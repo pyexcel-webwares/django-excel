@@ -74,6 +74,14 @@ or clone it and install it::
 
 Installation of individual plugins , please refer to individual plugin page.
 
+Setup
+======
+
+You will need to update your *settings.py*::
+
+    FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
+                            "django_excel.TemporaryExcelFileUploadHandler")
+
 
 Dependencies
 =============

@@ -50,7 +50,7 @@ class ExcelResponseTestCase(TestCase):
 
     def test_download(self):
         for file_type in FILE_TYPE_MIME_TABLE.keys():
-            print file_type
+            print(file_type)
             response = self.client.get("/polls/download/"+file_type)
             assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
             sheet = pe.load_from_memory(file_type, response.content)
@@ -71,7 +71,6 @@ class ExcelResponseTestCase(TestCase):
             with open(tmp_filename, "rb") as fp:
                 response = self.client.post('/polls/parse/'+data_struct_type,
                                             data={"file": fp})
-                print json.loads(response.content)
                 assert json.loads(response.content) == test_sample[data_struct_type]
             os.unlink(tmp_filename)
 
@@ -91,7 +90,6 @@ class ExcelResponseTestCase(TestCase):
             with open(tmp_filename, "rb") as fp:
                 response = self.client.post('/polls/parse/'+data_struct_type,
                                             data={"file": fp})
-                print json.loads(response.content)
                 assert json.loads(response.content) == expected_dict
             os.unlink(tmp_filename)
 

@@ -72,7 +72,7 @@ class ExcelResponseTestCase(TestCase):
             with open(tmp_filename, "rb") as fp:
                 response = self.client.post('/polls/parse/'+data_struct_type,
                                             data={"file": fp})
-                assert json.loads(response.content) == test_sample[data_struct_type]
+                assert json.loads(response.content.decode('utf-8')) == test_sample[data_struct_type]
             os.unlink(tmp_filename)
 
     def test_parse_book(self):
@@ -91,7 +91,7 @@ class ExcelResponseTestCase(TestCase):
             with open(tmp_filename, "rb") as fp:
                 response = self.client.post('/polls/parse/'+data_struct_type,
                                             data={"file": fp})
-                assert json.loads(response.content) == expected_dict
+                assert json.loads(response.content.decode('utf-8')) == expected_dict
             os.unlink(tmp_filename)
 
     def test_exchange(self):

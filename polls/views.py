@@ -5,7 +5,13 @@ from django.template import RequestContext
 import django_excel as excel
 import pyexcel.ext.xls
 import pyexcel.ext.xlsx
-import pyexcel.ext.ods
+import sys
+PY2 = sys.version_info[0] == 2
+if PY2:
+    import pyexcel.ext.ods
+else:
+    import pyexcel.ext.ods3
+
 
 data = [
     [1, 2, 3],

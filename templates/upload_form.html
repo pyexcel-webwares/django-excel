@@ -1,0 +1,22 @@
+<html>
+<head>
+    <title>Contact us</title>
+</head>
+<body>
+    <h1>Contact us</h1>
+
+    {% if form.errors %}
+        <p style="color: red;">
+            Please correct the error{{ form.errors|pluralize }} below.
+        </p>
+    {% endif %}
+
+    <form action="" enctype="multipart/form-data"  method="post">
+        <table>
+            {{ form.as_table }}
+        </table>
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

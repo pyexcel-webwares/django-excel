@@ -4,7 +4,6 @@ notifications:
 env:
   global:
 python:
-  - 2.6
   - 2.7
   - 3.3
   - 3.4
@@ -15,11 +14,9 @@ install:
   - pip install git+https://github.com/chfw/pyexcel-xls.git
   - pip install -r requirements.txt
   - pip install -r test_requirements.txt --use-mirrors
-  - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install pyexcel-ods; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install django==1.6; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "2.7" ]]; then pip install pyexcel-ods; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "2.7" ]]; then pip install django==1.7.1; fi
-  - if [[ $TRAVIS_PYTHON_VERSION == "3.2" ]]; then pip install django==1.7.1; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == "3.3" ]]; then pip install django==1.7.1; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "3.4" ]]; then pip install django==1.7.1; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "3.3" ]]; then pip install git+https://github.com/chfw/ezodf.git; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "3.4" ]]; then pip install git+https://github.com/chfw/ezodf.git; fi

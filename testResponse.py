@@ -3,7 +3,6 @@ from django.test import Client
 import pyexcel as pe
 import pyexcel.ext.xls
 import pyexcel.ext.xlsx
-import pyexcel.ext.ods
 import json
 import sys
 import os
@@ -14,10 +13,12 @@ else:
     from collections import OrderedDict
     
 if PY2:
+    import pyexcel.ext.ods
     from StringIO import StringIO
     from StringIO import StringIO as BytesIO
 else:
     from io import BytesIO, StringIO
+    import pyexcel.ext.ods3
 
 
 FILE_TYPE_MIME_TABLE = {

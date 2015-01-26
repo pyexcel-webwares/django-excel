@@ -1,5 +1,5 @@
-from unittest import TestCase
-from django.test import Client
+from django.test import Client, TestCase
+from django.test.utils import override_settings
 import pyexcel as pe
 import pyexcel.ext.xls
 import pyexcel.ext.xlsx
@@ -110,3 +110,8 @@ class ExcelResponseTestCase(TestCase):
                     array = sheet.to_array()
                     assert array == self.data
             os.unlink(tmp_filename)
+
+
+@override_settings(FILE_UPLOAD_MAX_MEMORY_SIZE=1)
+class ExcelResponseUsingFileTestCase(ExcelResponseTestCase):
+    pass

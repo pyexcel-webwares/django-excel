@@ -27,6 +27,8 @@ class ExcelFile(webio.ExcelInput, TemporaryUploadedFile):
 
 class ExcelMemoryFileUploadHandler(MemoryFileUploadHandler):
     def file_complete(self, file_size):
+        if not self.activated:
+            return
         self.file.seek(0)
         return ExcelMemoryFile(
             file=self.file,

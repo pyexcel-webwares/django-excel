@@ -5,7 +5,7 @@ django-excel - Let you focus on data, instead of file formats
 .. image:: https://api.travis-ci.org/chfw/django-excel.svg?branch=master
     :target: http://travis-ci.org/chfw/django-excel
 
-.. image:: https://coveralls.io/repos/chfw/django-excel/badge.png?branch=master 
+.. image:: https://coveralls.io/repos/chfw/django-excel/badge.svg?branch=master 
     :target: https://coveralls.io/r/chfw/django-excel?branch=master 
 
 .. image:: https://readthedocs.org/projects/django-excel/badge/?version=latest

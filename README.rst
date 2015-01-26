@@ -78,4 +78,6 @@ Installation of individual plugins , please refer to individual plugin page.
 Dependencies
 =============
 
+* Django
 * pyexcel
+* pyexcel-webio

@@ -5,7 +5,7 @@ import pyexcel as pe
 import pyexcel_webio as webio
 
 
-class ExcelMemoryFile(webio.ExcelInput, InMemoryUploadedFile):
+class ExcelMixin(webio.ExcelInput):
     def _get_file_extension(self):
         extension = self.name.split(".")[1]
         return extension
@@ -17,16 +17,12 @@ class ExcelMemoryFile(webio.ExcelInput, InMemoryUploadedFile):
         return pe.load_book_from_memory(self._get_file_extension(), self.file.read())
 
 
-class ExcelFile(webio.ExcelInput, TemporaryUploadedFile):
-    def _get_file_extension(self):
-        extension = self.name.split(".")[1]
-        return extension
-        
-    def load_single_sheet(self, sheet_name=None, **keywords):
-        return pe.load_from_memory(self._get_file_extension(), self.file.read(), sheet_name, **keywords)
+class ExcelMemoryFile(ExcelMixin, InMemoryUploadedFile):
+    pass
 
-    def load_book(self):
-        return pe.load_book_from_memory(self._get_file_extension(), self.file.read())
+
+class ExcelFile(ExcelMixin, TemporaryUploadedFile):
+    pass
 
 
 class ExcelMemoryFileUploadHandler(MemoryFileUploadHandler):
@@ -52,12 +48,16 @@ class TemporaryExcelFileUploadHandler(TemporaryFileUploadHandler):
         super(TemporaryFileUploadHandler, self).new_file(file_name, *args, **kwargs)
         self.file = ExcelFile(self.file_name, self.content_type, 0, self.charset, self.content_type_extra)
 
+
 webio.ExcelResponse = HttpResponse
-        
+
+
 from pyexcel_webio import (
     make_response,
     make_response_from_array,
     make_response_from_dict,
     make_response_from_records,
-    make_response_from_book_dict
+    make_response_from_book_dict,
+    make_response_from_a_table,
+    make_response_from_tables
 )

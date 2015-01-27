@@ -25,7 +25,6 @@ class UploadFileForm(forms.Form):
 # Create your views here.
 def upload(request):
     if request.method == "POST":
-        import pdb; pdb.set_trace()
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             filehandle = request.FILES['file']

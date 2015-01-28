@@ -17,11 +17,11 @@ class ExcelMixin(webio.ExcelInput):
         return pe.load_book_from_memory(self._get_file_extension(), self.file.read())
 
 
-class ExcelMemoryFile(ExcelMixin, InMemoryUploadedFile):
+class ExcelInMemoryUploadedFile(ExcelMixin, InMemoryUploadedFile):
     pass
 
 
-class ExcelFile(ExcelMixin, TemporaryUploadedFile):
+class TemporaryUploadedExcelFile(ExcelMixin, TemporaryUploadedFile):
     pass
 
 
@@ -30,7 +30,7 @@ class ExcelMemoryFileUploadHandler(MemoryFileUploadHandler):
         if not self.activated:
             return
         self.file.seek(0)
-        return ExcelMemoryFile(
+        return ExcelInMemoryUploadedFile(
             file=self.file,
             field_name=self.field_name,
             name=self.file_name,
@@ -46,7 +46,7 @@ class TemporaryExcelFileUploadHandler(TemporaryFileUploadHandler):
         Create the file object to append to as data is coming in.
         """
         super(TemporaryFileUploadHandler, self).new_file(file_name, *args, **kwargs)
-        self.file = ExcelFile(self.file_name, self.content_type, 0, self.charset, self.content_type_extra)
+        self.file = TemporaryUploadedExcelFile(self.file_name, self.content_type, 0, self.charset, self.content_type_extra)
 
 
 webio.ExcelResponse = HttpResponse

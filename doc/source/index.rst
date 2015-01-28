@@ -37,6 +37,62 @@ The highlighted features are:
 
 This library make infomation processing involving various excel files as easy as processing array, dictionary when processing file upload/download, data import into and export from SQL databases, information analysis and persistence. It uses **pyexcel** and its plugins: 1) to provide one uniform programming interface to handle csv, tsv, xls, xlsx, xlsm and ods formats. 2) to provide one-stop utility to import the data in uploaded file into a database and to export tables in a database as excel files for file download 3) to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
 
+Tutorial
+--------------
+
+In order to dive in django-excel and get hands-on experience quickly, the test application for django-excel will be introduced here. So, it is advisable that you should check out the code from `github <https://github.com/chfw/django-excel>`_ ::
+
+    git clone https://github.com/chfw/django-excel.git
+
+The test application is written according to Step 1, Step 2 and Step3 of django tutorial version 1.7.1. If you should wonder how the test application was written, please visit django documentation and come back.
+
+Once you have the code, please change to django-excel directory and then install all dependencies::
+
+    $ cd django-excel
+    $ pip install -r requirements.txt
+    $ pip install -r test_requirements.txt
+
+Then run the test application::
+   
+    $ python manage.py runserver
+    Performing system checks...
+    
+    System check identified no issues (0 silenced).
+    
+    You have unapplied migrations; your app may not work properly until they are applied.
+    Run 'python manage.py migrate' to apply them.
+    January 27, 2015 - 17:57:03
+    Django version 1.7.1, using settings 'mysite.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CTRL-BREAK.
+
+
+Handle excel file upload
++++++++++++++++++++++++++
+
+If you open your browser and visit http://localhost:8000/upload, you shall see this upload form:
+
+.. image :: upload-page.png
+
+Please open the file **polls/views.py** and focus on the following code section::
+
+    class UploadFileForm(forms.Form):
+        file = forms.FileField()
+    
+    # Create your views here.
+    def upload(request):
+        if request.method == "POST":
+            form = UploadFileForm(request.POST, request.FILES)
+            if form.is_valid():
+                filehandle = request.FILES['file']
+                return excel.make_response(filehandle.get_sheet(), "csv")
+        else:
+            form = UploadFileForm()
+        return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
+
+**UploadFileForm** is html widget for file upload form in the html page. Then look down at **filehandle**. It is an instance of either ExcelInMemoryUploadedFile or TemporaryUploadedExcelFile, which inherit ExcelMixin and hence have a list of conversion methods to call, such as get_sheet, get_array, etc.
+
+... to be continued ..
 
 All supported data types
 --------------------------
@@ -166,6 +222,26 @@ Response methods
    .. method:: make_response_from_book_dict(book_dict, file_type, status=200)
 
       :param book_dict: a dictionary of two dimensional arrays
+      :param file_type: same as :meth:`~django_excel.make_response`
+      :param status: same as :meth:`~django_excel.make_response`
+
+   .. method:: make_response_from_a_table(session, table, file_type status=200)
+
+      Produce a single sheet Excel book of *file_type*
+
+      :param session: SQLAlchemy session
+      :param table: a SQLAlchemy table
+      :param file_type: same as :meth:`~django_excel.make_response`
+      :param status: same as :meth:`~django_excel.make_response`
+
+   .. method:: make_response_from_tables(session, tables, file_type status=200)
+
+      Produce a multiple sheet Excel book of *file_type*. It becomes the same
+      as :meth:`~django_excel.make_response_from_a_table` if you pass *tables*
+      with an array that has a single table
+      
+      :param session: SQLAlchemy session
+      :param tables: SQLAlchemy tables
       :param file_type: same as :meth:`~django_excel.make_response`
       :param status: same as :meth:`~django_excel.make_response`
 

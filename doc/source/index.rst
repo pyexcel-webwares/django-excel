@@ -72,7 +72,7 @@ Handle excel file upload
 
 If you open your browser and visit http://localhost:8000/upload, you shall see this upload form:
 
-.. image :: upload-page.png
+.. image :: upload-form.png
 
 Please open the file **polls/views.py** and focus on the following code section::
 

@@ -67,12 +67,16 @@ Then run the test application::
     Quit the server with CTRL-BREAK.
 
 
-Handle excel file upload
-+++++++++++++++++++++++++
+Handle excel file upload and download
+++++++++++++++++++++++++++++++++++++++
 
-If you open your browser and visit http://localhost:8000/upload, you shall see this upload form:
+This example shows how to process uploaded excel file and how to make data download as an excel file. Open your browser and visit http://localhost:8000/upload, you shall see this upload form:
 
 .. image :: upload-form.png
+
+Choose an excel sheet, for example an xls file, and press "Submit". You will get a csv file for download.
+
+.. image :: download-file.png
 
 Please open the file **polls/views.py** and focus on the following code section::
 
@@ -90,9 +94,11 @@ Please open the file **polls/views.py** and focus on the following code section:
             form = UploadFileForm()
         return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
 
-**UploadFileForm** is html widget for file upload form in the html page. Then look down at **filehandle**. It is an instance of either ExcelInMemoryUploadedFile or TemporaryUploadedExcelFile, which inherit ExcelMixin and hence have a list of conversion methods to call, such as get_sheet, get_array, etc.
+**UploadFileForm** is html widget for file upload form in the html page. Then look down at **filehandle**. It is an instance of either ExcelInMemoryUploadedFile or TemporaryUploadedExcelFile, which inherit ExcelMixin and hence have a list of conversion methods to call, such as get_sheet, get_array, etc. :meth:`~django_excel.make_response` converts :class:`~pyexcel.Sheet` instance obtained via :meth:`~django_excel.ExcelMixin.get_sheet` into a csv file for download. Please feel free to change those functions according to :ref:`the mapping table <data-types-and-its-conversion-funcs>`.
 
 ... to be continued ..
+
+.. _data-types-and-its-conversion-funcs:
 
 All supported data types
 --------------------------
@@ -183,6 +189,8 @@ API Reference
 
 Response methods
 -----------------
+
+.. automodule:: django_excel
 
    .. method:: make_response(pyexcel_instance, file_type, status=200)
 

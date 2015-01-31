@@ -1,8 +1,9 @@
 from django.shortcuts import render_to_response
-from django.http import HttpResponseBadRequest, JsonResponse
+from django.http import HttpResponseBadRequest, JsonResponse, HttpResponse
 from django import forms
 from django.template import RequestContext
 import django_excel as excel
+from polls.models import Question, Choice
 import pyexcel.ext.xls
 import pyexcel.ext.xlsx
 import sys
@@ -36,6 +37,50 @@ def upload(request):
 def download(request, file_type):
     sheet = excel.pe.Sheet(data)
     return excel.make_response(sheet, file_type)
+
+def export_data(request, atype):
+    if atype == "sheet":
+        return excel.make_response_from_a_model(Question, 'csv')
+    elif atype == "book":
+        return excel.make_response_from_a_model([Question, Choice], 'csv')
+    
+def import_data(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        def choice_func(row):
+            print row[0]
+            q = Question.objects.filter(slug=row[0])[0]
+            row[0] = q
+            return row
+        if form.is_valid():
+            request.FILES['file'].save_book_to_database(
+                models=[
+                    (Question, ['question_text', 'pub_date', 'slug'], None, 0),
+                    (Choice, ['question', 'choice_text', 'votes'], choice_func, 0) 
+                 ]
+                )
+            return HttpResponse("OK")
+        else:
+            return HttpResponseBadRequest()
+    else:
+        form = UploadFileForm()
+    return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
+    
+
+def import_dataa(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            request.FILES['file'].save_to_database(
+                model=(Question,
+                       ['question_text', 'pub_date']))
+            return HttpResponse("OK")
+        else:
+            return HttpResponseBadRequest()
+    else:
+        form = UploadFileForm()
+    return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
+    
 
 def exchange(request, file_type):
     form = UploadFileForm(request.POST, request.FILES)

@@ -16,6 +16,20 @@ class ExcelMixin(webio.ExcelInput):
     def load_book(self):
         return pe.load_book_from_memory(self._get_file_extension(), self.file.read())
 
+    def save_to_database(self, model=None,
+                         sheet_name=None, name_columns_by_row=0, name_rows_by_column=-1, **keywords):
+        sheet = self.load_single_sheet(sheet_name=sheet_name,
+                                       name_columns_by_row=name_columns_by_row,
+                                       name_rows_by_column=name_rows_by_column,
+                                       **keywords)
+        if sheet:
+            sheet.save_to_django_model(model)
+
+    def save_book_to_database(self, models=None, **keywords):
+        book = self.load_book(**keywords)
+        if book:
+            book.save_to_django_models(models)
+
 
 class ExcelInMemoryUploadedFile(ExcelMixin, InMemoryUploadedFile):
     pass
@@ -58,6 +72,12 @@ from pyexcel_webio import (
     make_response_from_dict,
     make_response_from_records,
     make_response_from_book_dict,
-    make_response_from_a_table,
-    make_response_from_tables
 )
+
+def make_response_from_a_model(model, file_type, status=200, **keywords):
+    sheet = pe.get_sheet(model, **keywords)
+    return make_response(sheet, file_type, status, **keywords)
+
+def make_response_from_models(models, file_type, status=200, **keywords):
+    book = pe.get_book(models, **keywords)
+    return make_response(book, file_type, status, **keywords)

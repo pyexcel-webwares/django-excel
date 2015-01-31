@@ -58,10 +58,7 @@ Then run the test application::
     Performing system checks...
     
     System check identified no issues (0 silenced).
-    
-    You have unapplied migrations; your app may not work properly until they are applied.
-    Run 'python manage.py migrate' to apply them.
-    January 27, 2015 - 17:57:03
+    January 29, 2015 - 18:11:06
     Django version 1.7.1, using settings 'mysite.settings'
     Starting development server at http://127.0.0.1:8000/
     Quit the server with CTRL-BREAK.

@@ -74,10 +74,26 @@ from pyexcel_webio import (
     make_response_from_book_dict,
 )
 
-def make_response_from_a_model(model, file_type, status=200, **keywords):
-    sheet = pe.get_sheet(model, **keywords)
+def make_response_from_a_table(model, file_type, status=200, **keywords):
+    """
+    Produce a single sheet Excel book of *file_type*
+
+    :param model: a Django model
+    :param file_type: same as :meth:`~django_excel.make_response`
+    :param status: same as :meth:`~django_excel.make_response`
+    """
+    sheet = pe.get_sheet(model=model, **keywords)
     return make_response(sheet, file_type, status, **keywords)
 
-def make_response_from_models(models, file_type, status=200, **keywords):
-    book = pe.get_book(models, **keywords)
+def make_response_from_tables(models, file_type, status=200, **keywords):
+    """
+    Produce a multiple sheet Excel book of *file_type*. It becomes the same
+    as :meth:`~django_excel.make_response_from_a_table` if you pass *tables*
+    with an array that has a single table
+    
+    :param models: a list of Django models
+    :param file_type: same as :meth:`~django_excel.make_response`
+    :param status: same as :meth:`~django_excel.make_response`
+    """    
+    book = pe.get_book(models=models, **keywords)
     return make_response(book, file_type, status, **keywords)

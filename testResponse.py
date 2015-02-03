@@ -1,5 +1,7 @@
+from polls.models import Question, Choice
 from django.test import Client, TestCase
 from django.test.utils import override_settings
+from textwrap import dedent
 import pyexcel as pe
 import pyexcel.ext.xls
 import pyexcel.ext.xlsx
@@ -11,7 +13,6 @@ if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
 else:
     from collections import OrderedDict
-    
 if PY2:
     import pyexcel.ext.ods
     from StringIO import StringIO
@@ -112,6 +113,71 @@ class ExcelResponseTestCase(TestCase):
             os.unlink(tmp_filename)
 
 
+class DatabaseOperationsTestCase(TestCase):
+    def setUp(self):
+        self.testfile = "sample-data.xls"
+        Question.objects.all().delete()
+        Choice.objects.all().delete()
+
+    def testBook(self):
+        fp = open(self.testfile, "rb")
+        response = self.client.post('/polls/import/', data={"file": fp})
+        assert response.status_code == 200
+        response2 = self.client.get('/polls/export/book')
+        assert response2.status_code == 200
+        book = pe.load_book_from_memory('xls', response2.content)
+        content = dedent("""
+        Sheet Name: question
+        +----+---------------------------+----------------------------------------------+----------+
+        | id | pub_date                  | question_text                                | slug     |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 1  | 2015-01-28T00:00:00+00:00 | What is your favourite programming language? | language |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
+        +----+---------------------------+----------------------------------------------+----------+
+        Sheet Name: choice
+        +---------------+----+-------------+-------+
+        | choice_text   | id | question_id | votes |
+        +---------------+----+-------------+-------+
+        | Java          | 1  | 1           | 0     |
+        +---------------+----+-------------+-------+
+        | C++           | 2  | 1           | 0     |
+        +---------------+----+-------------+-------+
+        | C             | 3  | 1           | 0     |
+        +---------------+----+-------------+-------+
+        | Eclipse       | 4  | 2           | 0     |
+        +---------------+----+-------------+-------+
+        | Visual Studio | 5  | 2           | 0     |
+        +---------------+----+-------------+-------+
+        | PyCharm       | 6  | 2           | 0     |
+        +---------------+----+-------------+-------+
+        | IntelliJ      | 7  | 2           | 0     |
+        +---------------+----+-------------+-------+""").strip('\n')
+        assert str(book) == content
+
+    def testSheet(self):
+        fp = open(self.testfile, "rb")
+        response = self.client.post('/polls/import/', data={"file": fp})
+        assert response.status_code == 200
+        response2 = self.client.get('/polls/export/sheet')
+        assert response2.status_code == 200
+        sheet = pe.load_from_memory('xls', response2.content)
+        content = dedent("""
+        Sheet Name: question
+        +----+---------------------------+----------------------------------------------+----------+
+        | id | pub_date                  | question_text                                | slug     |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 1  | 2015-01-28T00:00:00+00:00 | What is your favourite programming language? | language |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
+        +----+---------------------------+----------------------------------------------+----------+""").strip('\n')
+        assert str(sheet) == content
+
+
 @override_settings(FILE_UPLOAD_MAX_MEMORY_SIZE=1)
 class ExcelResponseUsingFileTestCase(ExcelResponseTestCase):
+    pass
+
+@override_settings(FILE_UPLOAD_MAX_MEMORY_SIZE=1)
+class DatabaseOperationsUsingFileTestCase(DatabaseOperationsTestCase):
     pass

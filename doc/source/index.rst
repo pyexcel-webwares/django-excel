@@ -230,25 +230,8 @@ Response methods
       :param file_type: same as :meth:`~django_excel.make_response`
       :param status: same as :meth:`~django_excel.make_response`
 
-   .. method:: make_response_from_a_table(session, table, file_type status=200)
-
-      Produce a single sheet Excel book of *file_type*
-
-      :param session: SQLAlchemy session
-      :param table: a SQLAlchemy table
-      :param file_type: same as :meth:`~django_excel.make_response`
-      :param status: same as :meth:`~django_excel.make_response`
-
-   .. method:: make_response_from_tables(session, tables, file_type status=200)
-
-      Produce a multiple sheet Excel book of *file_type*. It becomes the same
-      as :meth:`~django_excel.make_response_from_a_table` if you pass *tables*
-      with an array that has a single table
-      
-      :param session: SQLAlchemy session
-      :param tables: SQLAlchemy tables
-      :param file_type: same as :meth:`~django_excel.make_response`
-      :param status: same as :meth:`~django_excel.make_response`
+   .. autofunction:: make_response_from_a_table(model, file_type status=200)
+   .. autofunction:: make_response_from_tables(models, file_type status=200)
 
 
 Indices and tables
@@ -257,4 +240,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

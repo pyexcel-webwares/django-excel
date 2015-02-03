@@ -40,9 +40,9 @@ def download(request, file_type):
 
 def export_data(request, atype):
     if atype == "sheet":
-        return excel.make_response_from_a_model(Question, 'csv')
+        return excel.make_response_from_a_table(Question, 'xls')
     elif atype == "book":
-        return excel.make_response_from_a_model([Question, Choice], 'csv')
+        return excel.make_response_from_tables([Question, Choice], 'xls')
     
 def import_data(request):
     if request.method == "POST":
@@ -59,7 +59,7 @@ def import_data(request):
                     (Choice, ['question', 'choice_text', 'votes'], choice_func, 0) 
                  ]
                 )
-            return HttpResponse("OK")
+            return HttpResponse("OK", status=200)
         else:
             return HttpResponseBadRequest()
     else:

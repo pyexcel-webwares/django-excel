@@ -55,7 +55,6 @@ def import_data(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         def choice_func(row):
-            print row[0]
             q = Question.objects.filter(slug=row[0])[0]
             row[0] = q
             return row

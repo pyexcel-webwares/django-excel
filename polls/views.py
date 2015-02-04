@@ -32,7 +32,14 @@ def upload(request):
             return excel.make_response(filehandle.get_sheet(), "csv")
     else:
         form = UploadFileForm()
-    return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
+    return render_to_response(
+        'upload_form.html',
+        {
+            'form': form,
+            'title': 'Excel file upload and download example',
+            'header': 'Please choose any excel file from your cloned repository:'
+        },
+        context_instance=RequestContext(request))
 
 def download(request, file_type):
     sheet = excel.pe.Sheet(data)
@@ -64,8 +71,15 @@ def import_data(request):
             return HttpResponseBadRequest()
     else:
         form = UploadFileForm()
-    return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
-    
+    return render_to_response(
+        'upload_form.html',
+        {
+            'form': form,
+            'title': 'Import excel data into database example',
+            'header': 'Please upload sample-data.xls:'
+        },
+        context_instance=RequestContext(request))
+
 
 def import_dataa(request):
     if request.method == "POST":

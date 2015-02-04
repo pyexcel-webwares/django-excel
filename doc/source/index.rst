@@ -91,9 +91,137 @@ Please open the file **polls/views.py** and focus on the following code section:
             form = UploadFileForm()
         return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
 
-**UploadFileForm** is html widget for file upload form in the html page. Then look down at **filehandle**. It is an instance of either ExcelInMemoryUploadedFile or TemporaryUploadedExcelFile, which inherit ExcelMixin and hence have a list of conversion methods to call, such as get_sheet, get_array, etc. :meth:`~django_excel.make_response` converts :class:`~pyexcel.Sheet` instance obtained via :meth:`~django_excel.ExcelMixin.get_sheet` into a csv file for download. Please feel free to change those functions according to :ref:`the mapping table <data-types-and-its-conversion-funcs>`.
+**UploadFileForm** is html widget for file upload form in the html page. Then look down at **filehandle**. It is an instance of either ExcelInMemoryUploadedFile or TemporaryUploadedExcelFile, which inherit ExcelMixin and hence have a list of conversion methods to call, such as get_sheet, get_array, etc.
 
-... to be continued ..
+For the response, :meth:`~django_excel.make_response` converts :class:`~pyexcel.Sheet` instance obtained via :meth:`~django_excel.ExcelMixin.get_sheet` into a csv file for download.
+
+Please feel free to change those functions according to :ref:`the mapping table <data-types-and-its-conversion-funcs>`.
+
+Handle data import
+++++++++++++++++++++++++++++++
+
+This example shows how to import uploaded excel file into django models. We are going to import *sample-data.xls*
+
+.. table:: Sheet 1 of sample-data.xls
+
+    ============================================    ============    =================
+    Question Text                                   Publish Date    Unique Identifier
+    ============================================    ============    =================
+    What is your favourite programming language?    28/01/15        language
+    What is your favourite IDE?                     29/01/15        ide
+    ============================================    ============    =================
+
+.. table:: Sheet 2 of sample-data.xls
+
+    ==========  ==============  ======         
+    Question    Choice          Votes
+    ==========  ==============  ======         
+    language    Java            0
+    language    C++             0
+    language    C               0
+    ide         Eclipse         0
+    ide         Visual Studio   0
+    ide         PyCharm         0
+    ide         IntelliJ        0
+    ==========  ==============  ======
+
+into the following data models::
+    
+    class Question(models.Model):
+        question_text = models.CharField(max_length=200)
+        pub_date = models.DateTimeField('date published')
+        slug = models.CharField(max_length=10, unique=True, default="question")
+    
+    
+    class Choice(models.Model):
+        question = models.ForeignKey(Question)
+        choice_text = models.CharField(max_length=200)
+        votes = models.IntegerField(default=0)
+
+.. note::
+   Except the added "slug" field, **Question** and **Choice** are copied from Django tutoial part 1.
+
+Please visit this link http://localhost:8000/import/, you shall see this upload form:
+
+.. image:: import-page.png
+
+Please then select *sample-data.xls* and upload. Then visit the admin page http://localhost:8000/admin/polls/question, you shall see questions have been populated:
+
+.. image:: question-admin.png
+
+.. note::
+   The admin user credentials are: user name: admin, password: admin
+
+And choices too:
+
+.. image:: choice-admin.png
+
+You may use admin interface to delete all those objects and try again. 
+
+Now please open views.py and focus on this part of code::
+
+    def import_data(request):
+        if request.method == "POST":
+            form = UploadFileForm(request.POST, request.FILES)
+            def choice_func(row):
+                print row[0]
+                q = Question.objects.filter(slug=row[0])[0]
+                row[0] = q
+                return row
+            if form.is_valid():
+                request.FILES['file'].save_book_to_database(
+                    models=[
+                        (Question, ['question_text', 'pub_date', 'slug'], None, 0),
+                        (Choice, ['question', 'choice_text', 'votes'], choice_func, 0) 
+                     ]
+                    )
+                return HttpResponse("OK", status=200)
+            else:
+                return HttpResponseBadRequest()
+        else:
+        ...
+
+The star is :meth:`~django_excel.save_book_to_database`. The parameter **models** can be a list of django models or a list of tuples, each of which contains:
+
+1. django model (**compulsory**)
+2. an array of model fields or a dicionary of key maps
+3. custom formating fuction
+4. the index of the row that has the field names
+5. the index of the column that has the field names
+
+When an array of model fields is supplied in the second member in the tuple, the names of the supplied fields should match the field names of the corresponding django model(the first member in the tuple) and the sequence of the supplied fields shall match the one in the uploaded excel sheet. For example::
+
+    (Question, ['question_text', 'pub_date', 'slug'], None, 0)
+
+When a dictionary of key maps is supplied, its keys should be the field names in the uploaded excel sheet and the value should be the actual field name in the corresponding django model. For example::
+
+    (Question,{"Question Text": "question_text",
+              "Publish Date": "pub_date",
+              "Unique Identifier": "slug"}, None, 0)
+
+The custom formatting function is needed when the data from the excel sheet needs translation before data import. For example, **Choice** has a foreign key to **Question**. When choice data are to be imported, "Question" column needs to be translated to a question instance. In our example, "Question" column in "Sheet 2" contains the values appeared in "Unique Identifier" column in "Sheet 1".
+
+Handle data export
+++++++++++++++++++++++++++++++
+
+This section shows how to export the data in your models as an excel file. After you have completed the previous section, you can visit http://localhost:8000/export/book and you shall get a file download dialog:
+
+.. image:: download-dialog.png
+
+Please save and open it. You shall see these data in your window:
+
+.. image:: question-sheet.png
+.. image:: choice-sheet.png
+
+Now let's examine the code behind this::
+
+    def export_data(request, atype):
+        if atype == "sheet":
+            return excel.make_response_from_a_table(Question, 'xls')
+        elif atype == "book":
+            return excel.make_response_from_tables([Question, Choice], 'xls')
+        
+:meth:`~django_excel.make_response_from_tables` does all what is needed: read out the data, convert them into xls and give it the browser. And what you need to do is to give a list of models to be exported and a file type. As you have noticed, you can visit http://localhost:8000/exportsheet and will get **Question** exported as a single sheet file.
 
 .. _data-types-and-its-conversion-funcs:
 

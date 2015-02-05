@@ -6,6 +6,13 @@
 Welcome to django-excel's documentation!
 ========================================
 
+:Author: C.W.
+:Source code: http://github.com/chfw/django-excel
+:Issues: http://github.com/chfw/django-excel/issues
+:License: GPL v3 or BSD
+:Version: |version|
+:Generated: |today|
+
 **django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes it easy to consume/produce information stored in excel files over HTTP protocol as well as on file system. This library can turn the excel data into Pythonic a list of lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it lets you focus on data in Flask based web development, instead of file formats.
 
 The highlighted features are:
@@ -35,7 +42,27 @@ The highlighted features are:
 .. _ods3: https://github.com/chfw/pyexcel-ods3
 .. _text: https://github.com/chfw/pyexcel-text
 
-This library make infomation processing involving various excel files as easy as processing array, dictionary when processing file upload/download, data import into and export from SQL databases, information analysis and persistence. It uses **pyexcel** and its plugins: 1) to provide one uniform programming interface to handle csv, tsv, xls, xlsx, xlsm and ods formats. 2) to provide one-stop utility to import the data in uploaded file into a database and to export tables in a database as excel files for file download 3) to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
+This library makes infomation processing involving various excel files as easy as processing array, dictionary when processing file upload/download, data import into and export from SQL databases, information analysis and persistence. It uses **pyexcel** and its plugins: 1) to provide one uniform programming interface to handle csv, tsv, xls, xlsx, xlsm and ods formats. 2) to provide one-stop utility to import the data in uploaded file into a database and to export tables in a database as excel files for file download 3) to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
+
+
+Installation
+--------------
+You can install it from github only for now::
+
+    $ git clone http://github.com/chfw/django-pyexcel.git
+    $ cd django-excel
+    $ python setup.py install
+
+Installation of individual plugins , please refer to individual plugin page.
+
+Setup
+---------
+
+You will need to update your *settings.py*::
+
+    FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
+                            "django_excel.TemporaryExcelFileUploadHandler")
+
 
 Tutorial
 --------------
@@ -44,7 +71,7 @@ In order to dive in django-excel and get hands-on experience quickly, the test a
 
     git clone https://github.com/chfw/django-excel.git
 
-The test application is written according to Step 1, Step 2 and Step3 of django tutorial version 1.7.1. If you should wonder how the test application was written, please visit django documentation and come back.
+The test application is written according to `Part 1 <https://docs.djangoproject.com/en/1.7/intro/tutorial01/>`_, `Part 2 <https://docs.djangoproject.com/en/1.7/intro/tutorial02/>`_ and `Part 3 <https://docs.djangoproject.com/en/1.7/intro/tutorial03/>`_ of django tutorial version 1.7.1. If you should wonder how the test application was written, please visit django documentation and come back.
 
 Once you have the code, please change to django-excel directory and then install all dependencies::
 
@@ -75,7 +102,7 @@ Choose an excel sheet, for example an xls file, and press "Submit". You will get
 
 .. image :: download-file.png
 
-Please open the file **polls/views.py** and focus on the following code section::
+Please open the file `polls/views.py <https://github.com/chfw/django-excel/blob/master/polls/views.py#L27>`_ and focus on the following code section::
 
     class UploadFileForm(forms.Form):
         file = forms.FileField()
@@ -100,7 +127,7 @@ Please feel free to change those functions according to :ref:`the mapping table 
 Handle data import
 ++++++++++++++++++++++++++++++
 
-This example shows how to import uploaded excel file into django models. We are going to import *sample-data.xls*
+This example shows how to import uploaded excel file into django models. We are going to import `sample-data.xls <https://github.com/chfw/django-excel/blob/master/sample-data.xls>`_
 
 .. table:: Sheet 1 of sample-data.xls
 
@@ -145,7 +172,7 @@ Please visit this link http://localhost:8000/import/, you shall see this upload 
 
 .. image:: import-page.png
 
-Please then select *sample-data.xls* and upload. Then visit the admin page http://localhost:8000/admin/polls/question, you shall see questions have been populated:
+Please then select `sample-data.xls <https://github.com/chfw/django-excel/blob/master/sample-data.xls>`_ and upload. Then visit the admin page http://localhost:8000/admin/polls/question, you shall see questions have been populated:
 
 .. image:: question-admin.png
 
@@ -158,7 +185,7 @@ And choices too:
 
 You may use admin interface to delete all those objects and try again. 
 
-Now please open views.py and focus on this part of code::
+Now please open `polls/views.py <https://github.com/chfw/django-excel/blob/master/polls/views.py#L54>`_ and focus on this part of code::
 
     def import_data(request):
         if request.method == "POST":
@@ -213,7 +240,7 @@ Please save and open it. You shall see these data in your window:
 .. image:: question-sheet.png
 .. image:: choice-sheet.png
 
-Now let's examine the code behind this::
+Now let's examine the code behind this in `polls/views.py <https://github.com/chfw/django-excel/blob/master/polls/views.py#L48>`_::
 
     def export_data(request, atype):
         if atype == "sheet":

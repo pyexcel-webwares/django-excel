@@ -61,7 +61,7 @@ Fonts, colors and charts are not supported.
 
 Installation
 ============
-You can install it from github only for now:
+You can install it from github only for now::
 
     $ git clone http://github.com/chfw/django-pyexcel.git
     $ cd django-excel
@@ -103,8 +103,8 @@ Here is the example viewing function codes::
         else:
             form = UploadFileForm()
         return render_to_response('upload_form.html',
-		                          {'form': form},
-								  context_instance=RequestContext(request))
+                                  {'form': form},
+                                  context_instance=RequestContext(request))
     
     def download(request):
         sheet = excel.pe.Sheet([[1, 2],[3, 4]])

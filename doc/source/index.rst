@@ -13,7 +13,7 @@ Welcome to django-excel's documentation!
 :Version: |version|
 :Generated: |today|
 
-**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes it easy to consume/produce information stored in excel files over HTTP protocol as well as on file system. This library can turn the excel data into Pythonic a list of lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it lets you focus on data in Flask based web development, instead of file formats.
+**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes it easy to consume/produce information stored in excel files over HTTP protocol as well as on file system. This library can turn the excel data into Pythonic a list of lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it lets you focus on data in Django web development, instead of file formats.
 
 The highlighted features are:
 
@@ -49,6 +49,7 @@ Installation
 --------------
 You can install it from github only for now::
 
+    $ pip install git+https://github.com/chfw/pyexcel.git # pyexcel v0.1.3 is not released yet
     $ git clone http://github.com/chfw/django-pyexcel.git
     $ cd django-excel
     $ python setup.py install
@@ -322,20 +323,22 @@ API Reference
    .. method:: save_to_database(table=None, **keywords)
 
       :param table: a database table or a tuple which have this sequence (table, table_init_func, mapdict, name_columns_by_row, name_rows_by_column)
-      :param table_init_func: it is needed when your table had custom __init__ function
-      :param mapdict: it is needed when the uploaded sheet had a different column headers than the table column names this mapdict tells which column of the upload sheet maps to which column of the table
-      :param name_columns_by_row: uses the first row of the sheet to be column headers by default. if you use name_rows_by_column, please set this to -1
-      :param name_rows_by_column: uses a column to name rows.
+
+                     ==================== =================================================================================
+                     Field                Description
+                     ==================== =================================================================================
+                     table_init_funcs     it is needed when your table had custom __init__ function
+                     mapdict              model column names
+                     name_columns_by_row  use a row to name columns. if you use name_rows_by_column, please set this to -1
+                     name_rows_by_column  uses a column to name rows.
+                     ==================== =================================================================================
+
       :param keywords: additional keywords to pyexcel library
 
 
    .. method:: save_book_to_database(tables=None, **keywords)
 
-      :param tables: a list of database tables or tuples which have this sequence (table, table_init_func, mapdict, name_columns_by_row, name_rows_by_column)
-      :param table_init_funcs: it is needed when your table had custom __init__ function
-      :param mapdict: it is needed when the uploaded sheet had a different column headers than the table column names. this mapdict tells which column of the upload sheet maps to which column of the table
-      :param name_columns_by_row: uses the first row of each sheet to be column headers by default. if you use name_rows_by_column, please set this to -1
-      :param name_rows_by_column: uses a column to name rows.
+      :param tables: a list of database tables or tuples which have this sequence (table, table_init_func, mapdict, name_columns_by_row, name_rows_by_column), see :meth:`~ExcelMixin.save_to_database`
       :param keywords: additional keywords to pyexcel library
 
 

@@ -61,9 +61,14 @@ Fonts, colors and charts are not supported.
 
 Installation
 ============
-You can install it from github only for now::
 
-    $ pip install git+https://github.com/chfw/pyexcel.git # pyexcel v0.1.3 is not released yet
+You can install it via pip::
+
+    $ pip install django-excel
+
+
+or clone it and install it::
+
     $ git clone http://github.com/chfw/django-pyexcel.git
     $ cd django-excel
     $ python setup.py install

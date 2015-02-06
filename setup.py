@@ -10,8 +10,7 @@ with open("README.rst", 'r') as readme:
 
 dependencies = [
     'pyexcel>=0.1.3',
-    'pyexcel-webio>=0.0.1',
-    'Django==1.7.1'
+    'Django>=1.7.1'
 ]
 
 setup(
@@ -39,7 +38,6 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',

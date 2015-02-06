@@ -47,9 +47,13 @@ This library makes infomation processing involving various excel files as easy a
 
 Installation
 --------------
-You can install it from github only for now::
+You can install it via pip::
 
-    $ pip install git+https://github.com/chfw/pyexcel.git # pyexcel v0.1.3 is not released yet
+    $ pip install django-excel
+
+
+or clone it and install it::
+
     $ git clone http://github.com/chfw/django-pyexcel.git
     $ cd django-excel
     $ python setup.py install

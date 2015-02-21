@@ -35,7 +35,6 @@ setup(
         'Topic :: Software Development :: Libraries :: Python Modules',
         'Programming Language :: Python',
         'License :: OSI Approved :: BSD License',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Intended Audience :: Developers',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',

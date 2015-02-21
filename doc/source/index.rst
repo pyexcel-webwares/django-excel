@@ -9,7 +9,7 @@ Welcome to django-excel's documentation!
 :Author: C.W.
 :Source code: http://github.com/chfw/django-excel
 :Issues: http://github.com/chfw/django-excel/issues
-:License: GPL v3 or BSD
+:License: New BSD License
 :Version: |version|
 :Generated: |today|
 

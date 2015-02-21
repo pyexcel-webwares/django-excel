@@ -116,6 +116,11 @@ Here is the example viewing function codes::
         sheet = excel.pe.Sheet([[1, 2],[3, 4]])
         return excel.make_response(sheet, "csv")
 
+License
+=============
+
+New BSD License
+
 Dependencies
 =============
 

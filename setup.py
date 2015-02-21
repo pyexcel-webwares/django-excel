@@ -16,7 +16,7 @@ dependencies = [
 setup(
     name='django-excel',
     author="C. W.",
-    version='0.0.1',
+    version='0.0.2',
     author_email="wangc_2011@hotmail.com",
     url="https://github.com/chfw/django-excel",
     description='A django library to read, manipulate and write data in different excel formats: csv, ods, xls, xlsx and xlsm.',

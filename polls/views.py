@@ -50,7 +50,12 @@ def export_data(request, atype):
         return excel.make_response_from_a_table(Question, 'xls')
     elif atype == "book":
         return excel.make_response_from_tables([Question, Choice], 'xls')
-    
+    elif atype == "custom":
+        question = Question.objects.get(slug='ide')
+        query_sets = Choice.objects.filter(question=question)
+        column_names = ['choice_text', 'id', 'votes']
+        return excel.make_response_from_query_sets(query_sets, column_names, 'xls')
+
 def import_data(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
@@ -60,9 +65,11 @@ def import_data(request):
             return row
         if form.is_valid():
             request.FILES['file'].save_book_to_database(
-                models=[
-                    (Question, ['question_text', 'pub_date', 'slug'], None, 0),
-                    (Choice, ['question', 'choice_text', 'votes'], choice_func, 0) 
+                models=[Question, Choice],
+                initializers=[None, choice_func],
+                mapdicts=[
+                    ['question_text', 'pub_date', 'slug'],
+                    ['question', 'choice_text', 'votes']
                  ]
                 )
             return HttpResponse("OK", status=200)
@@ -85,8 +92,8 @@ def import_dataa(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             request.FILES['file'].save_to_database(
-                model=(Question,
-                       ['question_text', 'pub_date']))
+                model=Question,
+                mapdict=['question_text', 'pub_date'])
             return HttpResponse("OK")
         else:
             return HttpResponseBadRequest()

@@ -1,3 +1,15 @@
+"""
+    django_excel
+    ~~~~~~~~~~~~~~~~~~~
+
+    A django middleware that provides one application programming interface
+    to read and write data in different excel file formats
+
+    :copyright: (c) 2015 by Onni Software Ltd.
+    :license: New BSD License
+"""
+
+
 from django.core.files.uploadhandler import MemoryFileUploadHandler, TemporaryFileUploadHandler
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.http import HttpResponse
@@ -11,10 +23,10 @@ class ExcelMixin(webio.ExcelInput):
         return extension
         
     def load_single_sheet(self, sheet_name=None, **keywords):
-        return pe.load_from_memory(self._get_file_extension(), self.file.read(), sheet_name, **keywords)
+        return pe.get_sheet(file_type=self._get_file_extension(), content=self.file.read(), sheet_name=sheet_name, **keywords)
 
-    def load_book(self):
-        return pe.load_book_from_memory(self._get_file_extension(), self.file.read())
+    def load_book(self, **keywords):
+        return pe.get_book(file_type=self._get_file_extension(), content=self.file.read(), **keywords)
 
     def save_to_database(self, model=None,
                          sheet_name=None, name_columns_by_row=0, name_rows_by_column=-1, **keywords):
@@ -23,12 +35,12 @@ class ExcelMixin(webio.ExcelInput):
                                        name_rows_by_column=name_rows_by_column,
                                        **keywords)
         if sheet:
-            sheet.save_to_django_model(model)
+            sheet.save_to_django_model(model, **keywords)
 
     def save_book_to_database(self, models=None, **keywords):
         book = self.load_book(**keywords)
         if book:
-            book.save_to_django_models(models)
+            book.save_to_django_models(models, **keywords)
 
 
 class ExcelInMemoryUploadedFile(ExcelMixin, InMemoryUploadedFile):
@@ -72,6 +84,7 @@ from pyexcel_webio import (
     make_response_from_dict,
     make_response_from_records,
     make_response_from_book_dict,
+    make_response_from_query_sets
 )
 
 def make_response_from_a_table(model, file_type, status=200, **keywords):

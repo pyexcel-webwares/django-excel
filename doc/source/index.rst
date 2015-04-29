@@ -99,7 +99,7 @@ Then run the test application::
 Handle excel file upload and download
 ++++++++++++++++++++++++++++++++++++++
 
-This example shows how to process uploaded excel file and how to make data download as an excel file. Open your browser and visit http://localhost:8000/upload, you shall see this upload form:
+This example shows how to process uploaded excel file and how to make data download as an excel file. Open your browser and visit http://localhost:8000/polls/upload, you shall see this upload form:
 
 .. image :: upload-form.png
 
@@ -125,7 +125,7 @@ Please open the file `polls/views.py <https://github.com/chfw/django-excel/blob/
 
 **UploadFileForm** is html widget for file upload form in the html page. Then look down at **filehandle**. It is an instance of either ExcelInMemoryUploadedFile or TemporaryUploadedExcelFile, which inherit ExcelMixin and hence have a list of conversion methods to call, such as get_sheet, get_array, etc.
 
-For the response, :meth:`~django_excel.make_response` converts :class:`~pyexcel.Sheet` instance obtained via :meth:`~django_excel.ExcelMixin.get_sheet` into a csv file for download.
+For the response, :meth:`~django_excel.make_response` converts :class:`pyexcel.Sheet` instance obtained via :meth:`~django_excel.ExcelMixin.get_sheet` into a csv file for download.
 
 Please feel free to change those functions according to :ref:`the mapping table <data-types-and-its-conversion-funcs>`.
 
@@ -173,7 +173,7 @@ into the following data models::
 .. note::
    Except the added "slug" field, **Question** and **Choice** are copied from Django tutoial part 1.
 
-Please visit this link http://localhost:8000/import/, you shall see this upload form:
+Please visit this link http://localhost:8000/polls/import/, you shall see this upload form:
 
 .. image:: import-page.png
 
@@ -236,7 +236,7 @@ The custom formatting function is needed when the data from the excel sheet need
 Handle data export
 ++++++++++++++++++++++++++++++
 
-This section shows how to export the data in your models as an excel file. After you have completed the previous section, you can visit http://localhost:8000/export/book and you shall get a file download dialog:
+This section shows how to export the data in your models as an excel file. After you have completed the previous section, you can visit http://localhost:8000/polls/export/book and you shall get a file download dialog:
 
 .. image:: download-dialog.png
 
@@ -253,7 +253,24 @@ Now let's examine the code behind this in `polls/views.py <https://github.com/ch
         elif atype == "book":
             return excel.make_response_from_tables([Question, Choice], 'xls')
         
-:meth:`~django_excel.make_response_from_tables` does all what is needed: read out the data, convert them into xls and give it the browser. And what you need to do is to give a list of models to be exported and a file type. As you have noticed, you can visit http://localhost:8000/exportsheet and will get **Question** exported as a single sheet file.
+:meth:`~django_excel.make_response_from_tables` does all what is needed: read out the data, convert them into xls and give it the browser. And what you need to do is to give a list of models to be exported and a file type. As you have noticed, you can visit http://localhost:8000/polls/export/sheet and will get **Question** exported as a single sheet file.
+
+Handle custom data export
++++++++++++++++++++++++++++++++
+
+It is also quite common to download a portion of the data in a database table, for example the result of a search query. With version 0.0.2, you can pass on a query sets to to :meth:`~django_excel.make_response_from_query_sets` and generate an excel sheet from it::
+
+    def export_data(request, atype):
+	    ...
+        elif atype == "custom":
+            question = Question.objects.get(slug='ide')
+            query_sets = Choice.objects.filter(question=question)
+            column_names = ['choice_text', 'id', 'votes']
+            return excel.make_response_from_query_sets(query_sets, column_names, 'xls')
+
+You can visit http://localhost:8000/polls/export/custom and will get the query set exported as a single sheet file as:
+
+.. image:: custom-export.png
 
 .. _data-types-and-its-conversion-funcs:
 
@@ -262,18 +279,19 @@ All supported data types
 
 Here is table of functions for all supported data types:
 
-=========================== ======================================================== ==================================================
+=========================== ======================================================== ===================================================
 data structure              from file to data structures                             from data structures to response
-=========================== ======================================================== ==================================================
+=========================== ======================================================== ===================================================
 dict                        :meth:`~django_excel.ExcelMixin.get_dict`                :meth:`~django_excel.make_response_from_dict`
 records                     :meth:`~django_excel.ExcelMixin.get_records`             :meth:`~django_excel.make_response_from_records`
 a list of lists             :meth:`~django_excel.ExcelMixin.get_array`               :meth:`~django_excel.make_response_from_array`
 dict of a list of lists     :meth:`~django_excel.ExcelMixin.get_book_dict`           :meth:`~django_excel.make_response_from_book_dict`
-:class:`~pyexcel.Sheet`     :meth:`~django_excel.ExcelMixin.get_sheet`               :meth:`~django_excel.make_response`
-:class:`~pyexcel.Book`      :meth:`~django_excel.ExcelMixin.get_book`                :meth:`~django_excel.make_response`
+:class:`pyexcel.Sheet`      :meth:`~django_excel.ExcelMixin.get_sheet`               :meth:`~django_excel.make_response`
+:class:`pyexcel.Book`       :meth:`~django_excel.ExcelMixin.get_book`                :meth:`~django_excel.make_response`
 database table              :meth:`~django_excel.ExcelMixin.save_to_database`        :meth:`~django_excel.make_response_from_a_table` 
-a list of database tables   :meth:`~django_excel.ExcelMixin.save_book_to_database`   :meth:`~django_excel.make_response_from_tables` 
-=========================== ======================================================== ==================================================
+a list of database tables   :meth:`~django_excel.ExcelMixin.save_book_to_database`   :meth:`~django_excel.make_response_from_tables`
+a database query sets                                                                :meth:`~django_excel.make_response_from_query_sets`
+=========================== ======================================================== ===================================================
 
 See more examples of the data structures in :ref:`pyexcel documentation<pyexcel:a-list-of-data-structures>`
 
@@ -291,7 +309,7 @@ API Reference
       :param sheet_name: For an excel book, there could be multiple sheets. If it is left
                          unspecified, the sheet at index 0 is loaded. For 'csv', 'tsv' file,
                          *sheet_name* should be None anyway.
-      :param keywords: additional keywords to pyexcel library
+      :param keywords: additional keywords to :meth:`pyexcel.get_sheet`
       :returns: A sheet object
 
    .. method:: get_array(sheet_name=None, **keywords)
@@ -324,27 +342,19 @@ API Reference
       :param keywords: additional keywords to pyexcel library
       :returns: a two dimensional array, a list of lists
 
-   .. method:: save_to_database(table=None, **keywords)
+   .. method:: save_to_database(model=None, initializer=None, mapdict=None, **keywords)
 
-      :param table: a database table or a tuple which have this sequence (table, table_init_func, mapdict, name_columns_by_row, name_rows_by_column)
+      :param model: a django model
+      :param initializer: a custom table initialization function if you have one
+      :param mapdict: the explicit table column names if your excel data do not have the exact column names
+      :param keywords: additional keywords to :meth:`pyexcel.Sheet.save_to_django_model`
 
-                     ==================== =================================================================================
-                     Field                Description
-                     ==================== =================================================================================
-                     table_init_funcs     it is needed when your table had custom __init__ function
-                     mapdict              model column names
-                     name_columns_by_row  use a row to name columns. if you use name_rows_by_column, please set this to -1
-                     name_rows_by_column  uses a column to name rows.
-                     ==================== =================================================================================
+   .. method:: save_book_to_database(models=None, initializers=None, mapdicts=None, **keywords)
 
-      :param keywords: additional keywords to pyexcel library
-
-
-   .. method:: save_book_to_database(tables=None, **keywords)
-
-      :param tables: a list of database tables or tuples which have this sequence (table, table_init_func, mapdict, name_columns_by_row, name_rows_by_column), see :meth:`~ExcelMixin.save_to_database`
-      :param keywords: additional keywords to pyexcel library
-
+      :param models: a list of django models
+      :param initializers: a list of model initialization functions.
+      :param mapdicts: a list of explicit table column names if your excel data sheets do not have the exact column names
+      :param keywords: additional keywords to :meth:`pyexcel.Book.save_to_django_models`
 
 Response methods
 -----------------
@@ -353,7 +363,7 @@ Response methods
 
    .. method:: make_response(pyexcel_instance, file_type, status=200)
 
-      :param pyexcel_instance: pyexcel.Sheet or pyexcel.Book
+      :param pyexcel_instance: :class:`pyexcel.Sheet` or :class:`pyexcel.Book`
       :param file_type: one of the following strings:
                         
                         * 'csv'
@@ -393,8 +403,18 @@ Response methods
       :param status: same as :meth:`~django_excel.make_response`
 
    .. autofunction:: make_response_from_a_table(model, file_type status=200)
-   .. autofunction:: make_response_from_tables(models, file_type status=200)
 
+
+   .. method:: make_response_from_query_sets(query_sets, column_names, file_type status=200)
+
+      Produce a single sheet Excel book of *file_type* from your custom database queries
+
+      :param query_sets: a query set
+      :param column_names: a nominated column names. It could not be None, otherwise no data is returned.
+      :param file_type: same as :meth:`~django_excel.make_response`
+      :param status: same as :meth:`~django_excel.make_response`
+
+   .. autofunction:: make_response_from_tables(models, file_type status=200)
 
 Indices and tables
 --------------------

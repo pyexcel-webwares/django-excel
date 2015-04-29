@@ -9,17 +9,18 @@ with open("README.rst", 'r') as readme:
     README_txt = readme.read()
 
 dependencies = [
-    'pyexcel>=0.1.3',
+    'pyexcel>=0.1.5',
+    'pyexcel-webio>=0.0.2',
     'Django>=1.7.1'
 ]
 
 setup(
     name='django-excel',
     author="C. W.",
-    version='0.0.1',
+    version='0.0.2',
     author_email="wangc_2011@hotmail.com",
     url="https://github.com/chfw/django-excel",
-    description='A django library to read, manipulate and write data in different excel formats: csv, ods, xls, xlsx and xlsm.',
+    description='A django middleware that provides one application programming interface to read and write data in different excel file formats',
     install_requires=dependencies,
     packages=find_packages(exclude=['ez_setup', 'examples', 'tests', 'mysite', 'polls', 'migrations']),
     include_package_data=True,
@@ -27,7 +28,7 @@ setup(
     zip_safe=False,
     tests_require=['nose'],
     keywords=['API', 'Django', 'Excel'],
-    license='GNU GPLv3 or BSD',
+    license='New BSD',
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',

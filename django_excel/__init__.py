@@ -8,8 +8,6 @@
     :copyright: (c) 2015 by Onni Software Ltd.
     :license: New BSD License
 """
-
-
 from django.core.files.uploadhandler import MemoryFileUploadHandler, TemporaryFileUploadHandler
 from django.core.files.uploadedfile import InMemoryUploadedFile, TemporaryUploadedFile
 from django.http import HttpResponse

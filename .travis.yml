@@ -15,7 +15,7 @@ install:
   - pip install git+https://github.com/chfw/pyexcel-xlsx.git
   - pip install -r requirements.txt
   - pip install -r test_requirements.txt --use-mirrors
-  - if [[ $TRAVIS_PYTHON_VERSION == "2.7" ]]; then pip install pyexcel-ods; fi
+  - if [[ $TRAVIS_PYTHON_VERSION == "2.7" ]]; then pip install git+https://github.com/chfw/pyexcel-ods.git; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "2.7" ]]; then pip install django==1.7.1; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "3.3" ]]; then pip install django==1.7.1; fi
   - if [[ $TRAVIS_PYTHON_VERSION == "3.4" ]]; then pip install django==1.7.1; fi

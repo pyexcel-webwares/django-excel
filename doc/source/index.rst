@@ -58,7 +58,9 @@ or clone it and install it::
     $ cd django-excel
     $ python setup.py install
 
-Installation of individual plugins , please refer to individual plugin page.
+Installation of individual plugins , please refer to individual plugin page. For example, if you need xls file support, please install pyexcel-xls::
+
+    $ pip install pyexcel-xls
 
 Setup
 ---------
@@ -68,6 +70,20 @@ You will need to update your *settings.py*::
     FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
                             "django_excel.TemporaryExcelFileUploadHandler")
 
+
+More excel file formats
+------------------------
+    
+If you would like to expand the list of supported excel file formats (see :ref:`file-format-list`) for your own application, you could include **one** or more of the following import lines in your django views::
+
+    import pyexcel.ext.xls # pip install pyexcel-xls
+    import pyexcel.ext.xlsx # pip install pyexcel-xlsx
+    import pyexcel.ext.ods # pip install pyexcel-ods
+
+.. note::
+
+   Your IDE or pyflakes may highlight it as un-used but it is used. The registration of 
+   the extra file format support happens when the import action is performed
 
 Tutorial
 --------------

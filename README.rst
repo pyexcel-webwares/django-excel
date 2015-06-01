@@ -11,15 +11,6 @@ django-excel - Let you focus on data, instead of file formats
 .. image:: https://readthedocs.org/projects/django-excel/badge/?version=latest
     :target: http://django-excel.readthedocs.org/en/latest/
 
-.. image:: https://pypip.in/version/django-excel/badge.png
-    :target: https://pypi.python.org/pypi/django-excel
-
-.. image:: https://pypip.in/d/django-excel/badge.png
-    :target: https://pypi.python.org/pypi/django-excel
-
-.. image:: https://pypip.in/py_versions/django-excel/badge.png
-    :target: https://pypi.python.org/pypi/django-excel
-
 .. image:: http://img.shields.io/gittip/chfw.svg
     :target: https://gratipay.com/chfw/
 
@@ -125,5 +116,5 @@ Dependencies
 =============
 
 * Django
-* pyexcel >= 0.1.3
+* pyexcel >= 0.1.5
 * pyexcel-webio

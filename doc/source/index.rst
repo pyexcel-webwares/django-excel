@@ -13,7 +13,7 @@ Welcome to django-excel's documentation!
 :Version: |version|
 :Generated: |today|
 
-**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes it easy to consume/produce information stored in excel files over HTTP protocol as well as on file system. This library can turn the excel data into Pythonic a list of lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it lets you focus on data in Django web development, instead of file formats.
+**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes it easy to consume/produce information stored in excel files over HTTP protocol as well as on file system. This library can turn the excel data into a list of lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it lets you focus on data in Django web development, instead of file formats.
 
 The highlighted features are:
 
@@ -27,14 +27,16 @@ The highlighted features are:
 
 .. table:: A list of file formats supported by external plugins
 
-   ================ ========================================================================
-   Plugins          Supported file formats                                      
-   ================ ========================================================================
+   ================ ==========================================
+   Plugins          Supported file formats                    
+   ================ ==========================================
    `xls`_           xls, xlsx(r), xlsm(r)
    `xlsx`_          xlsx
-   `ods`_           ods (python 2.6, 2.7)                                       
-   `ods3`_          ods (python 2.7, 3.3, 3.4)                                  
-   ================ ========================================================================
+   `ods3`_          ods (python 2.6, 2.7, 3.3, 3.4)
+   `ods`_           ods (python 2.6, 2.7)
+   `text`_          write only)json, rst, mediawiki,
+                    latex, grid, pipe, orgtbl, plain simple
+   ================ ==========================================
    
 .. _xls: https://github.com/chfw/pyexcel-xls
 .. _xlsx: https://github.com/chfw/pyexcel-xlsx
@@ -292,8 +294,14 @@ database table              :meth:`~django_excel.ExcelMixin.save_to_database`   
 a list of database tables   :meth:`~django_excel.ExcelMixin.save_book_to_database`   :meth:`~django_excel.make_response_from_tables`
 a database query sets                                                                :meth:`~django_excel.make_response_from_query_sets`
 =========================== ======================================================== ===================================================
-
+    
 See more examples of the data structures in :ref:`pyexcel documentation<pyexcel:a-list-of-data-structures>`
+
+If you would like to expand the list of supported excel file formats (see :ref:`file-format-list`) for your own application, you could include one or all of the following import lines right after **Flask-Excel** is imported::
+
+    import pyexcel.ext.xls
+    import pyexcel.ext.xlsx
+    import pyexcel.ext.ods
 
 API Reference
 ---------------

@@ -55,7 +55,7 @@ class ExcelResponseTestCase(TestCase):
             print(file_type)
             response = self.client.get("/polls/download/"+file_type)
             assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
-            sheet = pe.get_sheet(file_type=file_type, content=response.content)
+            sheet = pe.get_sheet(file_type=file_type, file_content=response.content)
             sheet.format(int)
             array = sheet.to_array()
             assert array == self.data
@@ -106,7 +106,7 @@ class ExcelResponseTestCase(TestCase):
                     response = self.client.post('/polls/exchange/'+file_type,
                                                 data={"file": fp})
                     assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
-                    sheet = pe.get_sheet(file_type=file_type, content=response.content)
+                    sheet = pe.get_sheet(file_type=file_type, file_content=response.content)
                     sheet.format(int)
                     array = sheet.to_array()
                     assert array == self.data
@@ -125,7 +125,7 @@ class DatabaseOperationsTestCase(TestCase):
         assert response.status_code == 200
         response2 = self.client.get('/polls/export/book')
         assert response2.status_code == 200
-        book = pe.get_book(file_type='xls', content=response2.content)
+        book = pe.get_book(file_type='xls', file_content=response2.content)
         content = dedent("""
         Sheet Name: question
         +----+---------------------------+----------------------------------------------+----------+
@@ -161,7 +161,7 @@ class DatabaseOperationsTestCase(TestCase):
         assert response.status_code == 200
         response2 = self.client.get('/polls/export/sheet')
         assert response2.status_code == 200
-        sheet = pe.get_sheet(file_type='xls', content=response2.content)
+        sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
         content = dedent("""
         Sheet Name: question
         +----+---------------------------+----------------------------------------------+----------+
@@ -179,7 +179,7 @@ class DatabaseOperationsTestCase(TestCase):
         assert response.status_code == 200
         response2 = self.client.get('/polls/export/custom')
         assert response2.status_code == 200
-        sheet = pe.get_sheet(file_type='xls', content=response2.content)
+        sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
         content = dedent("""
         Sheet Name: pyexcel_sheet1
         +---------------+----+-------+

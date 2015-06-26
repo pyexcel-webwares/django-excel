@@ -21,10 +21,10 @@ class ExcelMixin(webio.ExcelInput):
         return extension
         
     def load_single_sheet(self, sheet_name=None, **keywords):
-        return pe.get_sheet(file_type=self._get_file_extension(), content=self.file.read(), sheet_name=sheet_name, **keywords)
+        return pe.get_sheet(file_type=self._get_file_extension(), file_content=self.file.read(), sheet_name=sheet_name, **keywords)
 
     def load_book(self, **keywords):
-        return pe.get_book(file_type=self._get_file_extension(), content=self.file.read(), **keywords)
+        return pe.get_book(file_type=self._get_file_extension(), file_content=self.file.read(), **keywords)
 
     def save_to_database(self, model=None,
                          sheet_name=None, name_columns_by_row=0, name_rows_by_column=-1, **keywords):

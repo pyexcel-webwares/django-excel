@@ -14,9 +14,20 @@ django-excel - Let you focus on data, instead of file formats
 .. image:: http://img.shields.io/gittip/chfw.svg
     :target: https://gratipay.com/chfw/
 
-**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes it easy to consume/produce information stored in excel files over HTTP protocol as well as on file system. This library can turn the excel data into Pythonic a list of lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it lets you focus on data in Django web development, instead of file formats.
+**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes
+it easy to consume/produce information stored in excel files over HTTP protocol as
+well as on file system. This library can turn the excel data into Pythonic a list of
+lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence
+it lets you focus on data in Django web development, instead of file formats.
 
-The idea originated from the problem of the illiteracy of excel file formats of non-technical office workers: such as office assistant, human resource administrator. There is nothing with the un-deniable fact that some people do not know the difference among various excel formats. It becomes usability problem to those people when a web service cannot parse the excel file that they saved using Microsoft Excel. Instead of training those people about file formats, this library helps web developers to handle most of the excel file formats by unifying the programming interface to most of the excel readers and writers.
+The idea originated from the problem of the illiteracy of excel file formats of
+non-technical office workers: such as office assistant, human resource administrator.
+There is nothing with the un-deniable fact that some people do not know the difference
+among various excel formats. It becomes usability problem to those people when a web
+service cannot parse the excel file that they saved using Microsoft Excel. Instead of
+training those people about file formats, this library helps web developers to handle
+most of the excel file formats by unifying the programming interface to most of the
+excel readers and writers.
 
 The highlighted features are:
 

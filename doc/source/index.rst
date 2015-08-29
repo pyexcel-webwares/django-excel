@@ -13,7 +13,11 @@ Welcome to django-excel's documentation!
 :Version: |version|
 :Generated: |today|
 
-**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes it easy to consume/produce information stored in excel files over HTTP protocol as well as on file system. This library can turn the excel data into a list of lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it lets you focus on data in Django web development, instead of file formats.
+**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes
+it easy to consume/produce information stored in excel files over HTTP protocol as
+well as on file system. This library can turn the excel data into a list of lists,
+a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it
+lets you focus on data in Django web development, instead of file formats.
 
 The highlighted features are:
 
@@ -21,7 +25,8 @@ The highlighted features are:
 #. turn uploaded excel file directly into Python data struture
 #. pass Python data structures as an excel file download
 #. provide data persistence as an excel file in server side
-#. supports csv, tsv, csvz, tsvz by default and other formats are supported via the following plugins:
+#. supports csv, tsv, csvz, tsvz by default and other formats are supported via the
+   following plugins:
 
 .. _file-format-list:
 
@@ -44,7 +49,14 @@ The highlighted features are:
 .. _ods3: https://github.com/chfw/pyexcel-ods3
 .. _text: https://github.com/chfw/pyexcel-text
 
-This library makes infomation processing involving various excel files as easy as processing array, dictionary when processing file upload/download, data import into and export from SQL databases, information analysis and persistence. It uses **pyexcel** and its plugins: 1) to provide one uniform programming interface to handle csv, tsv, xls, xlsx, xlsm and ods formats. 2) to provide one-stop utility to import the data in uploaded file into a database and to export tables in a database as excel files for file download 3) to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
+This library makes infomation processing involving various excel files as easy as
+processing array, dictionary when processing file upload/download, data import into
+and export from SQL databases, information analysis and persistence. It uses
+**pyexcel** and its plugins:
+
+#. to provide one uniform programming interface to handle csv, tsv, xls, xlsx, xlsm and ods formats.
+#. to provide one-stop utility to import the data in uploaded file into a database and to export tables in a database as excel files for file download
+#. to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
 
 
 Installation
@@ -60,7 +72,11 @@ or clone it and install it::
     $ cd django-excel
     $ python setup.py install
 
-Installation of individual plugins , please refer to individual plugin page. For example, if you need xls file support, please install pyexcel-xls::
+Contrary to Django's phylosophy of 'battery included', django-excel does not
+come with all batteries due to the size of the dependency(xlwt, openpyxl, odfpy). Hence,
+Django developer is left with the choice to install and load the excel file formats.
+Installation of individual plugins , please refer to individual
+plugin page. For example, if you need xls file support, please install pyexcel-xls::
 
     $ pip install pyexcel-xls
 
@@ -318,6 +334,7 @@ If you would like to expand the list of supported excel file formats (see :ref:`
     import pyexcel.ext.xls
     import pyexcel.ext.xlsx
     import pyexcel.ext.ods
+
 
 API Reference
 ---------------

@@ -19,6 +19,7 @@ data = [
     [4, 5, 6]
 ]
 
+
 class UploadFileForm(forms.Form):
     file = forms.FileField()
 
@@ -41,24 +42,33 @@ def upload(request):
         },
         context_instance=RequestContext(request))
 
+
 def download(request, file_type):
     sheet = excel.pe.Sheet(data)
     return excel.make_response(sheet, file_type)
 
+
 def export_data(request, atype):
     if atype == "sheet":
-        return excel.make_response_from_a_table(Question, 'xls')
+        return excel.make_response_from_a_table(
+            Question, 'xls')
     elif atype == "book":
-        return excel.make_response_from_tables([Question, Choice], 'xls')
+        return excel.make_response_from_tables(
+            [Question, Choice], 'xls')
     elif atype == "custom":
         question = Question.objects.get(slug='ide')
         query_sets = Choice.objects.filter(question=question)
         column_names = ['choice_text', 'id', 'votes']
-        return excel.make_response_from_query_sets(query_sets, column_names, 'xls')
+        return excel.make_response_from_query_sets(
+            query_sets,
+            column_names,
+            'xls')
+
 
 def import_data(request):
     if request.method == "POST":
-        form = UploadFileForm(request.POST, request.FILES)
+        form = UploadFileForm(request.POST,
+                              request.FILES)
         def choice_func(row):
             q = Question.objects.filter(slug=row[0])[0]
             row[0] = q
@@ -69,9 +79,8 @@ def import_data(request):
                 initializers=[None, choice_func],
                 mapdicts=[
                     ['question_text', 'pub_date', 'slug'],
-                    ['question', 'choice_text', 'votes']
-                 ]
-                )
+                    ['question', 'choice_text', 'votes']]
+            )
             return HttpResponse("OK", status=200)
         else:
             return HttpResponseBadRequest()
@@ -89,7 +98,8 @@ def import_data(request):
 
 def import_dataa(request):
     if request.method == "POST":
-        form = UploadFileForm(request.POST, request.FILES)
+        form = UploadFileForm(request.POST,
+                              request.FILES)
         if form.is_valid():
             request.FILES['file'].save_to_database(
                 model=Question,
@@ -99,8 +109,10 @@ def import_dataa(request):
             return HttpResponseBadRequest()
     else:
         form = UploadFileForm()
-    return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
-    
+    return render_to_response('upload_form.html',
+                              {'form': form},
+                              context_instance=RequestContext(request))
+
 
 def exchange(request, file_type):
     form = UploadFileForm(request.POST, request.FILES)
@@ -110,16 +122,17 @@ def exchange(request, file_type):
     else:
         return HttpResponseBadRequest()
 
+
 def parse(request, data_struct_type):
     form = UploadFileForm(request.POST, request.FILES)
     if form.is_valid():
         filehandle = request.FILES['file']
         if data_struct_type == "array":
-            return JsonResponse({"result":filehandle.get_array()})
+            return JsonResponse({"result": filehandle.get_array()})
         elif data_struct_type == "dict":
             return JsonResponse(filehandle.get_dict())
         elif data_struct_type == "records":
-            return JsonResponse({"result":filehandle.get_records()})
+            return JsonResponse({"result": filehandle.get_records()})
         elif data_struct_type == "book":
             return JsonResponse(filehandle.get_book().to_dict())
         elif data_struct_type == "book_dict":
@@ -128,4 +141,3 @@ def parse(request, data_struct_type):
             return HttpResponseBadRequest()
     else:
         return HttpResponseBadRequest()
-

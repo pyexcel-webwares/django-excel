@@ -1,3 +1,4 @@
+sudo: false
 language: python
 notifications:
   email: false
@@ -10,7 +11,7 @@ python:
   - 3.5
 install:
   - pip install -r requirements.txt
-  - pip install -r test_requirements.txt --use-mirrors
+  - pip install -r test_requirements.txt
 script:
   make test
 after_success:

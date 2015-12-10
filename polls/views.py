@@ -96,14 +96,14 @@ def import_data(request):
         context_instance=RequestContext(request))
 
 
-def import_dataa(request):
+def import_sheet(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST,
                               request.FILES)
         if form.is_valid():
             request.FILES['file'].save_to_database(
                 model=Question,
-                mapdict=['question_text', 'pub_date'])
+                mapdict=['question_text', 'pub_date', 'slug'])
             return HttpResponse("OK")
         else:
             return HttpResponseBadRequest()

@@ -9,5 +9,6 @@ urlpatterns = patterns(
     url(r'^exchange/(.*)', views.exchange, name="exchange"),
     url(r'^parse/(.*)', views.parse, name="parse"),
     url(r'^import/', views.import_data, name="import"),
+    url(r'^import_sheet/', views.import_sheet, name="import_sheet"),
     url(r'^export/(.*)', views.export_data, name="export")
 )

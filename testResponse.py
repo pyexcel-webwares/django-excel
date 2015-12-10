@@ -173,6 +173,24 @@ class DatabaseOperationsTestCase(TestCase):
         +----+---------------------------+----------------------------------------------+----------+""").strip('\n')
         assert str(sheet) == content
 
+    def testImportSheet(self):
+        fp = open("sample-sheet.xls", "rb")
+        response = self.client.post('/polls/import_sheet/', data={"file": fp})
+        assert response.status_code == 200
+        response2 = self.client.get('/polls/export/sheet')
+        assert response2.status_code == 200
+        sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
+        content = dedent("""
+        Sheet Name: question
+        +----+---------------------------+----------------------------------------------+----------+
+        | id | pub_date                  | question_text                                | slug     |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 1  | 2015-01-28T00:00:00+00:00 | What is your favourite programming language? | language |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
+        +----+---------------------------+----------------------------------------------+----------+""").strip('\n')
+        assert str(sheet) == content
+
     def testCustomExport(self):
         fp = open(self.testfile, "rb")
         response = self.client.post('/polls/import/', data={"file": fp})

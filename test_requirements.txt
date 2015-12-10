@@ -5,4 +5,6 @@ python-coveralls
 coverage
 pyexcel-xls
 pyexcel-xlsx
+https://github.com/T0ha/ezodf/archive/2c69103e6c0715adb0e36562cb2e6325fd776112.zip
+pyexcel-ods3
 lxml

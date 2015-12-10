@@ -18,8 +18,11 @@ import pyexcel_webio as webio
 
 
 class ExcelMixin(webio.ExcelInput):
+    """
+    Provide additional pyexcel-webio methods to Django's UploadedFiles
+    """
     def _get_file_extension(self):
-        extension = self.name.split(".")[1]
+        extension = self.name.split(".")[-1]
         return extension
 
     def load_single_sheet(self, sheet_name=None, **keywords):
@@ -40,6 +43,9 @@ class ExcelMixin(webio.ExcelInput):
                          name_columns_by_row=0,
                          name_rows_by_column=-1,
                          **keywords):
+        """
+        Save data from a sheet to a nominated django model
+        """        
         sheet = self.load_single_sheet(
             sheet_name=sheet_name,
             name_columns_by_row=name_columns_by_row,
@@ -49,20 +55,32 @@ class ExcelMixin(webio.ExcelInput):
             sheet.save_to_django_model(model, **keywords)
 
     def save_book_to_database(self, models=None, **keywords):
+        """
+        Save data from a book to a nominated django models
+        """        
         book = self.load_book(**keywords)
         if book:
             book.save_to_django_models(models, **keywords)
 
 
 class ExcelInMemoryUploadedFile(ExcelMixin, InMemoryUploadedFile):
+    """
+    Mix-in pyexcel-webio methods in InMemoryUploadedFile
+    """
     pass
 
 
 class TemporaryUploadedExcelFile(ExcelMixin, TemporaryUploadedFile):
+    """
+    Mix-in pyexcel-webio methods in TemporaryUploadedFile    
+    """
     pass
 
 
 class ExcelMemoryFileUploadHandler(MemoryFileUploadHandler):
+    """
+    Override MemoryFileUploadHandler to bring in ExcelInMemoryUploadedFile
+    """
     def file_complete(self, file_size):
         if not self.activated:
             return
@@ -79,6 +97,9 @@ class ExcelMemoryFileUploadHandler(MemoryFileUploadHandler):
 
 
 class TemporaryExcelFileUploadHandler(TemporaryFileUploadHandler):
+    """
+    Override TemporaryFileUploadHandler to bring in TemporaryUploadedExcelFile
+    """
     def new_file(self, file_name, *args, **kwargs):
         """
         Create the file object to append to as data is coming in.

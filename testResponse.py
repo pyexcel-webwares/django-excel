@@ -68,7 +68,7 @@ class ExcelResponseTestCase(TestCase):
         }
         for data_struct_type in test_sample.keys():
             sheet = pe.Sheet(self.single_sheet)
-            tmp_filename = "test.xls"
+            tmp_filename = "test.file.xls"
             sheet.save_as(tmp_filename)
             with open(tmp_filename, "rb") as fp:
                 response = self.client.post('/polls/parse/'+data_struct_type,

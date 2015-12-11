@@ -1,25 +1,24 @@
+import os
+import sys
+import json
+from textwrap import dedent
 from polls.models import Question, Choice
 from django.test import Client, TestCase
 from django.test.utils import override_settings
-from textwrap import dedent
 import pyexcel as pe
 import pyexcel.ext.xls
 import pyexcel.ext.xlsx
-import json
-import sys
-import os
+import pyexcel.ext.ods3
 PY2 = sys.version_info[0] == 2
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
 else:
     from collections import OrderedDict
 if PY2:
-    import pyexcel.ext.ods
     from StringIO import StringIO
     from StringIO import StringIO as BytesIO
 else:
     from io import BytesIO, StringIO
-    import pyexcel.ext.ods3
 
 
 FILE_TYPE_MIME_TABLE = {

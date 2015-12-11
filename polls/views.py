@@ -6,12 +6,7 @@ import django_excel as excel
 from polls.models import Question, Choice
 import pyexcel.ext.xls
 import pyexcel.ext.xlsx
-import sys
-PY2 = sys.version_info[0] == 2
-if PY2:
-    import pyexcel.ext.ods
-else:
-    import pyexcel.ext.ods3
+import pyexcel.ext.ods3
 
 
 data = [

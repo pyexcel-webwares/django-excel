@@ -14,11 +14,11 @@ python:
 matrix:
   exclude:
     - python: 3.3
-	  env: DJANGO_VERSION=1.9
+      env: DJANGO_VERSION=1.9
     - python: 3.5
-	  env: DJANGO_VERSION=1.7.8
+      env: DJANGO_VERSION=1.7.8
     - python: 3.5
-	  env: DJANGO_VERSION=1.8.2
+      env: DJANGO_VERSION=1.8.2
 install:
   - pip install Django==$DJANGO_VERSION
   - pip install -r requirements.txt

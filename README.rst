@@ -59,6 +59,19 @@ Known constraints
 Fonts, colors and charts are not supported. 
 
 
+Tested Django Versions
+========================
+
+.. image:: https://img.shields.io/badge/django-1.9-green.svg
+    :target: http://travis-ci.org/chfw/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.8.2-green.svg
+    :target: http://travis-ci.org/chfw/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.7.8-green.svg
+    :target: http://travis-ci.org/chfw/django-excel
+
+
 Installation
 ============
 
@@ -128,14 +141,3 @@ Dependencies
 * pyexcel >= 0.1.5
 * pyexcel-webio
 
-Tested Django Versions
-========================
-
-.. image:: https://img.shields.io/badge/django-1.9-green.svg
-    :target: http://travis-ci.org/chfw/django-excel
-
-.. image:: https://img.shields.io/badge/django-1.8.2-green.svg
-    :target: http://travis-ci.org/chfw/django-excel
-
-.. image:: https://img.shields.io/badge/django-1.7.8-green.svg
-    :target: http://travis-ci.org/chfw/django-excel

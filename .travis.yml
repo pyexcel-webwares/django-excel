@@ -3,12 +3,17 @@ language: python
 notifications:
   email: false
 env:
-  global:
+  - DJANGO_VERSION=1.5.12
+  - DJANGO_VERSION=1.6.11
+  - DJANGO_VERSION=1.7.8
+  - DJANGO_VERSION=1.8.2
+  - DJANGO_VERSION=1.9
 python:
   - 2.7
   - 3.3
   - 3.4
 install:
+  - pip install Django==$DJANGO_VERSION
   - pip install -r requirements.txt
   - pip install -r test_requirements.txt
 script:

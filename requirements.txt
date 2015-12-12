@@ -2,4 +2,4 @@ pyexcel>=0.1.4
 pyexcel-webio>=0.0.2
 pyexcel-xls>=0.0.7
 pyexcel-xlsx>=0.0.6
-django==1.7.1
+django>=1.5.12

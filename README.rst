@@ -41,8 +41,8 @@ Plugins          Supported file formats
 ================ ========================================================================
 `pyexcel-xls`_   xls, xlsx(r), xlsm(r)
 `pyexcel-xlsx`_  xlsx
-`pyexcel-ods`_   ods (python 2.6, 2.7)                                       
 `pyexcel-ods3`_  ods (python 2.7, 3.3, 3.4)                                  
+`pyexcel-ods`_   ods (python 2.6, 2.7)                                       
 `pyexcel-text`_  (write only)json, rst, mediawiki,latex, grid, pipe, orgtbl, plain simple
 ================ ========================================================================
 
@@ -75,12 +75,16 @@ Tested Django Versions
 Installation
 ============
 
-You can install it via pip::
+You can install it via pip:
 
-    $ pip install django-excel
+.. code-block:: bash
+
+	$ pip install django-excel
 
 
-or clone it and install it::
+or clone it and install it:
+
+.. code-block:: bash
 
     $ git clone http://github.com/chfw/django-pyexcel.git
     $ cd django-excel
@@ -91,7 +95,9 @@ Installation of individual plugins , please refer to individual plugin page.
 Setup
 ======
 
-You will need to update your *settings.py*::
+You will need to update your *settings.py*:
+
+.. code-block:: python
 
     FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
                             "django_excel.TemporaryExcelFileUploadHandler")
@@ -100,7 +106,9 @@ You will need to update your *settings.py*::
 Usage
 ======
 
-Here is the example viewing function codes::
+Here is the example viewing function codes:
+
+.. code-block:: python
 
     from django.shortcuts import render_to_response
     from django.http import HttpResponseBadRequest
@@ -134,10 +142,4 @@ License
 
 New BSD License
 
-Dependencies
-=============
-
-* Django
-* pyexcel >= 0.1.5
-* pyexcel-webio
 

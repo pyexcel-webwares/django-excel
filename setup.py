@@ -8,11 +8,14 @@ except ImportError:
 with open("README.rst", 'r') as readme:
     README_txt = readme.read()
 
-dependencies = [
-    'pyexcel>=0.1.5',
-    'pyexcel-webio>=0.0.2',
-    'Django>=1.7.1'
-]
+with open("requirements.txt", 'r') as requirements_txt:
+    lines = requirements_txt.readlines()
+    lines = map(lambda x: x.rstrip(), lines)
+    dependencies = lines
+
+with open("VERSION", "r") as version:
+    version_txt = version.read().rstrip()
+
 extras = {
     'xls': ['pyexcel-xls>=0.0.7'],
     'xlsx': ['pyexcel-xlsx>=0.0.7'],
@@ -22,7 +25,7 @@ extras = {
 setup(
     name='django-excel',
     author="C. W.",
-    version='0.0.3',
+    version=version_txt,
     author_email="wangc_2011@hotmail.com",
     url="https://github.com/chfw/django-excel",
     description='A django middleware that provides one application programming interface to read and write data in different excel file formats',

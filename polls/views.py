@@ -97,6 +97,7 @@ def import_sheet(request):
                               request.FILES)
         if form.is_valid():
             request.FILES['file'].save_to_database(
+                name_columns_by_row=2,
                 model=Question,
                 mapdict=['question_text', 'pub_date', 'slug'])
             return HttpResponse("OK")

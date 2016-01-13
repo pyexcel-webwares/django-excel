@@ -146,7 +146,7 @@ Then run the test application::
 Handle excel file upload and download
 ++++++++++++++++++++++++++++++++++++++
 
-This example shows how to process uploaded excel file and how to make data download as an excel file. Open your browser and visit http://localhost:8000/polls/upload, you shall see this upload form:
+This example shows how to process uploaded excel file and how to make data download as an excel file. Open your browser and visit http://localhost:8000/polls/, you shall see this upload form:
 
 .. image :: upload-form.png
 

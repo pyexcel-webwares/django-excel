@@ -116,7 +116,17 @@ class TemporaryExcelFileUploadHandler(TemporaryFileUploadHandler):
             self.content_type_extra)
 
 
-webio.ExcelResponse = HttpResponse
+def make_response(content, content_type, status, file_name=None):
+    """
+    Custom response function that is called by pyexcel-webio
+    """
+    response = HttpResponse(content, content_type=content_type, status=status)
+    if file_name:
+        response["Content-Disposition"] = "attachment; filename=%s" % (file_name)
+    return response
+
+
+webio.ExcelResponse = make_response
 
 
 from pyexcel_webio import (
@@ -129,7 +139,8 @@ from pyexcel_webio import (
 )
 
 
-def make_response_from_a_table(model, file_type, status=200, **keywords):
+def make_response_from_a_table(model, file_type,
+                               status=200, file_name=None, **keywords):
     """
     Produce a single sheet Excel book of *file_type*
 
@@ -138,10 +149,11 @@ def make_response_from_a_table(model, file_type, status=200, **keywords):
     :param status: same as :meth:`~django_excel.make_response`
     """
     sheet = pe.get_sheet(model=model, **keywords)
-    return make_response(sheet, file_type, status, **keywords)
+    return make_response(sheet, file_type, status, file_name=file_name, **keywords)
 
 
-def make_response_from_tables(models, file_type, status=200, **keywords):
+def make_response_from_tables(models, file_type,
+                              status=200, file_name=None, **keywords):
     """
     Produce a multiple sheet Excel book of *file_type*. It becomes the same
     as :meth:`~django_excel.make_response_from_a_table` if you pass *tables*
@@ -152,4 +164,4 @@ def make_response_from_tables(models, file_type, status=200, **keywords):
     :param status: same as :meth:`~django_excel.make_response`
     """
     book = pe.get_book(models=models, **keywords)
-    return make_response(book, file_type, status, **keywords)
+    return make_response(book, file_type, status, file_name=file_name, **keywords)

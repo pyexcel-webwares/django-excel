@@ -217,6 +217,7 @@ class DatabaseOperationsTestCase(TestCase):
 class ExcelResponseUsingFileTestCase(ExcelResponseTestCase):
     pass
 
+
 @override_settings(FILE_UPLOAD_MAX_MEMORY_SIZE=1)
 class DatabaseOperationsUsingFileTestCase(DatabaseOperationsTestCase):
     pass

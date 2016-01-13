@@ -7,4 +7,3 @@ pyexcel-xls
 pyexcel-xlsx
 pyexcel-ods3
 lxml
-https://github.com/pyexcel/pyexcel-webio/archive/master.zip

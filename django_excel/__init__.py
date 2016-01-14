@@ -116,7 +116,7 @@ class TemporaryExcelFileUploadHandler(TemporaryFileUploadHandler):
             self.content_type_extra)
 
 
-def make_response(content, content_type, status, file_name=None):
+def _make_response(content, content_type, status, file_name=None):
     """
     Custom response function that is called by pyexcel-webio
     """
@@ -126,7 +126,7 @@ def make_response(content, content_type, status, file_name=None):
     return response
 
 
-webio.ExcelResponse = make_response
+webio.ExcelResponse = _make_response
 
 
 from pyexcel_webio import (

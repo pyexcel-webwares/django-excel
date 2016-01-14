@@ -6,6 +6,8 @@ urlpatterns = patterns(
     '',
     url(r'^$', views.upload, name='uplink'),
     url(r'^download/(.*)', views.download, name="download"),
+    url(r'^download_attachment/(.*)/(.*)', views.download_as_attachment,
+        name="download_attachment"),
     url(r'^exchange/(.*)', views.exchange, name="exchange"),
     url(r'^parse/(.*)', views.parse, name="parse"),
     url(r'^import/', views.import_data, name="import"),

@@ -42,6 +42,10 @@ def download(request, file_type):
     sheet = excel.pe.Sheet(data)
     return excel.make_response(sheet, file_type)
 
+    
+def download_as_attachment(request, file_type, file_name):
+    return excel.make_response_from_array(data, file_type, file_name=file_name)
+
 
 def export_data(request, atype):
     if atype == "sheet":

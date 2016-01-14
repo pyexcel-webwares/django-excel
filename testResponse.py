@@ -59,6 +59,18 @@ class ExcelResponseTestCase(TestCase):
             array = sheet.to_array()
             assert array == self.data
 
+    def test_download_attachment(self):
+        test_file_name = "test"
+        for file_type in FILE_TYPE_MIME_TABLE.keys():
+            print(file_type)
+            response = self.client.get("/polls/download_attachment/"+file_type+"/"+test_file_name)
+            assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
+            assert response['Content-Disposition'] == "attachment; filename=%s.%s" % (test_file_name, file_type)
+            sheet = pe.get_sheet(file_type=file_type, file_content=response.content)
+            sheet.format(int)
+            array = sheet.to_array()
+            assert array == self.data
+
     def test_parse_single_sheet(self):
         test_sample = {
             "array": {u'result': [[u'X', u'Y', u'Z'], [1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]},

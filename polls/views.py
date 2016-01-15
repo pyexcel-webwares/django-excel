@@ -62,7 +62,9 @@ def export_data(request, atype):
             query_sets,
             column_names,
             'xls')
-
+    else:
+        return HttpResponseBadRequest("Bad request. please put one of these \
+                                      in your url suffix: sheet, book or custom")
 
 def import_data(request):
     if request.method == "POST":

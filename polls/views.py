@@ -25,7 +25,7 @@ def upload(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             filehandle = request.FILES['file']
-            return excel.make_response(filehandle.get_sheet(), "csv")
+            return excel.make_response(filehandle.get_sheet(), "csv", file_name="download")
     else:
         form = UploadFileForm()
     return render_to_response(
@@ -50,10 +50,10 @@ def download_as_attachment(request, file_type, file_name):
 def export_data(request, atype):
     if atype == "sheet":
         return excel.make_response_from_a_table(
-            Question, 'xls')
+            Question, 'xls', file_name="sheet")
     elif atype == "book":
         return excel.make_response_from_tables(
-            [Question, Choice], 'xls')
+            [Question, Choice], 'xls', file_name="book")
     elif atype == "custom":
         question = Question.objects.get(slug='ide')
         query_sets = Choice.objects.filter(question=question)
@@ -61,7 +61,9 @@ def export_data(request, atype):
         return excel.make_response_from_query_sets(
             query_sets,
             column_names,
-            'xls')
+            'xls',
+            file_name="custom"
+        )
     else:
         return HttpResponseBadRequest("Bad request. please put one of these \
                                       in your url suffix: sheet, book or custom")

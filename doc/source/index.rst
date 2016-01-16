@@ -152,7 +152,7 @@ Please open the file `polls/views.py <https://github.com/chfw/django-excel/blob/
             form = UploadFileForm(request.POST, request.FILES)
             if form.is_valid():
                 filehandle = request.FILES['file']
-                return excel.make_response(filehandle.get_sheet(), "csv")
+                return excel.make_response(filehandle.get_sheet(), "csv", file_name="download")
         else:
             form = UploadFileForm()
         return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
@@ -267,6 +267,8 @@ When a dictionary of key maps is supplied, its keys should be the field names in
 
 The custom formatting function is needed when the data from the excel sheet needs translation before data import. For example, **Choice** has a foreign key to **Question**. When choice data are to be imported, "Question" column needs to be translated to a question instance. In our example, "Question" column in "Sheet 2" contains the values appeared in "Unique Identifier" column in "Sheet 1".
 
+
+
 Handle data export
 ++++++++++++++++++++++++++++++
 
@@ -283,11 +285,65 @@ Now let's examine the code behind this in `polls/views.py <https://github.com/ch
 
     def export_data(request, atype):
         if atype == "sheet":
-            return excel.make_response_from_a_table(Question, 'xls')
+            return excel.make_response_from_a_table(Question, 'xls', file_name="sheet")
         elif atype == "book":
-            return excel.make_response_from_tables([Question, Choice], 'xls')
+            return excel.make_response_from_tables([Question, Choice], 'xls', file_name="book")
         
 :meth:`~django_excel.make_response_from_tables` does all what is needed: read out the data, convert them into xls and give it the browser. And what you need to do is to give a list of models to be exported and a file type. As you have noticed, you can visit http://localhost:8000/polls/export/sheet and will get **Question** exported as a single sheet file.
+
+
+How to import one sheet instead of multi-sheet book
+*****************************************************
+
+Previous example shows how to import a multi-sheet book. However, what exactly is needed to import only one sheet instead? Before you proceed, please empty question and choice data using django admin.
+
+Let's visit this url first http://localhost:8000/polls/imports_sheet/, where you see a similar file upload form. This time please choose `sample-sheet.xls <https://github.com/chfw/django-excel/blob/master/sample-sheet.xls>`_ instead. Then look at django admin and see if the question data have been imported or not.
+
+Now let's look at the code::
+
+    def import_sheet(request):
+        if request.method == "POST":
+            form = UploadFileForm(request.POST,
+                                  request.FILES)
+            if form.is_valid():
+                request.FILES['file'].save_to_database(
+                    name_columns_by_row=2,
+                    model=Question,
+                    mapdict=['question_text', 'pub_date', 'slug'])
+                return HttpResponse("OK")
+            else:
+                return HttpResponseBadRequest()
+        else:
+           ...
+
+Becuase it is a single sheet, the function to call is  :meth:`~django_excel.ExcelMixin.save_to_database` where you specify a model and its mapping dictionary.
+
+Have you noticed the extra parameter 'name_columns_by_row'? Why is this needed? Well, normally you *will not need* that if you have column names in the first row. In this example, the column names appears in the second row. Please open `sample-sheet.xls <https://github.com/chfw/django-excel/blob/master/sample-sheet.xls>`_ and have a look. The straight answer is because the column names in the data appears in the 2nd row of the data matrix.
+
+.. note::
+
+   If you have imported earlier excel sheet "sample-data.xls", you will get the following warning in your console output::
+
+       Warning: Bulk insertion got below exception. Trying to do it one by one slowly.
+       column slug is not unique <- reason
+       One row is ignored <- action
+       column slug is not unique
+       What is your favourite programming language?
+       One row is ignored
+       column slug is not unique
+       What is your favourite IDE?
+
+
+   This is because question data have been imported before. Django is raising IntegrityError. For more details please read `this part of code in pyexcel-io <https://github.com/pyexcel/pyexcel-io/blob/master/pyexcel_io/djangobook.py#L98>`_, and `django-excel issue 2 <https://github.com/pyexcel/django-excel/issues/2>`_
+
+   In order to remove those warnings, what you can do is to empty all data using django admin and redo this single sheet import again.
+
+
+What to do if import data overlaps existing data in the database
+******************************************************************
+
+With new version pyexcel-io v0.1.0, you could provide the row initialization function that returns None in order to skip a row in your import data. Inside the initialization function, you could also do database update. As long as it returns None, django-excel will try to do bulk create the import data.
+
 
 Handle custom data export
 +++++++++++++++++++++++++++++++
@@ -300,7 +356,7 @@ It is also quite common to download a portion of the data in a database table, f
             question = Question.objects.get(slug='ide')
             query_sets = Choice.objects.filter(question=question)
             column_names = ['choice_text', 'id', 'votes']
-            return excel.make_response_from_query_sets(query_sets, column_names, 'xls')
+            return excel.make_response_from_query_sets(query_sets, column_names, 'xls', file_name="custom")
 
 You can visit http://localhost:8000/polls/export/custom and will get the query set exported as a single sheet file as:
 

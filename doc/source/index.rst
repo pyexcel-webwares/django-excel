@@ -35,19 +35,19 @@ The highlighted features are:
    ================ ==========================================
    Plugins          Supported file formats                    
    ================ ==========================================
-   `xls`_           xls, xlsx(r), xlsm(r)
-   `xlsx`_          xlsx
-   `ods3`_          ods (python 2.6, 2.7, 3.3, 3.4)
-   `ods`_           ods (python 2.6, 2.7)
-   `text`_          write only)json, rst, mediawiki,
+   `pyexcel-xls`_   xls, xlsx(r), xlsm(r)
+   `pyexcel-xlsx`_  xlsx
+   `pyexcel-ods3`_  ods (python 2.6, 2.7, 3.3, 3.4)
+   `pyexcel-ods`_   ods (python 2.6, 2.7)
+   `pyexcel-text`_  (write only)json, rst, mediawiki,
                     latex, grid, pipe, orgtbl, plain simple
    ================ ==========================================
    
-.. _xls: https://github.com/chfw/pyexcel-xls
-.. _xlsx: https://github.com/chfw/pyexcel-xlsx
-.. _ods: https://github.com/chfw/pyexcel-ods
-.. _ods3: https://github.com/chfw/pyexcel-ods3
-.. _text: https://github.com/chfw/pyexcel-text
+.. _pyexcel-xls: https://github.com/chfw/pyexcel-xls
+.. _pyexcel-xlsx: https://github.com/chfw/pyexcel-xlsx
+.. _pyexcel-ods: https://github.com/chfw/pyexcel-ods
+.. _pyexcel-ods3: https://github.com/chfw/pyexcel-ods3
+.. _pyexcel-text: https://github.com/chfw/pyexcel-text
 
 This library makes infomation processing involving various excel files as easy as
 processing array, dictionary when processing file upload/download, data import into

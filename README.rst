@@ -5,13 +5,13 @@ django-excel - Let you focus on data, instead of file formats
 .. image:: https://api.travis-ci.org/pyexcel/django-excel.svg?branch=master
     :target: http://travis-ci.org/pyexcel/django-excel
 
-.. image:: https://coveralls.io/repos/chfw/django-excel/badge.svg?branch=master 
-    :target: https://coveralls.io/r/chfw/django-excel?branch=master 
+.. image:: https://codecov.io/github/pyexcel/django-excel/coverage.png
+    :target: https://codecov.io/github/pyexcel/django-excel
 
 .. image:: https://readthedocs.org/projects/django-excel/badge/?version=latest
     :target: http://django-excel.readthedocs.org/en/latest/
 
-**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes
+**django-excel** is based on `pyexcel <https://github.com/pyexcel/pyexcel>`_ and makes
 it easy to consume/produce information stored in excel files over HTTP protocol as
 well as on file system. This library can turn the excel data into Pythonic a list of
 lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence
@@ -46,11 +46,11 @@ Plugins          Supported file formats
 `pyexcel-text`_  (write only)json, rst, mediawiki,latex, grid, pipe, orgtbl, plain simple
 ================ ========================================================================
 
-.. _pyexcel-xls: https://github.com/chfw/pyexcel-xls
-.. _pyexcel-xlsx: https://github.com/chfw/pyexcel-xlsx
-.. _pyexcel-ods: https://github.com/chfw/pyexcel-ods
-.. _pyexcel-ods3: https://github.com/chfw/pyexcel-ods3
-.. _pyexcel-text: https://github.com/chfw/pyexcel-text
+.. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
+.. _pyexcel-xlsx: https://github.com/pyexcel/pyexcel-xlsx
+.. _pyexcel-ods: https://github.com/pyexcel/pyexcel-ods
+.. _pyexcel-ods3: https://github.com/pyexcel/pyexcel-ods3
+.. _pyexcel-text: https://github.com/pyexcel/pyexcel-text
 
 
 Known constraints
@@ -63,13 +63,13 @@ Tested Django Versions
 ========================
 
 .. image:: https://img.shields.io/badge/django-1.9-green.svg
-    :target: http://travis-ci.org/chfw/django-excel
+    :target: http://travis-ci.org/pyexcel/django-excel
 
 .. image:: https://img.shields.io/badge/django-1.8.2-green.svg
-    :target: http://travis-ci.org/chfw/django-excel
+    :target: http://travis-ci.org/pyexcel/django-excel
 
 .. image:: https://img.shields.io/badge/django-1.7.8-green.svg
-    :target: http://travis-ci.org/chfw/django-excel
+    :target: http://travis-ci.org/pyexcel/django-excel
 
 
 Installation
@@ -86,7 +86,7 @@ or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone http://github.com/chfw/django-pyexcel.git
+    $ git clone http://github.com/pyexcel/django-pyexcel.git
     $ cd django-excel
     $ python setup.py install
 

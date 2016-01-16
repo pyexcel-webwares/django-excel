@@ -7,13 +7,13 @@ Welcome to django-excel's documentation!
 ========================================
 
 :Author: C.W.
-:Source code: http://github.com/chfw/django-excel
-:Issues: http://github.com/chfw/django-excel/issues
+:Source code: http://github.com/pyexcel/django-excel
+:Issues: http://github.com/pyexcel/django-excel/issues
 :License: New BSD License
 :Version: |version|
 :Generated: |today|
 
-**django-excel** is based on `pyexcel <https://github.com/chfw/pyexcel>`_ and makes
+**django-excel** is based on `pyexcel <https://github.com/pyexcel/pyexcel>`_ and makes
 it easy to consume/produce information stored in excel files over HTTP protocol as
 well as on file system. This library can turn the excel data into a list of lists,
 a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it
@@ -43,11 +43,11 @@ The highlighted features are:
                     latex, grid, pipe, orgtbl, plain simple
    ================ ==========================================
    
-.. _pyexcel-xls: https://github.com/chfw/pyexcel-xls
-.. _pyexcel-xlsx: https://github.com/chfw/pyexcel-xlsx
-.. _pyexcel-ods: https://github.com/chfw/pyexcel-ods
-.. _pyexcel-ods3: https://github.com/chfw/pyexcel-ods3
-.. _pyexcel-text: https://github.com/chfw/pyexcel-text
+.. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
+.. _pyexcel-xlsx: https://github.com/pyexcel/pyexcel-xlsx
+.. _pyexcel-ods: https://github.com/pyexcel/pyexcel-ods
+.. _pyexcel-ods3: https://github.com/pyexcel/pyexcel-ods3
+.. _pyexcel-text: https://github.com/pyexcel/pyexcel-text
 
 This library makes infomation processing involving various excel files as easy as
 processing array, dictionary when processing file upload/download, data import into
@@ -68,7 +68,7 @@ You can install it via pip::
 
 or clone it and install it::
 
-    $ git clone http://github.com/chfw/django-pyexcel.git
+    $ git clone http://github.com/pyexcel/django-pyexcel.git
     $ cd django-excel
     $ python setup.py install
 
@@ -106,9 +106,9 @@ If you would like to expand the list of supported excel file formats (see :ref:`
 Tutorial
 --------------
 
-In order to dive in django-excel and get hands-on experience quickly, the test application for django-excel will be introduced here. So, it is advisable that you should check out the code from `github <https://github.com/chfw/django-excel>`_ ::
+In order to dive in django-excel and get hands-on experience quickly, the test application for django-excel will be introduced here. So, it is advisable that you should check out the code from `github <https://github.com/pyexcel/django-excel>`_ ::
 
-    git clone https://github.com/chfw/django-excel.git
+    git clone https://github.com/pyexcel/django-excel.git
 
 The test application is written according to `Part 1 <https://docs.djangoproject.com/en/1.7/intro/tutorial01/>`_, `Part 2 <https://docs.djangoproject.com/en/1.7/intro/tutorial02/>`_ and `Part 3 <https://docs.djangoproject.com/en/1.7/intro/tutorial03/>`_ of django tutorial version 1.7.1. If you should wonder how the test application was written, please visit django documentation and come back.
 
@@ -141,7 +141,7 @@ Choose an excel sheet, for example an xls file, and press "Submit". You will get
 
 .. image :: download-file.png
 
-Please open the file `polls/views.py <https://github.com/chfw/django-excel/blob/master/polls/views.py#L27>`_ and focus on the following code section::
+Please open the file `polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L27>`_ and focus on the following code section::
 
     class UploadFileForm(forms.Form):
         file = forms.FileField()
@@ -166,7 +166,7 @@ Please feel free to change those functions according to :ref:`the mapping table 
 Handle data import
 ++++++++++++++++++++++++++++++
 
-This example shows how to import uploaded excel file into django models. We are going to import `sample-data.xls <https://github.com/chfw/django-excel/blob/master/sample-data.xls>`_
+This example shows how to import uploaded excel file into django models. We are going to import `sample-data.xls <https://github.com/pyexcel/django-excel/blob/master/sample-data.xls>`_
 
 .. table:: Sheet 1 of sample-data.xls
 
@@ -211,7 +211,7 @@ Please visit this link http://localhost:8000/polls/import/, you shall see this u
 
 .. image:: import-page.png
 
-Please then select `sample-data.xls <https://github.com/chfw/django-excel/blob/master/sample-data.xls>`_ and upload. Then visit the admin page http://localhost:8000/admin/polls/question, you shall see questions have been populated:
+Please then select `sample-data.xls <https://github.com/pyexcel/django-excel/blob/master/sample-data.xls>`_ and upload. Then visit the admin page http://localhost:8000/admin/polls/question, you shall see questions have been populated:
 
 .. image:: question-admin.png
 
@@ -224,7 +224,7 @@ And choices too:
 
 You may use admin interface to delete all those objects and try again. 
 
-Now please open `polls/views.py <https://github.com/chfw/django-excel/blob/master/polls/views.py#L54>`_ and focus on this part of code::
+Now please open `polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L54>`_ and focus on this part of code::
 
     def import_data(request):
         if request.method == "POST":
@@ -281,7 +281,7 @@ Please save and open it. You shall see these data in your window:
 .. image:: question-sheet.png
 .. image:: choice-sheet.png
 
-Now let's examine the code behind this in `polls/views.py <https://github.com/chfw/django-excel/blob/master/polls/views.py#L48>`_::
+Now let's examine the code behind this in `polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L48>`_::
 
     def export_data(request, atype):
         if atype == "sheet":
@@ -297,7 +297,7 @@ How to import one sheet instead of multi-sheet book
 
 Previous example shows how to import a multi-sheet book. However, what exactly is needed to import only one sheet instead? Before you proceed, please empty question and choice data using django admin.
 
-Let's visit this url first http://localhost:8000/polls/imports_sheet/, where you see a similar file upload form. This time please choose `sample-sheet.xls <https://github.com/chfw/django-excel/blob/master/sample-sheet.xls>`_ instead. Then look at django admin and see if the question data have been imported or not.
+Let's visit this url first http://localhost:8000/polls/imports_sheet/, where you see a similar file upload form. This time please choose `sample-sheet.xls <https://github.com/pyexcel/django-excel/blob/master/sample-sheet.xls>`_ instead. Then look at django admin and see if the question data have been imported or not.
 
 Now let's look at the code::
 
@@ -318,7 +318,7 @@ Now let's look at the code::
 
 Becuase it is a single sheet, the function to call is  :meth:`~django_excel.ExcelMixin.save_to_database` where you specify a model and its mapping dictionary.
 
-Have you noticed the extra parameter 'name_columns_by_row'? Why is this needed? Well, normally you *will not need* that if you have column names in the first row. In this example, the column names appears in the second row. Please open `sample-sheet.xls <https://github.com/chfw/django-excel/blob/master/sample-sheet.xls>`_ and have a look. The straight answer is because the column names in the data appears in the 2nd row of the data matrix.
+Have you noticed the extra parameter 'name_columns_by_row'? Why is this needed? Well, normally you *will not need* that if you have column names in the first row. In this example, the column names appears in the second row. Please open `sample-sheet.xls <https://github.com/pyexcel/django-excel/blob/master/sample-sheet.xls>`_ and have a look. The straight answer is because the column names in the data appears in the 2nd row of the data matrix.
 
 .. note::
 

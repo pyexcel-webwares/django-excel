@@ -339,7 +339,9 @@ If you would like to expand the list of supported excel file formats (see :ref:`
 API Reference
 ---------------
 
-**django-excel** attaches **pyexcel** functions to **InMemoryUploadedFile** and **TemporaryUploadedFile**.
+**django-excel** attaches **pyexcel** functions to **InMemoryUploadedFile** and **TemporaryUploadedFile**. Hence, the following functions are available for the uploaded files, e.g. request.FILES['your_uploaded_file'].
+
+.. module:: django_excel.ExcelMixin
 
 .. method:: get_sheet(sheet_name=None, **keywords)
 
@@ -395,6 +397,8 @@ API Reference
 
 Response methods
 -----------------
+
+.. module:: django_excel
 
 .. method:: make_response(pyexcel_instance, file_type, status=200)
 

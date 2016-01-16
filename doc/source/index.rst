@@ -59,19 +59,6 @@ and export from SQL databases, information analysis and persistence. It uses
 #. to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
 
 
-Tested Django Versions
-========================
-
-.. image:: https://img.shields.io/badge/django-1.9-green.svg
-    :target: http://travis-ci.org/chfw/django-excel
-
-.. image:: https://img.shields.io/badge/django-1.8.2-green.svg
-    :target: http://travis-ci.org/chfw/django-excel
-
-.. image:: https://img.shields.io/badge/django-1.7.8-green.svg
-    :target: http://travis-ci.org/chfw/django-excel
-
-
 Installation
 --------------
 You can install it via pip::
@@ -354,121 +341,127 @@ API Reference
 
 **django-excel** attaches **pyexcel** functions to **InMemoryUploadedFile** and **TemporaryUploadedFile**.
 
-.. module:: django_excel
+.. method:: get_sheet(sheet_name=None, **keywords)
 
-.. autoclass:: ExcelMixin
+   :param sheet_name: For an excel book, there could be multiple sheets. If it is left
+                      unspecified, the sheet at index 0 is loaded. For 'csv', 'tsv' file,
+                      *sheet_name* should be None anyway.
+   :param keywords: additional keywords to :meth:`pyexcel.get_sheet`
+   :returns: A sheet object
 
-   .. method:: get_sheet(sheet_name=None, **keywords)
+.. method:: get_array(sheet_name=None, **keywords)
 
-      :param sheet_name: For an excel book, there could be multiple sheets. If it is left
-                         unspecified, the sheet at index 0 is loaded. For 'csv', 'tsv' file,
-                         *sheet_name* should be None anyway.
-      :param keywords: additional keywords to :meth:`pyexcel.get_sheet`
-      :returns: A sheet object
+   :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
+   :param keywords: additional keywords to pyexcel library
+   :returns: a two dimensional array, a list of lists
 
-   .. method:: get_array(sheet_name=None, **keywords)
+.. method:: get_dict(sheet_name=None, name_columns_by_row=0, **keywords)
 
-      :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
-      :param keywords: additional keywords to pyexcel library
-      :returns: a two dimensional array, a list of lists
+   :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
+   :param name_columns_by_row: uses the first row of the sheet to be column headers by default.
+   :param keywords: additional keywords to pyexcel library
+   :returns: a dictionary of the file content
 
-   .. method:: get_dict(sheet_name=None, name_columns_by_row=0, **keywords)
+.. method:: get_records(sheet_name=None, name_columns_by_row=0, **keywords)
 
-      :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
-      :param name_columns_by_row: uses the first row of the sheet to be column headers by default.
-      :param keywords: additional keywords to pyexcel library
-      :returns: a dictionary of the file content
+   :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
+   :param name_columns_by_row: uses the first row of the sheet to be record field names by default.
+   :param keywords: additional keywords to pyexcel library
+   :returns: a list of dictionary of the file content
 
-   .. method:: get_records(sheet_name=None, name_columns_by_row=0, **keywords)
+.. method:: get_book(**keywords)
 
-      :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
-      :param name_columns_by_row: uses the first row of the sheet to be record field names by default.
-      :param keywords: additional keywords to pyexcel library
-      :returns: a list of dictionary of the file content
+   :param keywords: additional keywords to pyexcel library
+   :returns: a two dimensional array, a list of lists
 
-   .. method:: get_book(**keywords)
+.. method:: get_book_dict(**keywords)
 
-      :param keywords: additional keywords to pyexcel library
-      :returns: a two dimensional array, a list of lists
+   :param keywords: additional keywords to pyexcel library
+   :returns: a two dimensional array, a list of lists
 
-   .. method:: get_book_dict(**keywords)
+.. method:: save_to_database(model=None, initializer=None, mapdict=None, **keywords)
 
-      :param keywords: additional keywords to pyexcel library
-      :returns: a two dimensional array, a list of lists
+   :param model: a django model
+   :param initializer: a custom table initialization function if you have one
+   :param mapdict: the explicit table column names if your excel data do not have the exact column names
+   :param keywords: additional keywords to :meth:`pyexcel.Sheet.save_to_django_model`
 
-   .. method:: save_to_database(model=None, initializer=None, mapdict=None, **keywords)
+.. method:: save_book_to_database(models=None, initializers=None, mapdicts=None, **keywords)
 
-      :param model: a django model
-      :param initializer: a custom table initialization function if you have one
-      :param mapdict: the explicit table column names if your excel data do not have the exact column names
-      :param keywords: additional keywords to :meth:`pyexcel.Sheet.save_to_django_model`
-
-   .. method:: save_book_to_database(models=None, initializers=None, mapdicts=None, **keywords)
-
-      :param models: a list of django models
-      :param initializers: a list of model initialization functions.
-      :param mapdicts: a list of explicit table column names if your excel data sheets do not have the exact column names
-      :param keywords: additional keywords to :meth:`pyexcel.Book.save_to_django_models`
+   :param models: a list of django models
+   :param initializers: a list of model initialization functions.
+   :param mapdicts: a list of explicit table column names if your excel data sheets do not have the exact column names
+   :param keywords: additional keywords to :meth:`pyexcel.Book.save_to_django_models`
 
 Response methods
 -----------------
 
-.. automodule:: django_excel
+.. method:: make_response(pyexcel_instance, file_type, status=200)
 
-   .. method:: make_response(pyexcel_instance, file_type, status=200)
+   :param pyexcel_instance: :class:`pyexcel.Sheet` or :class:`pyexcel.Book`
+   :param file_type: one of the following strings:
+                     
+                     * 'csv'
+                     * 'tsv'
+                     * 'csvz'
+                     * 'tsvz'
+                     * 'xls'
+                     * 'xlsx'
+                     * 'xlsm'
+                     * 'ods'
+                       
+   :param status: unless a different status is to be returned.
+         
+.. method:: make_response_from_array(array, file_type, status=200)
 
-      :param pyexcel_instance: :class:`pyexcel.Sheet` or :class:`pyexcel.Book`
-      :param file_type: one of the following strings:
-                        
-                        * 'csv'
-                        * 'tsv'
-                        * 'csvz'
-                        * 'tsvz'
-                        * 'xls'
-                        * 'xlsx'
-                        * 'xlsm'
-                        * 'ods'
-                          
-      :param status: unless a different status is to be returned.
-            
-   .. method:: make_response_from_array(array, file_type, status=200)
+   :param array: a list of lists
+   :param file_type: same as :meth:`~django_excel.make_response`
+   :param status: same as :meth:`~django_excel.make_response`
+         
+.. method:: make_response_from_dict(dict, file_type, status=200)
 
-      :param array: a list of lists
-      :param file_type: same as :meth:`~django_excel.make_response`
-      :param status: same as :meth:`~django_excel.make_response`
-            
-   .. method:: make_response_from_dict(dict, file_type, status=200)
+   :param dict: a dictinary of lists
+   :param file_type: same as :meth:`~django_excel.make_response`
+   :param status: same as :meth:`~django_excel.make_response`
+         
+.. method:: make_response_from_records(records, file_type, status=200)
 
-      :param dict: a dictinary of lists
-      :param file_type: same as :meth:`~django_excel.make_response`
-      :param status: same as :meth:`~django_excel.make_response`
-            
-   .. method:: make_response_from_records(records, file_type, status=200)
+   :param records: a list of dictionaries
+   :param file_type: same as :meth:`~django_excel.make_response`
+   :param status: same as :meth:`~django_excel.make_response`
+         
+             
+.. method:: make_response_from_book_dict(book_dict, file_type, status=200)
 
-      :param records: a list of dictionaries
-      :param file_type: same as :meth:`~django_excel.make_response`
-      :param status: same as :meth:`~django_excel.make_response`
-            
-                
-   .. method:: make_response_from_book_dict(book_dict, file_type, status=200)
+   :param book_dict: a dictionary of two dimensional arrays
+   :param file_type: same as :meth:`~django_excel.make_response`
+   :param status: same as :meth:`~django_excel.make_response`
 
-      :param book_dict: a dictionary of two dimensional arrays
-      :param file_type: same as :meth:`~django_excel.make_response`
-      :param status: same as :meth:`~django_excel.make_response`
+.. method:: make_response_from_a_table(model, file_type status=200)
+   Produce a single sheet Excel book of *file_type*
+	  
+   :param model: a Django model
+   :param file_type: same as :meth:`~django_excel.make_response`
+   :param status: same as :meth:`~django_excel.make_response`
 
-   .. autofunction:: make_response_from_a_table(model, file_type status=200)
+.. method:: make_response_from_query_sets(query_sets, column_names, file_type status=200)
 
+   Produce a single sheet Excel book of *file_type* from your custom database queries
 
-   .. method:: make_response_from_query_sets(query_sets, column_names, file_type status=200)
+   :param query_sets: a query set
+   :param column_names: a nominated column names. It could not be None, otherwise no data is returned.
+   :param file_type: same as :meth:`~django_excel.make_response`
+   :param status: same as :meth:`~django_excel.make_response`
 
-      Produce a single sheet Excel book of *file_type* from your custom database queries
+.. method:: make_response_from_tables(models, file_type status=200)
 
-      :param query_sets: a query set
-      :param column_names: a nominated column names. It could not be None, otherwise no data is returned.
-      :param file_type: same as :meth:`~django_excel.make_response`
-      :param status: same as :meth:`~django_excel.make_response`
-
-   .. autofunction:: make_response_from_tables(models, file_type status=200)
+   Produce a multiple sheet Excel book of *file_type*. It becomes the same
+   as :meth:`~django_excel.make_response_from_a_table` if you pass *tables*
+   with an array that has a single table
+	  
+   :param models: a list of Django models
+   :param file_type: same as :meth:`~django_excel.make_response`
+   :param status: same as :meth:`~django_excel.make_response`
 
 Indices and tables
 --------------------

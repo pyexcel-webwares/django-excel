@@ -17,28 +17,17 @@ import pyexcel as pe
 import pyexcel_webio as webio
 
 
-class ExcelMixin(webio.ExcelInput):
+class ExcelMixin(webio.ExcelInputInMultiDict):
     """
     Provide additional pyexcel-webio methods to Django's UploadedFiles
     """
-    def _get_file_extension(self):
+    def get_params(self, **keywords):
         extension = self.name.split(".")[-1]
-        return extension
+        keywords['file_type'] = extension
+        keywords['file_content'] = self.file.read()
+        return keywords
 
-    def load_single_sheet(self, sheet_name=None, **keywords):
-        return pe.get_sheet(
-            file_type=self._get_file_extension(),
-            file_content=self.file.read(),
-            sheet_name=sheet_name,
-            **keywords)
-
-    def load_book(self, **keywords):
-        return pe.get_book(
-            file_type=self._get_file_extension(),
-            file_content=self.file.read(),
-            **keywords)
-
-    def save_to_database(self, model=None,
+    def save_to_database(self, model=None, initializer=None, mapdict=None,
                          sheet_name=None,
                          name_columns_by_row=0,
                          name_rows_by_column=-1,
@@ -46,21 +35,28 @@ class ExcelMixin(webio.ExcelInput):
         """
         Save data from a sheet to a nominated django model
         """        
-        sheet = self.load_single_sheet(
-            sheet_name=sheet_name,
-            name_columns_by_row=name_columns_by_row,
-            name_rows_by_column=name_rows_by_column,
-            **keywords)
-        if sheet:
-            sheet.save_to_django_model(model, **keywords)
+        params = self.get_params(**keywords)
+        if 'name_columns_by_row' not in params:
+            params['name_columns_by_row'] = 0
+        if 'name_rows_by_column' not in params:
+            params['name_rows_by_column'] = -1
+        params['dest_model'] = model
+        params['dest_initializer'] = initializer
+        params['dest_mapdict'] = mapdict
+        pe.save_as(**params)
 
-    def save_book_to_database(self, models=None, **keywords):
+    def save_book_to_database(self, models=None, initializers=None,
+                              mapdicts=None, batch_size=None,
+                              **keywords):
         """
         Save data from a book to a nominated django models
-        """        
-        book = self.load_book(**keywords)
-        if book:
-            book.save_to_django_models(models, **keywords)
+        """
+        params = self.get_params(**keywords)
+        params['dest_models'] = models
+        params['dest_initializers']=initializers
+        params['dest_mapdicts'] = mapdicts
+        params['dest_batch_size'] = batch_size
+        pe.save_book_as(**params)
 
 
 class ExcelInMemoryUploadedFile(ExcelMixin, InMemoryUploadedFile):

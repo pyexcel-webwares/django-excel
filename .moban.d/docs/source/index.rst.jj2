@@ -1,106 +1,18 @@
-.. django-excel documentation master file, created by
-   sphinx-quickstart on Wed Jan 07 08:46:32 2015.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to django-excel's documentation!
-================================================================================
-
-:Author: C. W.
-:Issues: http://github.com/pyexcel/django-excel/issues
-:License: New BSD License
-:Version: |version|
-:Generated: |today|
-
-**django-excel** is based on `pyexcel <https://github.com/pyexcel/pyexcel>`_ and makes
-it easy to consume/produce information stored in excel files over HTTP protocol as
-well as on file system. This library can turn the excel data into a list of lists,
-a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it
-lets you focus on data in Django web development, instead of file formats.
-
-The highlighted features are:
-
-#. excel data import into and export from databases
-#. turn uploaded excel file directly into Python data struture
-#. pass Python data structures as an excel file download
-#. provide data persistence as an excel file in server side
-#. supports csv, tsv, csvz, tsvz by default and other formats are supported via
-   the following plugins:
-
-.. _file-format-list:
-
-.. table:: A list of file formats supported by external plugins
-
-   ================ ========================================
-   Plugins          Supported file formats
-   ================ ========================================
-   `pyexcel-xls`_   xls, xlsx(r), xlsm(r)
-   `pyexcel-xlsx`_  xlsx
-   `pyexcel-ods3`_  ods (python 2.6, 2.7, 3.3, 3.4)
-   `pyexcel-ods`_   ods (python 2.6, 2.7)
-   `pyexcel-text`_  (write only)json, rst, mediawiki,
-                    latex, grid, pipe, orgtbl, plain simple
-   ================ ========================================
-   
-.. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
-.. _pyexcel-xlsx: https://github.com/pyexcel/pyexcel-xlsx
-.. _pyexcel-ods: https://github.com/pyexcel/pyexcel-ods
-.. _pyexcel-ods3: https://github.com/pyexcel/pyexcel-ods3
-.. _pyexcel-text: https://github.com/pyexcel/pyexcel-text
-
-This library makes infomation processing involving various excel files as easy as
-processing array, dictionary when processing file upload/download, data import into
-and export from SQL databases, information analysis and persistence. It uses
-**pyexcel** and its plugins:
-
-#. to provide one uniform programming interface to handle csv, tsv, xls, xlsx, xlsm and ods formats.
-#. to provide one-stop utility to import the data in uploaded file into a database and to export tables in a database as excel files for file download.
-#. to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
-
-Installation
--------------------
-
-You can install it via pip::
-
-    $ pip install django-excel
-
-
-or clone it and install it::
-
-    $ git clone http://github.com/pyexcel/django-excel.git
-    $ cd django-excel
-    $ python setup.py install
-
-Installation of individual plugins , please refer to individual plugin page. For example, if you need xls file support, please install pyexcel-xls::
-
-        $ pip install pyexcel-xls
-
+{% extends 'docs/source/WEB-index.rst.jj2' %}
+{%block installation_note%}
 Contrary to Django's phylosophy of 'battery included', django-excel does not
 come with all batteries due to the size of the dependency(xlwt, openpyxl, odfpy). Hence,
 Django developer is left with the choice to install and load the excel file formats.
+{%endblock%}
 
-Setup
-------------------------
+{%block setup %}
 You will need to update your *settings.py*::
 
     FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
                             "django_excel.TemporaryExcelFileUploadHandler")
+{%endblock%}
 
-
-More excel file formats
-------------------------
-    
-The example application understands csv, tsv and its zipped variants: csvz and tsvz. If you would like to expand the list of supported excel file formats (see :ref:`file-format-list`) for your own application, you could include one or all of the following import lines right after **django-excel** is imported::
-
-    import pyexcel.ext.xls # pip install pyexcel-xls
-    import pyexcel.ext.xlsx # pip install pyexcel-xlsx
-    import pyexcel.ext.ods # pip install pyexcel-ods
-
-.. note::
-
-   Your IDE or pyflakes may highlight it as un-used but it is used. The registration of
-   the extra file format support happens when the import action is performed
-
+{%block tutorial%}
 Tutorial
 --------------
 
@@ -361,13 +273,9 @@ You can visit http://localhost:8000/polls/export/custom and will get the query s
 
 .. image:: custom-export.png
 
-.. _data-types-and-its-conversion-funcs:
+{%endblock%}
 
-All supported data types
---------------------------
-
-The example application likes to have array but it is not just about arrays. Here is table of functions for all supported data types:
-
+{%block api_table%}
 =========================== ======================================================== ===================================================
 data structure              from file to data structures                             from data structures to response
 =========================== ======================================================== ===================================================
@@ -381,11 +289,9 @@ database table              :meth:`~django_excel.ExcelMixin.save_to_database`   
 a list of database tables   :meth:`~django_excel.ExcelMixin.save_book_to_database`   :meth:`~django_excel.make_response_from_tables`
 a database query sets                                                                :meth:`~django_excel.make_response_from_query_sets`
 =========================== ======================================================== ===================================================
-See more examples of the data structures in :ref:`pyexcel documentation<pyexcel:a-list-of-data-structures>`
+{%endblock%}
 
-API Reference
----------------
-
+{%block api_doc %}
 **django-excel** attaches **pyexcel** functions to **InMemoryUploadedFile** and **TemporaryUploadedFile**. Hence, the following functions are available for the uploaded files, e.g. request.FILES['your_uploaded_file'].
 
 .. module:: django_excel.ExcelMixin
@@ -514,6 +420,7 @@ Response methods
    :param file_type: same as :meth:`~django_excel.make_response`
    :param status: same as :meth:`~django_excel.make_response`
 
+{%endblock%}
 
 Indices and tables
 --------------------
@@ -521,3 +428,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

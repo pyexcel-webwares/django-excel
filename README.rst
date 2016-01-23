@@ -1,30 +1,30 @@
-==============================================================
+================================================================================
 django-excel - Let you focus on data, instead of file formats
-==============================================================
+================================================================================
 
 .. image:: https://api.travis-ci.org/pyexcel/django-excel.svg?branch=master
-    :target: http://travis-ci.org/pyexcel/django-excel
+   :target: http://travis-ci.org/pyexcel/django-excel
 
 .. image:: https://codecov.io/github/pyexcel/django-excel/coverage.png
     :target: https://codecov.io/github/pyexcel/django-excel
 
 .. image:: https://readthedocs.org/projects/django-excel/badge/?version=latest
-    :target: http://django-excel.readthedocs.org/en/latest/
+   :target: http://django-excel.readthedocs.org/en/latest/
 
 **django-excel** is based on `pyexcel <https://github.com/pyexcel/pyexcel>`_ and makes
 it easy to consume/produce information stored in excel files over HTTP protocol as
-well as on file system. This library can turn the excel data into Pythonic a list of
-lists, a list of records(dictionaries), dictionaries of lists. And vice versa. Hence
-it lets you focus on data in Django web development, instead of file formats.
+well as on file system. This library can turn the excel data into a list of lists,
+a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it
+lets you focus on data in Django based web development, instead of file formats.
 
 The idea originated from the problem of the illiteracy of excel file formats of
 non-technical office workers: such as office assistant, human resource administrator.
-There is nothing with the un-deniable fact that some people do not know the difference
-among various excel formats. It becomes usability problem to those people when a web
-service cannot parse the excel file that they saved using Microsoft Excel. Instead of
-training those people about file formats, this library helps web developers to handle
-most of the excel file formats by unifying the programming interface to most of the
-excel readers and writers.
+There is nothing with the un-deniable fact that some people do not know the
+difference among various excel formats. It becomes usability problem to those
+people when a web service cannot parse the excel file that they saved using
+Microsoft Excel. Instead of training those people about file formats, this library
+helps web developers to handle most of the excel file formats by unifying the
+programming interface to most of the excel readers and writers.
 
 The highlighted features are:
 
@@ -36,15 +36,16 @@ The highlighted features are:
 Available Plugins
 =================
 
-================ ========================================================================
-Plugins          Supported file formats                                      
-================ ========================================================================
+================ ==========================================
+Plugins          Supported file formats
+================ ==========================================
 `pyexcel-xls`_   xls, xlsx(r), xlsm(r)
 `pyexcel-xlsx`_  xlsx
-`pyexcel-ods3`_  ods (python 2.7, 3.3, 3.4)                                  
-`pyexcel-ods`_   ods (python 2.6, 2.7)                                       
-`pyexcel-text`_  (write only)json, rst, mediawiki,latex, grid, pipe, orgtbl, plain simple
-================ ========================================================================
+`pyexcel-ods`_   ods (python 2.6, 2.7)
+`pyexcel-ods3`_  ods (python 2.7, 3.3, 3.4)
+`pyexcel-text`_  write only)json, rst, mediawiki,
+                 latex, grid, pipe, orgtbl, plain simple
+================ ==========================================
 
 .. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
 .. _pyexcel-xlsx: https://github.com/pyexcel/pyexcel-xlsx
@@ -58,7 +59,6 @@ Known constraints
 
 Fonts, colors and charts are not supported. 
 
-
 Tested Django Versions
 ========================
 
@@ -71,7 +71,6 @@ Tested Django Versions
 .. image:: https://img.shields.io/badge/django-1.7.8-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
-
 Installation
 ============
 
@@ -79,14 +78,14 @@ You can install it via pip:
 
 .. code-block:: bash
 
-	$ pip install django-excel
+    $ pip install django-excel
 
 
 or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone http://github.com/pyexcel/django-pyexcel.git
+    $ git clone http://github.com/pyexcel/django-excel.git
     $ cd django-excel
     $ python setup.py install
 
@@ -104,8 +103,7 @@ You will need to update your *settings.py*:
 
 
 Usage
-======
-
+=========
 Here is the example viewing function codes:
 
 .. code-block:: python
@@ -138,8 +136,6 @@ Here is the example viewing function codes:
         return excel.make_response(sheet, "csv")
 
 License
-=============
+==========
 
 New BSD License
-
-

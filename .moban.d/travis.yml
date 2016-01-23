@@ -1,0 +1,25 @@
+{% extends "travis.yml.jj2" %}
+{%block test_other_environments%}
+  - DJANGO_VERSION=1.7.8
+  - DJANGO_VERSION=1.8.2
+  - DJANGO_VERSION=1.9
+{%endblock%}
+
+{%block exclusion_matrix%}
+matrix:
+  exclude:
+    - python: 3.3
+      env: DJANGO_VERSION=1.9
+    - python: 3.5
+      env: DJANGO_VERSION=1.7.8
+    - python: 3.5
+      env: DJANGO_VERSION=1.8.2
+{%endblock%}
+
+{%block test_other_python_versions%}  - 3.3
+  - 3.4
+  - 3.5
+{%endblock%}
+
+{% block custom_install %}  - pip install Django==$DJANGO_VERSION
+{% endblock%}

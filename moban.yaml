@@ -1,0 +1,35 @@
+overrides: "pyexcel.yaml"
+name: "django-excel"
+version: 0.0.3
+webframework: Django
+keywords:
+  - 'Flask'
+  - 'Excel'
+  - 'pyexcel'
+  - 'xls'
+  - 'xlsx'
+  - 'ods'
+  - 'csv'
+dependencies:
+  - pyexcel>=0.2.0
+  - pyexcel-webio>=0.0.5
+  - Django>=1.7.1
+extra_dependencies:
+  - xls:
+    - pyexcel-xls>=0.1.0
+  - xlsx:
+    - pyexcel-xlsx>=0.1.0
+  - ods:
+    - pyexcel-ods3>=0.1.0
+additional_classifiers:
+  - 'Programming Language :: Python :: 2'
+  - 'Programming Language :: Python :: 2.6'
+  - 'Programming Language :: Python :: 2.7'
+  - 'Programming Language :: Python :: 3'
+  - 'Programming Language :: Python :: 3.3'
+  - 'Programming Language :: Python :: 3.4'
+  - 'Environment :: Web Environment'
+  - 'Topic :: Internet :: WWW/HTTP'
+  - 'Topic :: Software Development :: Libraries :: Python Modules'
+description: |
+  A django middleware that provides one application programming interface to read and write data in different excel file formats

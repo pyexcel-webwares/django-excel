@@ -1,0 +1,7 @@
+{% extends 'tests/requirements.txt.jj2' %}
+{%block extras %}
+lxml
+pyexcel-ods3>=0.1.0
+pyexcel-xls>=0.1.0
+pyexcel-xlsx>=0.1.0
+{%endblock%}

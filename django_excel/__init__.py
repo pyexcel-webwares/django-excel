@@ -17,7 +17,7 @@ import pyexcel as pe
 import pyexcel_webio as webio
 
 
-class ExcelMixin(webio.ExcelInputInMultiDict):
+class ExcelMixin(webio.ExcelInput):
     """
     Provide additional pyexcel-webio methods to Django's UploadedFiles
     """
@@ -28,9 +28,6 @@ class ExcelMixin(webio.ExcelInputInMultiDict):
         return keywords
 
     def save_to_database(self, model=None, initializer=None, mapdict=None,
-                         sheet_name=None,
-                         name_columns_by_row=0,
-                         name_rows_by_column=-1,
                          **keywords):
         """
         Save data from a sheet to a nominated django model

@@ -6,7 +6,7 @@
         'Django'
 {%endblock%}
 
-{%block additional_classifers%}
+{%block additional_classifiers%}
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Topic :: Internet :: WWW/HTTP',

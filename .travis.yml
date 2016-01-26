@@ -22,6 +22,7 @@ matrix:
 install:
   - rm applymoban.py
   - pip install Django==$DJANGO_VERSION
+  - pip install https://github.com/pyexcel/pyexcel-webio/archive/master.zip
   - pip install -r requirements.txt
   - pip install -r tests/requirements.txt
 script:

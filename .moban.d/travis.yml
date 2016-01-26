@@ -22,4 +22,5 @@ matrix:
 {%endblock%}
 
 {% block custom_install %}  - pip install Django==$DJANGO_VERSION
+  - pip install https://github.com/pyexcel/pyexcel-webio/archive/master.zip
 {% endblock%}

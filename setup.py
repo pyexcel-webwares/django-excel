@@ -10,7 +10,7 @@ with open("README.rst", 'r') as readme:
 
 dependencies = [
     'pyexcel>=0.2.0',
-    'pyexcel-webio>=0.0.5',
+    'pyexcel-webio>=0.0.6',
     'Django>=1.7.1',
 ]
 
@@ -24,7 +24,7 @@ extras = {
 setup(
     name='django-excel',
     author='C. W.',
-    version='0.0.3',
+    version='0.0.4',
     author_email='wangc_2011 (at) hotmail.com',
     url='https://github.com/pyexcel/django-excel',
     description='A django middleware that provides one application programming interface to read and write data in different excel file formats',

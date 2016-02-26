@@ -28,31 +28,42 @@ programming interface to most of the excel readers and writers.
 
 The highlighted features are:
 
+#. excel data import into and export from databases
 #. turn uploaded excel file directly into Python data struture
 #. pass Python data structures as an excel file download
 #. provide data persistence as an excel file in server side
-#. supports csv, tsv, csvz, tsvz by default and other formats are supported via the following plugins:
+#. supports csv, tsv, csvz, tsvz by default and other formats are supported via
+   the following plugins:
 
-Available Plugins
-=================
+.. _file-format-list:
 
-================ ==========================================
-Plugins          Supported file formats
-================ ==========================================
-`pyexcel-xls`_   xls, xlsx(r), xlsm(r)
-`pyexcel-xlsx`_  xlsx
-`pyexcel-ods`_   ods (python 2.6, 2.7)
-`pyexcel-ods3`_  ods (python 2.7, 3.3, 3.4)
-`pyexcel-text`_  write only)json, rst, mediawiki,
-                 latex, grid, pipe, orgtbl, plain simple
-================ ==========================================
+.. table:: A list of file formats supported by external plugins
 
+   ================ ========================================
+   Plugins          Supported file formats
+   ================ ========================================
+   `pyexcel-xls`_   xls, xlsx(r), xlsm(r)
+   `pyexcel-xlsx`_  xlsx
+   `pyexcel-ods3`_  ods (python 2.6, 2.7, 3.3, 3.4)
+   `pyexcel-ods`_   ods (python 2.6, 2.7)
+   `pyexcel-text`_  (write only)json, rst, mediawiki,
+                    latex, grid, pipe, orgtbl, plain simple
+   ================ ========================================
+   
 .. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
 .. _pyexcel-xlsx: https://github.com/pyexcel/pyexcel-xlsx
 .. _pyexcel-ods: https://github.com/pyexcel/pyexcel-ods
 .. _pyexcel-ods3: https://github.com/pyexcel/pyexcel-ods3
 .. _pyexcel-text: https://github.com/pyexcel/pyexcel-text
 
+This library makes infomation processing involving various excel files as easy as
+processing array, dictionary when processing file upload/download, data import into
+and export from SQL databases, information analysis and persistence. It uses
+**pyexcel** and its plugins:
+
+#. to provide one uniform programming interface to handle csv, tsv, xls, xlsx, xlsm and ods formats.
+#. to provide one-stop utility to import the data in uploaded file into a database and to export tables in a database as excel files for file download.
+#. to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
 
 Known constraints
 ==================
@@ -72,8 +83,7 @@ Tested Django Versions
     :target: http://travis-ci.org/pyexcel/django-excel
 
 Installation
-============
-
+================================================================================
 You can install it via pip:
 
 .. code-block:: bash
@@ -88,8 +98,6 @@ or clone it and install it:
     $ git clone http://github.com/pyexcel/django-excel.git
     $ cd django-excel
     $ python setup.py install
-
-Installation of individual plugins , please refer to individual plugin page.
 
 Setup
 ======
@@ -136,6 +144,6 @@ Here is the example viewing function codes:
         return excel.make_response(sheet, "csv")
 
 License
-==========
+================================================================================
 
 New BSD License

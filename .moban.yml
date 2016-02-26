@@ -1,0 +1,16 @@
+configuration:
+  configuration_dir: "commons/config"
+  template_dir:
+    - "commons/templates"
+    - ".moban.d"
+  configuration: django_excel.yml
+targets:
+  - README.rst: README.rst
+  - setup.py: setup.py
+  - "doc/source/conf.py": "docs/source/conf.py"
+  - .travis.yml: travis.yml
+  - requirements.txt: requirements.txt
+  - LICENSE: LICENSE.jj2
+  - MANIFEST.in: MANIFEST.in.jj2
+  - "doc/source/index.rst": "docs/source/index.rst.jj2"
+  - "tests/requirements.txt": "tests/requirements.txt"

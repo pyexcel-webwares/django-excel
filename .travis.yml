@@ -20,7 +20,6 @@ matrix:
     - python: 3.5
       env: DJANGO_VERSION=1.8.2
 install:
-  - rm applymoban.py
   - pip install Django==$DJANGO_VERSION
   - pip install -r requirements.txt
   - pip install -r tests/requirements.txt

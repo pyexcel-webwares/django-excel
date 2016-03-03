@@ -23,7 +23,7 @@ extras = {
 
 setup(
     name='django-excel',
-    author='C. W.',
+    author='C.W.',
     version='0.0.4',
     author_email='wangc_2011 (at) hotmail.com',
     url='https://github.com/pyexcel/django-excel',

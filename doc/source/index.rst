@@ -6,7 +6,7 @@
 Welcome to django-excel's documentation!
 ================================================================================
 
-:Author: C. W.
+:Author: C.W.
 :Issues: http://github.com/pyexcel/django-excel/issues
 :License: New BSD License
 :Version: |version|

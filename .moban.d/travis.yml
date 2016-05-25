@@ -16,7 +16,11 @@ matrix:
       env: DJANGO_VERSION=1.8.2
 {%endblock%}
 
-{%block test_other_python_versions%}  - 3.3
+{%block custom_python_versions%}
+python:
+  - 2.6
+  - 2.7
+  - 3.3
   - 3.4
   - 3.5
 {%endblock%}

@@ -138,7 +138,7 @@ class DatabaseOperationsTestCase(TestCase):
         assert response2.status_code == 200
         book = pe.get_book(file_type='xls', file_content=response2.content)
         content = dedent("""
-        Sheet Name: question
+        question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
         +----+---------------------------+----------------------------------------------+----------+
@@ -146,7 +146,7 @@ class DatabaseOperationsTestCase(TestCase):
         +----+---------------------------+----------------------------------------------+----------+
         | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
         +----+---------------------------+----------------------------------------------+----------+
-        Sheet Name: choice
+        choice:
         +---------------+----+-------------+-------+
         | choice_text   | id | question_id | votes |
         +---------------+----+-------------+-------+
@@ -164,7 +164,7 @@ class DatabaseOperationsTestCase(TestCase):
         +---------------+----+-------------+-------+
         | IntelliJ      | 7  | 2           | 0     |
         +---------------+----+-------------+-------+""").strip('\n')
-        assert str(book) == content
+        self.assertEqual(str(book), content)
 
     def testSheet(self):
         fp = open(self.testfile, "rb")
@@ -174,7 +174,7 @@ class DatabaseOperationsTestCase(TestCase):
         assert response2.status_code == 200
         sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
         content = dedent("""
-        Sheet Name: question
+        question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
         +----+---------------------------+----------------------------------------------+----------+
@@ -192,7 +192,7 @@ class DatabaseOperationsTestCase(TestCase):
         assert response2.status_code == 200
         sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
         content = dedent("""
-        Sheet Name: question
+        question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
         +----+---------------------------+----------------------------------------------+----------+
@@ -200,7 +200,7 @@ class DatabaseOperationsTestCase(TestCase):
         +----+---------------------------+----------------------------------------------+----------+
         | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
         +----+---------------------------+----------------------------------------------+----------+""").strip('\n')
-        assert str(sheet) == content
+        self.assertEqual(str(sheet), content)
 
     def testCustomExport(self):
         fp = open(self.testfile, "rb")
@@ -210,7 +210,7 @@ class DatabaseOperationsTestCase(TestCase):
         assert response2.status_code == 200
         sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
         content = dedent("""
-        Sheet Name: pyexcel_sheet1
+        pyexcel_sheet1:
         +---------------+----+-------+
         | choice_text   | id | votes |
         +---------------+----+-------+
@@ -222,7 +222,7 @@ class DatabaseOperationsTestCase(TestCase):
         +---------------+----+-------+
         | IntelliJ      | 7  | 0     |
         +---------------+----+-------+""").strip('\n')
-        assert str(sheet) == content
+        self.assertEqual(str(sheet), content)
 
 
 @override_settings(FILE_UPLOAD_MAX_MEMORY_SIZE=1)

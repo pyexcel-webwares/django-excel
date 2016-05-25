@@ -50,7 +50,7 @@ The highlighted features are:
    `pyexcel-text`_  (write only)json, rst, mediawiki,
                     latex, grid, pipe, orgtbl, plain simple
    ================ ========================================
-   
+
 .. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
 .. _pyexcel-xlsx: https://github.com/pyexcel/pyexcel-xlsx
 .. _pyexcel-ods: https://github.com/pyexcel/pyexcel-ods
@@ -65,6 +65,7 @@ and export from SQL databases, information analysis and persistence. It uses
 #. to provide one uniform programming interface to handle csv, tsv, xls, xlsx, xlsm and ods formats.
 #. to provide one-stop utility to import the data in uploaded file into a database and to export tables in a database as excel files for file download.
 #. to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
+
 
 Installation
 -------------------
@@ -102,7 +103,7 @@ You will need to update your *settings.py*::
 
 More excel file formats
 ------------------------
-    
+
 The example application understands csv, tsv and its zipped variants: csvz and tsvz. If you would like to expand the list of supported excel file formats (see :ref:`file-format-list`) for your own application, you could include one or all of the following import lines right after **django-excel** is imported::
 
     import pyexcel.ext.xls # pip install pyexcel-xls
@@ -535,3 +536,4 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+

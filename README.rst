@@ -17,14 +17,19 @@ well as on file system. This library can turn the excel data into a list of list
 a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it
 lets you focus on data in Django based web development, instead of file formats.
 
-The idea originated from the problem of the illiteracy of excel file formats of
-non-technical office workers: such as office assistant, human resource administrator.
-There is nothing with the un-deniable fact that some people do not know the
-difference among various excel formats. It becomes usability problem to those
-people when a web service cannot parse the excel file that they saved using
-Microsoft Excel. Instead of training those people about file formats, this library
-helps web developers to handle most of the excel file formats by unifying the
-programming interface to most of the excel readers and writers.
+The idea originated from the common usability problem when developing an excel file
+driven web applications for non-technical office workers: such as office assistant,
+human resource administrator. It is an un-deniable fact that not all people know the
+difference among various excel formats: csv, xls, xlsx. Instead of training those people
+about file formats, this library helps web developers to handle most of the excel file
+formats by providing a common programming interface.
+
+.. note::
+ Here is a typical conversation between the developer and the user::
+
+  User: "I have uploaded an excel file as instructed, but your application says un-supported file format"
+  Developer: "Did you upload an xlsx file or a csv file?"
+  User: "Well, I am not sure. I saved the data using Microsoft Excel. Surely, it must be in an excel format."
 
 The highlighted features are:
 
@@ -46,7 +51,7 @@ The highlighted features are:
    `pyexcel-xlsx`_  xlsx
    `pyexcel-ods3`_  ods (python 2.6, 2.7, 3.3, 3.4)
    `pyexcel-ods`_   ods (python 2.6, 2.7)
-   `pyexcel-text`_  (write only)json, rst, mediawiki,
+   `pyexcel-text`_  (write only)json, rst, mediawiki, html
                     latex, grid, pipe, orgtbl, plain simple
    ================ ========================================
 

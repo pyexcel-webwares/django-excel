@@ -4,7 +4,9 @@ from django import forms
 from django.template import RequestContext
 import django_excel as excel
 from polls.models import Question, Choice
-import pyexcel.ext.xls
+
+# No longer you need the following import statements if you use pyexcel >=0.2.2
+import pyexcel.ext.xls 
 import pyexcel.ext.xlsx
 import pyexcel.ext.ods3
 

@@ -31,7 +31,7 @@ class ExcelMixin(webio.ExcelInput):
                          **keywords):
         """
         Save data from a sheet to a nominated django model
-        """        
+        """
         params = self.get_params(**keywords)
         if 'name_columns_by_row' not in params:
             params['name_columns_by_row'] = 0
@@ -50,7 +50,7 @@ class ExcelMixin(webio.ExcelInput):
         """
         params = self.get_params(**keywords)
         params['dest_models'] = models
-        params['dest_initializers']=initializers
+        params['dest_initializers'] = initializers
         params['dest_mapdicts'] = mapdicts
         params['dest_batch_size'] = batch_size
         pe.save_book_as(**params)
@@ -65,7 +65,7 @@ class ExcelInMemoryUploadedFile(ExcelMixin, InMemoryUploadedFile):
 
 class TemporaryUploadedExcelFile(ExcelMixin, TemporaryUploadedFile):
     """
-    Mix-in pyexcel-webio methods in TemporaryUploadedFile    
+    Mix-in pyexcel-webio methods in TemporaryUploadedFile
     """
     pass
 
@@ -115,14 +115,15 @@ def _make_response(content, content_type, status, file_name=None):
     """
     response = HttpResponse(content, content_type=content_type, status=status)
     if file_name:
-        response["Content-Disposition"] = "attachment; filename=%s" % (file_name)
+        response["Content-Disposition"] = (
+            "attachment; filename=%s" % (file_name))
     return response
 
 
 webio.ExcelResponse = _make_response
 
 
-from pyexcel_webio import (
+from pyexcel_webio import (  # noqa
     make_response,
     make_response_from_array,
     make_response_from_dict,
@@ -142,7 +143,8 @@ def make_response_from_a_table(model, file_type,
     :param status: same as :meth:`~django_excel.make_response`
     """
     sheet = pe.get_sheet(model=model, **keywords)
-    return make_response(sheet, file_type, status, file_name=file_name, **keywords)
+    return make_response(sheet, file_type, status,
+                         file_name=file_name, **keywords)
 
 
 def make_response_from_tables(models, file_type,
@@ -157,4 +159,5 @@ def make_response_from_tables(models, file_type,
     :param status: same as :meth:`~django_excel.make_response`
     """
     book = pe.get_book(models=models, **keywords)
-    return make_response(book, file_type, status, file_name=file_name, **keywords)
+    return make_response(book, file_type, status,
+                         file_name=file_name, **keywords)

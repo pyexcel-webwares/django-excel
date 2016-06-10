@@ -6,9 +6,9 @@ import django_excel as excel
 from polls.models import Question, Choice
 
 # No longer you need the following import statements if you use pyexcel >=0.2.2
-import pyexcel.ext.xls 
+import pyexcel.ext.xls
 import pyexcel.ext.xlsx
-import pyexcel.ext.ods3
+import pyexcel.ext.ods3   # noqa
 
 
 data = [
@@ -27,7 +27,8 @@ def upload(request):
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
             filehandle = request.FILES['file']
-            return excel.make_response(filehandle.get_sheet(), "csv", file_name="download")
+            return excel.make_response(filehandle.get_sheet(), "csv",
+                                       file_name="download")
     else:
         form = UploadFileForm()
     return render_to_response(
@@ -35,7 +36,8 @@ def upload(request):
         {
             'form': form,
             'title': 'Excel file upload and download example',
-            'header': 'Please choose any excel file from your cloned repository:'
+            'header': ('Please choose any excel file ' +
+                       'from your cloned repository:')
         },
         context_instance=RequestContext(request))
 
@@ -44,9 +46,10 @@ def download(request, file_type):
     sheet = excel.pe.Sheet(data)
     return excel.make_response(sheet, file_type)
 
-    
+
 def download_as_attachment(request, file_type, file_name):
-    return excel.make_response_from_array(data, file_type, file_name=file_name)
+    return excel.make_response_from_array(
+        data, file_type, file_name=file_name)
 
 
 def export_data(request, atype):
@@ -67,13 +70,16 @@ def export_data(request, atype):
             file_name="custom"
         )
     else:
-        return HttpResponseBadRequest("Bad request. please put one of these \
-                                      in your url suffix: sheet, book or custom")
+        return HttpResponseBadRequest(
+            "Bad request. please put one of these " +
+            "in your url suffix: sheet, book or custom")
+
 
 def import_data(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST,
                               request.FILES)
+
         def choice_func(row):
             q = Question.objects.filter(slug=row[0])[0]
             row[0] = q

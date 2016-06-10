@@ -28,9 +28,11 @@ formats by providing a common programming interface.
 .. note::
  Here is a typical conversation between the developer and the user::
 
-  User: "I have uploaded an excel file as instructed, but your application says un-supported file format"
+  User: "I have uploaded an excel file"
+        "but your application says un-supported file format"
   Developer: "Did you upload an xlsx file or a csv file?"
-  User: "Well, I am not sure. I saved the data using Microsoft Excel. Surely, it must be in an excel format."
+  User: "Well, I am not sure. I saved the data using "
+        "Microsoft Excel. Surely, it must be in an excel format."
 
 The highlighted features are:
 
@@ -74,6 +76,13 @@ and export from SQL databases, information analysis and persistence. It uses
 
 Installation
 -------------------
+
+
+Recently, pyexcel(0.2.2+) and its plugins(0.2.0+) started using newer version of setuptools. Please upgrade your setup tools before install latest pyexcel components:
+
+.. code-block:: bash
+
+    $ pip install --upgrade setuptools
 
 You can install it via pip:
 

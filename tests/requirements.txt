@@ -1,6 +1,7 @@
 nose
 codecov
 coverage
+flake8
 lxml
 pyexcel-ods3>=0.1.0
 pyexcel-xls>=0.1.0

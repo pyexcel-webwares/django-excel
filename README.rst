@@ -11,6 +11,17 @@ django-excel - Let you focus on data, instead of file formats
 .. image:: https://readthedocs.org/projects/django-excel/badge/?version=latest
    :target: http://django-excel.readthedocs.org/en/latest/
 
+Here is a typical conversation between the developer and the user::
+
+ User: "I have uploaded an excel file"
+       "but your application says un-supported file format"
+ Developer: "Did you upload an xlsx file or a csv file?"
+ User: "Well, I am not sure. I saved the data using "
+       "Microsoft Excel. Surely, it must be in an excel format."
+ Developer: "OK. Here is the thing. I were not told to support"
+            "all available excel formats in day 1. Live with it"
+            "or delay the project x number of days."
+
 **django-excel** is based on `pyexcel <https://github.com/pyexcel/pyexcel>`_ and makes
 it easy to consume/produce information stored in excel files over HTTP protocol as
 well as on file system. This library can turn the excel data into a list of lists,
@@ -19,24 +30,17 @@ lets you focus on data in Django based web development, instead of file formats.
 
 The idea originated from the common usability problem when developing an excel file
 driven web applications for non-technical office workers: such as office assistant,
-human resource administrator. It is an un-deniable fact that not all people know the
+human resource administrator. The fact is that not all people know the
 difference among various excel formats: csv, xls, xlsx. Instead of training those people
 about file formats, this library helps web developers to handle most of the excel file
-formats by providing a common programming interface.
-
-.. note::
- Here is a typical conversation between the developer and the user::
-
-  User: "I have uploaded an excel file"
-        "but your application says un-supported file format"
-  Developer: "Did you upload an xlsx file or a csv file?"
-  User: "Well, I am not sure. I saved the data using "
-        "Microsoft Excel. Surely, it must be in an excel format."
+formats by providing a common programming interface. To add a specific excel file format
+to you application, all you need is to install an extra pyexcel plugin. No code change
+to your application.
 
 The highlighted features are:
 
 #. excel data import into and export from databases
-#. turn uploaded excel file directly into Python data struture
+#. turn uploaded excel file directly into Python data structure
 #. pass Python data structures as an excel file download
 #. provide data persistence as an excel file in server side
 #. supports csv, tsv, csvz, tsvz by default and other formats are supported via
@@ -63,7 +67,7 @@ The highlighted features are:
 .. _pyexcel-ods3: https://github.com/pyexcel/pyexcel-ods3
 .. _pyexcel-text: https://github.com/pyexcel/pyexcel-text
 
-This library makes infomation processing involving various excel files as easy as
+This library makes information processing involving various excel files as easy as
 processing array, dictionary when processing file upload/download, data import into
 and export from SQL databases, information analysis and persistence. It uses
 **pyexcel** and its plugins:

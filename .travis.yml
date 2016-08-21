@@ -21,6 +21,7 @@ matrix:
       env: DJANGO_VERSION=1.8.2
 before_install:
   - pip install Django==$DJANGO_VERSION
+  - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install flake8==2.6.2; fi
   - if [[ -f min_requirements.txt && "$MINREQ" -eq 1 ]]; then
       mv min_requirements.txt requirements.txt ;
     fi

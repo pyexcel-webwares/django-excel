@@ -1,15 +1,8 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render
 from django.http import HttpResponseBadRequest, JsonResponse, HttpResponse
 from django import forms
-from django.template import RequestContext
 import django_excel as excel
 from polls.models import Question, Choice
-
-# No longer you need the following import statements if you use pyexcel >=0.2.2
-import pyexcel.ext.xls
-import pyexcel.ext.xlsx
-import pyexcel.ext.ods3   # noqa
-
 
 data = [
     [1, 2, 3],
@@ -31,15 +24,15 @@ def upload(request):
                                        file_name="download")
     else:
         form = UploadFileForm()
-    return render_to_response(
+    return render(
+        request,
         'upload_form.html',
         {
             'form': form,
             'title': 'Excel file upload and download example',
             'header': ('Please choose any excel file ' +
                        'from your cloned repository:')
-        },
-        context_instance=RequestContext(request))
+        })
 
 
 def download(request, file_type):
@@ -97,14 +90,14 @@ def import_data(request):
             return HttpResponseBadRequest()
     else:
         form = UploadFileForm()
-    return render_to_response(
+    return render(
+        request,
         'upload_form.html',
         {
             'form': form,
             'title': 'Import excel data into database example',
             'header': 'Please upload sample-data.xls:'
-        },
-        context_instance=RequestContext(request))
+        })
 
 
 def import_sheet(request):
@@ -121,9 +114,10 @@ def import_sheet(request):
             return HttpResponseBadRequest()
     else:
         form = UploadFileForm()
-    return render_to_response('upload_form.html',
-                              {'form': form},
-                              context_instance=RequestContext(request))
+    return render(
+        request,
+        'upload_form.html',
+        {'form': form})
 
 
 def exchange(request, file_type):

@@ -15,6 +15,7 @@ from django.core.files.uploadedfile import (
 from django.http import HttpResponse
 import pyexcel as pe
 import pyexcel_webio as webio
+from ._compact import DJANGO_ONE_SIX
 
 
 class ExcelMixin(webio.ExcelInput):
@@ -78,15 +79,17 @@ class ExcelMemoryFileUploadHandler(MemoryFileUploadHandler):
         if not self.activated:
             return
         self.file.seek(0)
-        return ExcelInMemoryUploadedFile(
+        keywords = dict(
             file=self.file,
             field_name=self.field_name,
             name=self.file_name,
             content_type=self.content_type,
             size=file_size,
-            charset=self.charset,
-            content_type_extra=self.content_type_extra
+            charset=self.charset
         )
+        if not DJANGO_ONE_SIX:
+            keywords["content_type_extra"] = self.content_type_extra
+        return ExcelInMemoryUploadedFile(**keywords)
 
 
 class TemporaryExcelFileUploadHandler(TemporaryFileUploadHandler):
@@ -101,12 +104,14 @@ class TemporaryExcelFileUploadHandler(TemporaryFileUploadHandler):
             file_name,
             *args,
             **kwargs)
-        self.file = TemporaryUploadedExcelFile(
+        custom_args = [
             self.file_name,
             self.content_type,
             0,
-            self.charset,
-            self.content_type_extra)
+            self.charset]
+        if not DJANGO_ONE_SIX:
+            custom_args.append(self.content_type_extra)
+        self.file = TemporaryUploadedExcelFile(*custom_args)
 
 
 def _make_response(content, content_type, status, file_name=None):

@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponseBadRequest, JsonResponse, HttpResponse
+from django.http import HttpResponseBadRequest, HttpResponse
+from _compact import JsonResponse
 from django import forms
 import django_excel as excel
 from polls.models import Question, Choice

@@ -85,14 +85,21 @@ Fonts, colors and charts are not supported.
 Tested Django Versions
 ========================
 
-.. image:: https://img.shields.io/badge/django-1.9-green.svg
+.. image:: https://img.shields.io/badge/django-1.10-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
-.. image:: https://img.shields.io/badge/django-1.8.2-green.svg
+.. image:: https://img.shields.io/badge/django-1.9.9-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
-.. image:: https://img.shields.io/badge/django-1.7.8-green.svg
+.. image:: https://img.shields.io/badge/django-1.8.14-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.7.11-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.6.11-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
 
 Installation
 ================================================================================

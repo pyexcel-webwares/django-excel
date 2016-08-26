@@ -9,8 +9,8 @@ Welcome to django-excel's documentation!
 :Author: C.W.
 :Issues: http://github.com/pyexcel/django-excel/issues
 :License: New BSD License
-:Development: |version|
-:Released: |release|
+:Development: |release|
+:Released: |version|
 :Generated: |today|
 
 Here is a typical conversation between the developer and the user::

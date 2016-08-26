@@ -1,2 +1,4 @@
 include README.rst
 include CHANGELOG.rst
+prune mysite
+prune polls

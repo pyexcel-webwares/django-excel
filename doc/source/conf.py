@@ -16,8 +16,8 @@ master_doc = 'index'
 
 project = u'django-excel'
 copyright = u'2015-2016 Onni Software Ltd.'
-version = '0.0.5'
-release = '0.0.4'
+version = '0.0.4'
+release = '0.0.5'
 exclude_patterns = []
 pygments_style = 'sphinx'
 import os  # noqa

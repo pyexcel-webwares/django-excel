@@ -1,6 +1,11 @@
 {% extends 'setup.py.jj2' %}
+
+{%block platform_block%}
+{%endblock%}
+
 {%block extras %}
 {%endblock %}
+
 {%block additional_keywords%}
     'API',
     'Django'

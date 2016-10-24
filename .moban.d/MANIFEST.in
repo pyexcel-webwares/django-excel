@@ -1,0 +1,6 @@
+{%extends 'MANIFEST.in.jj2'%}
+
+{%block more_options%}
+prune mysite
+prune polls
+{%endblock%}

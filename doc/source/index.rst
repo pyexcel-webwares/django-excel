@@ -3,10 +3,11 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to django-excel's documentation!
+`django-excel` - Let you focus on data, instead of file formats
 ================================================================================
 
 :Author: C.W.
+:Source code: http://github.com/pyexcel/django-excel.git
 :Issues: http://github.com/pyexcel/django-excel/issues
 :License: New BSD License
 :Development: |release|
@@ -37,7 +38,9 @@ difference among various excel formats: csv, xls, xlsx. Instead of training thos
 about file formats, this library helps web developers to handle most of the excel file
 formats by providing a common programming interface. To add a specific excel file format
 to you application, all you need is to install an extra pyexcel plugin. No code change
-to your application.
+to your application. Looking at the community, this library and its associated ones try
+to become a small and easy to install alternative to Pandas.
+
 
 The highlighted features are:
 
@@ -49,25 +52,51 @@ The highlighted features are:
    the following plugins:
 
 .. _file-format-list:
+.. _a-map-of-plugins-and-file-formats:
 
 .. table:: A list of file formats supported by external plugins
 
-   ================ ========================================
-   Plugins          Supported file formats
-   ================ ========================================
-   `pyexcel-xls`_   xls, xlsx(r), xlsm(r)
-   `pyexcel-xlsx`_  xlsx
-   `pyexcel-ods3`_  ods (python 2.6, 2.7, 3.3, 3.4)
-   `pyexcel-ods`_   ods (python 2.6, 2.7)
-   `pyexcel-text`_  (write only)json, rst, mediawiki, html
-                    latex, grid, pipe, orgtbl, plain simple
-   ================ ========================================
+   ================= ======================= ============= ==================
+   Package name      Supported file formats  Dependencies  Python versions
+   ================= ======================= ============= ==================
+   `pyexcel-io`_     csv, csvz [#f1]_, tsv,                2.6, 2.7, 3.3,
+                     tsvz [#f2]_                           3.4, 3.5,
+                                                           pypy, pypy3
+   `pyexcel-xls`_    xls, xlsx(read only),   `xlrd`_,      same as above
+                     xlsm(read only)         `xlwt`_
+   `pyexcel-xlsx`_   xlsx                    `openpyxl`_   same as above
+   `pyexcel-xlsxw`_  xlsx(write only)        `XlsxWriter`_ same as above
+   `pyexcel-ods3`_   ods                     `ezodf`_,     2.6, 2.7, 3.3, 3.4
+                                             lxml          3.5
+   `pyexcel-ods`_    ods                     `odfpy`_      same as above
+   `pyexcel-text`_   (write only)json, rst,  `tabulate`_   2.6, 2.7, 3.3, 3.4
+                     mediawiki, html,                      3.5, pypy, pypy3
+                     latex, grid, pipe,
+                     orgtbl, plain simple
+   ================= ======================= ============= ==================
 
+.. _pyexcel-io: https://github.com/pyexcel/pyexcel-io
 .. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
 .. _pyexcel-xlsx: https://github.com/pyexcel/pyexcel-xlsx
 .. _pyexcel-ods: https://github.com/pyexcel/pyexcel-ods
 .. _pyexcel-ods3: https://github.com/pyexcel/pyexcel-ods3
+.. _pyexcel-xlsxw: https://github.com/pyexcel/pyexcel-xlsxw
+
+.. _xlrd: https://github.com/python-excel/xlrd
+.. _xlwt: https://github.com/python-excel/xlwt
+.. _openpyxl: https://bitbucket.org/openpyxl/openpyxl
+.. _XlsxWriter: https://github.com/jmcnamara/XlsxWriter
+.. _ezodf: https://github.com/T0ha/ezodf
+.. _odfpy: https://github.com/eea/odfpy
+
 .. _pyexcel-text: https://github.com/pyexcel/pyexcel-text
+.. _tabulate: https://bitbucket.org/astanin/python-tabulate
+
+.. rubric:: Footnotes
+
+.. [#f1] zipped csv file
+.. [#f2] zipped tsv file
+
 
 This library makes information processing involving various excel files as easy as
 processing array, dictionary when processing file upload/download, data import into
@@ -81,13 +110,6 @@ and export from SQL databases, information analysis and persistence. It uses
 
 Installation
 -------------------
-
-
-Recently, pyexcel(0.2.2+) and its plugins(0.2.0+) started using newer version of setuptools. Please upgrade your setup tools before install latest pyexcel components:
-
-.. code-block:: bash
-
-    $ pip install --upgrade setuptools
 
 You can install it via pip:
 

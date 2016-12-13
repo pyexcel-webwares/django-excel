@@ -50,7 +50,7 @@ CLASSIFIERS = [
 
 INSTALL_REQUIRES = [
     'pyexcel>=0.2.2',
-    'pyexcel-webio>=0.0.7',
+    'pyexcel-webio>=0.0.9',
     'Django>=1.6.1',
 ]
 

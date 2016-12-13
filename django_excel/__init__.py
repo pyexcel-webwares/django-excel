@@ -25,7 +25,11 @@ class ExcelMixin(webio.ExcelInput):
     def get_params(self, **keywords):
         extension = self.name.split(".")[-1]
         keywords['file_type'] = extension
-        keywords['file_content'] = self.file.read()
+        content = self.file.read()
+        if content:
+            keywords['file_content'] = content
+        else:
+            raise IOError("No content was uploaded.")
         return keywords
 
     def save_to_database(self, model=None, initializer=None, mapdict=None,

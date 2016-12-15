@@ -9,6 +9,7 @@ Updated
 
 #. `issue 26 <https://github.com/pyexcel/django-excel/issues/26>`_, raise
    ioerror if content is empty.
+#. Adapt pyexcel-io v0.3.0
 
 
 0.0.5 - 26.08.2016

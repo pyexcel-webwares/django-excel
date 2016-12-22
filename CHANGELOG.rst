@@ -1,7 +1,7 @@
 Change log
 ================================================================================
 
-0.0.6 - unreleased
+0.0.6 - 12.22.2016
 --------------------------------------------------------------------------------
 
 Updated
@@ -9,7 +9,8 @@ Updated
 
 #. `issue 26 <https://github.com/pyexcel/django-excel/issues/26>`_, raise
    ioerror if content is empty.
-#. Adapt pyexcel-io v0.3.0
+#. Use pyexcel-webio v0.0.9 so as to push out new version of pyexcel and its
+   plugins.
 
 
 0.0.5 - 26.08.2016

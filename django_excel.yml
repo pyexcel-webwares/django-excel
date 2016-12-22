@@ -4,7 +4,6 @@ version: 0.0.6
 release: 0.0.5
 webframework: Django
 dependencies:
-  - pyexcel>=0.2.2
   - pyexcel-webio>=0.0.9
   - Django>=1.6.1
 extra_dependencies:

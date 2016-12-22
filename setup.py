@@ -15,8 +15,7 @@ EMAIL = 'wangc_2011 (at) hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
     'A django middleware that provides one application programming interfac' +
-    'e to read and write data in different excel file formats
-' +
+    'e to read and write data in different excel file formats' +
     ''
 )
 KEYWORDS = [

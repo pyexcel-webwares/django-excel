@@ -56,30 +56,34 @@ The highlighted features are:
 
 .. table:: A list of file formats supported by external plugins
 
-   ================= ======================= ============= ==================
-   Package name      Supported file formats  Dependencies  Python versions
-   ================= ======================= ============= ==================
-   `pyexcel-io`_     csv, csvz [#f1]_, tsv,                2.6, 2.7, 3.3,
-                     tsvz [#f2]_                           3.4, 3.5,
-                                                           pypy
-   `pyexcel-xls`_    xls, xlsx(read only),   `xlrd`_,      same as above
-                     xlsm(read only)         `xlwt`_
-   `pyexcel-xlsx`_   xlsx                    `openpyxl`_   same as above
-   `pyexcel-xlsxw`_  xlsx(write only)        `XlsxWriter`_ same as above
-   `pyexcel-ods3`_   ods                     `ezodf`_,     2.6, 2.7, 3.3, 3.4
-                                             lxml          3.5
-   `pyexcel-ods`_    ods                     `odfpy`_      same as above
-   `pyexcel-text`_   (write only)json, rst,  `tabulate`_   2.6, 2.7, 3.3, 3.4
-                     mediawiki, html,                      3.5, pypy, pypy3
-                     latex, grid, pipe,
-                     orgtbl, plain simple
-   ================= ======================= ============= ==================
+   ======================== ======================= =============== ==================
+   Package name              Supported file formats  Dependencies   Python versions
+   ======================== ======================= =============== ==================
+   `pyexcel-io`_            csv, csvz [#f1]_, tsv,                  2.6, 2.7, 3.3,
+                            tsvz [#f2]_                             3.4, 3.5, 3.6
+                                                                    pypy
+   `pyexcel-xls`_           xls, xlsx(read only),   `xlrd`_,        same as above
+                            xlsm(read only)         `xlwt`_
+   `pyexcel-xlsx`_          xlsx                    `openpyxl`_     same as above
+   `pyexcel-xlsxw`_         xlsx(write only)        `XlsxWriter`_   same as above
+   `pyexcel-ods3`_          ods                     `ezodf`_,       2.6, 2.7, 3.3, 3.4
+                                                    lxml            3.5, 3.6
+   `pyexcel-ods`_           ods                     `odfpy`_        same as above
+   `pyexcel-odsr`_          ods(read only)          lxml            same as above
+   `pyexcel-text`_          (write only)json, rst,  `tabulate`_     2.6, 2.7, 3.3, 3.4
+                            mediawiki, html,                        3.5, pypy, pypy3
+                            latex, grid, pipe,
+                            orgtbl, plain simple
+   `pyexcel-handsontable`_  handsontable in html    `handsontable`_ same as above
+   `pyexcel-chart`_         svg chart               `pygal`_        same as above
+   ======================== ======================= =============== ==================
 
 .. _pyexcel-io: https://github.com/pyexcel/pyexcel-io
 .. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
 .. _pyexcel-xlsx: https://github.com/pyexcel/pyexcel-xlsx
 .. _pyexcel-ods: https://github.com/pyexcel/pyexcel-ods
 .. _pyexcel-ods3: https://github.com/pyexcel/pyexcel-ods3
+.. _pyexcel-odsr: https://github.com/pyexcel/pyexcel-odsr
 .. _pyexcel-xlsxw: https://github.com/pyexcel/pyexcel-xlsxw
 
 .. _xlrd: https://github.com/python-excel/xlrd
@@ -91,6 +95,10 @@ The highlighted features are:
 
 .. _pyexcel-text: https://github.com/pyexcel/pyexcel-text
 .. _tabulate: https://bitbucket.org/astanin/python-tabulate
+.. _pyexcel-handsontable: https://github.com/pyexcel/pyexcel-handsontable
+.. _handsontable: https://cdnjs.com/libraries/handsontable
+.. _pyexcel-chart: https://github.com/pyexcel/pyexcel-chart
+.. _pygal: https://github.com/Kozea/pygal
 
 .. rubric:: Footnotes
 

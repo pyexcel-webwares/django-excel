@@ -38,7 +38,6 @@ def upload(request):
 
 def download(request, file_type):
     sheet = excel.pe.Sheet(data)
-    import pdb;pdb.set_trace()
     return excel.make_response(sheet, file_type)
 
 

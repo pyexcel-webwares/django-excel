@@ -130,7 +130,7 @@ or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone http://github.com/pyexcel/django-excel.git
+    $ git clone https://github.com/pyexcel/django-excel.git
     $ cd django-excel
     $ python setup.py install
 

@@ -12,7 +12,7 @@ extensions = [
 ]
 
 intersphinx_mapping = {
-    'pyexcel': ('http://pyexcel.readthedocs.org/en/latest/', None)
+    'pyexcel': ('http://pyexcel.readthedocs.org/en/latest/', None),
 }
 spelling_word_list_filename = 'spelling_wordlist.txt'
 templates_path = ['_templates']

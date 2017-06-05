@@ -1,6 +1,6 @@
 {% extends 'docs/source/WEB-index.rst.jj2' %}
 {%block installation_note%}
-Contrary to Django's phylosophy of 'battery included', django-excel does not
+Contrary to Django's philosophy of 'battery included', django-excel does not
 come with all batteries due to the size of the dependency(xlwt, openpyxl, odfpy). Hence,
 Django developer is left with the choice to install and load the excel file formats.
 {%endblock%}
@@ -14,25 +14,34 @@ You will need to update your *settings.py*::
 
 {%block tutorial%}
 Tutorial
---------------
+--------------------------------------------------------------------------------
 
-In order to dive in django-excel and get hands-on experience quickly, the test application for django-excel will be introduced here. So, it is advisable that you should check out the code from `github <https://github.com/pyexcel/django-excel>`_ ::
+In order to dive in django-excel and get hands-on experience quickly, the test
+application for django-excel will be introduced here. So, it is advisable that
+you should check out the code from
+`github <https://github.com/pyexcel/django-excel>`_ ::
 
     git clone https://github.com/pyexcel/django-excel.git
 
-The test application is written according to `Part 1 <https://docs.djangoproject.com/en/1.7/intro/tutorial01/>`_, `Part 2 <https://docs.djangoproject.com/en/1.7/intro/tutorial02/>`_ and `Part 3 <https://docs.djangoproject.com/en/1.7/intro/tutorial03/>`_ of django tutorial version 1.7.1. If you should wonder how the test application was written, please visit django documentation and come back.
+The test application is written according
+to `Part 1 <https://docs.djangoproject.com/en/1.7/intro/tutorial01/>`_,
+`Part 2 <https://docs.djangoproject.com/en/1.7/intro/tutorial02/>`_ and
+`Part 3 <https://docs.djangoproject.com/en/1.7/intro/tutorial03/>`_ of django
+tutorial version 1.7.1. If you should wonder how the test application was
+written, please visit django documentation and come back.
 
-Once you have the code, please change to django-excel directory and then install all dependencies::
+Once you have the code, please change to django-excel directory and then
+install all dependencies::
 
     $ cd django-excel
     $ pip install -r requirements.txt
     $ pip install -r test_requirements.txt
 
 Then run the test application::
-   
+
     $ python manage.py runserver
     Performing system checks...
-    
+
     System check identified no issues (0 silenced).
     January 29, 2015 - 18:11:06
     Django version 1.7.1, using settings 'mysite.settings'
@@ -41,9 +50,11 @@ Then run the test application::
 
 
 Handle excel file upload and download
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This example shows how to process uploaded excel file and how to make data download as an excel file. Open your browser and visit http://localhost:8000/polls/, you shall see this upload form:
+This example shows how to process uploaded excel file and how to make data
+download as an excel file. Open your browser
+and visit http://localhost:8000/polls/, you shall see this upload form:
 
 .. image :: upload-form.png
 
@@ -51,48 +62,47 @@ Choose an excel sheet, for example an xls file, and press "Submit". You will get
 
 .. image :: download-file.png
 
-Please open the file `polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L27>`_ and focus on the following code section::
+Please open the file
+`polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L14>`_
+and focus on the following code section:
 
-    class UploadFileForm(forms.Form):
-        file = forms.FileField()
-    
-    # Create your views here.
-    def upload(request):
-        if request.method == "POST":
-            form = UploadFileForm(request.POST, request.FILES)
-            if form.is_valid():
-                filehandle = request.FILES['file']
-                return excel.make_response(filehandle.get_sheet(), "csv", file_name="download")
-        else:
-            form = UploadFileForm()
-        return render_to_response('upload_form.html', {'form': form}, context_instance=RequestContext(request))
+.. literalinclude:: ../../polls/views.py
+   :lines: 14-36
 
-**UploadFileForm** is html widget for file upload form in the html page. Then look down at **filehandle**. It is an instance of either ExcelInMemoryUploadedFile or TemporaryUploadedExcelFile, which inherit ExcelMixin and hence have a list of conversion methods to call, such as get_sheet, get_array, etc.
 
-For the response, :meth:`~django_excel.make_response` converts :class:`pyexcel.Sheet` instance obtained via :meth:`~django_excel.ExcelMixin.get_sheet` into a csv file for download.
+**UploadFileForm** is html widget for file upload form in the html page. Then
+look down at **filehandle**. It is an instance of either ExcelInMemoryUploadedFile
+or TemporaryUploadedExcelFile, which inherit ExcelMixin and hence have a list of
+conversion methods to call, such as get_sheet, get_array, etc.
+
+For the response, :meth:`~django_excel.make_response` converts
+:class:`pyexcel.Sheet` instance obtained via
+:meth:`~django_excel.ExcelMixin.get_sheet` into a csv file for download.
 
 Please feel free to change those functions according to :ref:`the mapping table <data-types-and-its-conversion-funcs>`.
 
 
 Handle data import
-++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This example shows how to import uploaded excel file into django models. We are going to import `sample-data.xls <https://github.com/pyexcel/django-excel/blob/master/sample-data.xls>`_
+This example shows how to import uploaded excel file into django models. We are
+going to import
+`sample-data.xls <https://github.com/pyexcel/django-excel/blob/master/sample-data.xls>`_
 
 .. table:: Sheet 1 of sample-data.xls
 
-    ============================================    ============    =================
-    Question Text                                   Publish Date    Unique Identifier
-    ============================================    ============    =================
-    What is your favourite programming language?    28/01/15        language
-    What is your favourite IDE?                     29/01/15        ide
-    ============================================    ============    =================
+    ============================================ ============ =================
+    Question Text                                Publish Date Unique Identifier
+    ============================================ ============ =================
+    What is your favourite programming language? 28/01/15     language
+    What is your favourite IDE?                  29/01/15     ide
+    ============================================ ============ =================
 
 .. table:: Sheet 2 of sample-data.xls
 
-    ==========  ==============  ======         
+    ==========  ==============  ======
     Question    Choice          Votes
-    ==========  ==============  ======         
+    ==========  ==============  ======
     language    Java            0
     language    C++             0
     language    C               0
@@ -102,27 +112,22 @@ This example shows how to import uploaded excel file into django models. We are 
     ide         IntelliJ        0
     ==========  ==============  ======
 
-into the following data models::
-    
-    class Question(models.Model):
-        question_text = models.CharField(max_length=200)
-        pub_date = models.DateTimeField('date published')
-        slug = models.CharField(max_length=10, unique=True, default="question")
-    
-    
-    class Choice(models.Model):
-        question = models.ForeignKey(Question)
-        choice_text = models.CharField(max_length=200)
-        votes = models.IntegerField(default=0)
+into the following data models:
+
+.. literalinclude:: ../../polls/models.py
+   :lines: 4-
 
 .. note::
-   Except the added "slug" field, **Question** and **Choice** are copied from Django tutoial part 1.
+   Except the added "slug" field, **Question** and **Choice** are copied from Django tutorial part 1.
 
 Please visit this link http://localhost:8000/polls/import/, you shall see this upload form:
 
 .. image:: import-page.png
 
-Please then select `sample-data.xls <https://github.com/pyexcel/django-excel/blob/master/sample-data.xls>`_ and upload. Then visit the admin page http://localhost:8000/admin/polls/question, you shall see questions have been populated:
+Please then select
+`sample-data.xls <https://github.com/pyexcel/django-excel/blob/master/sample-data.xls>`_
+and upload. Then visit the admin page http://localhost:8000/admin/polls/question,
+you shall see questions have been populated:
 
 .. image:: question-admin.png
 
@@ -133,57 +138,41 @@ And choices too:
 
 .. image:: choice-admin.png
 
-You may use admin interface to delete all those objects and try again. 
+You may use admin interface to delete all those objects and try again.
 
-Now please open `polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L54>`_ and focus on this part of code::
+Now please open `polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L79>`_
+and focus on this part of code:
 
-    def import_data(request):
-        if request.method == "POST":
-            form = UploadFileForm(request.POST, request.FILES)
-            def choice_func(row):
-                print row[0]
-                q = Question.objects.filter(slug=row[0])[0]
-                row[0] = q
-                return row
-            if form.is_valid():
-                request.FILES['file'].save_book_to_database(
-                    models=[
-                        (Question, ['question_text', 'pub_date', 'slug'], None, 0),
-                        (Choice, ['question', 'choice_text', 'votes'], choice_func, 0) 
-                     ]
-                    )
-                return HttpResponse("OK", status=200)
-            else:
-                return HttpResponseBadRequest()
-        else:
-        ...
+.. literalinclude:: ../../polls/views.py
+   :lines: 72-92
 
-The star is :meth:`~django_excel.save_book_to_database`. The parameter **models** can be a list of django models or a list of tuples, each of which contains:
+The star is :meth:`~django_excel.save_book_to_database`. The parameter **models**
+should be a list of django models. **initializers** is a list of initialization
+functions for each model. In the example, we do not have init function for Question
+so 'None' is given and `choice_func` is given to Choice. **mapdicts** is a list of
+column names for each model. The member of the **mapdicts** can be a dictionary
+as well::
 
-1. django model (**compulsory**)
-2. an array of model fields or a dicionary of key maps
-3. custom formating fuction
-4. the index of the row that has the field names
-5. the index of the column that has the field names
+    {
+      "Question Text": "question_text",
+      "Publish Date": "pub_date",
+      "Unique Identifier": "slug"
+    }
 
-When an array of model fields is supplied in the second member in the tuple, the names of the supplied fields should match the field names of the corresponding django model(the first member in the tuple) and the sequence of the supplied fields shall match the one in the uploaded excel sheet. For example::
-
-    (Question, ['question_text', 'pub_date', 'slug'], None, 0)
-
-When a dictionary of key maps is supplied, its keys should be the field names in the uploaded excel sheet and the value should be the actual field name in the corresponding django model. For example::
-
-    (Question,{"Question Text": "question_text",
-              "Publish Date": "pub_date",
-              "Unique Identifier": "slug"}, None, 0)
-
-The custom formatting function is needed when the data from the excel sheet needs translation before data import. For example, **Choice** has a foreign key to **Question**. When choice data are to be imported, "Question" column needs to be translated to a question instance. In our example, "Question" column in "Sheet 2" contains the values appeared in "Unique Identifier" column in "Sheet 1".
-
+The custom initialization function is needed when the data from the excel sheet
+needs translation before data import. For example, **Choice** has a foreign
+key to **Question**. When choice data are to be imported, "Question" column
+needs to be translated to a question instance. In our example, "Question" column
+in "Sheet 2" contains the values appeared in "Unique Identifier" column in
+"Sheet 1".
 
 
 Handle data export
-++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This section shows how to export the data in your models as an excel file. After you have completed the previous section, you can visit http://localhost:8000/polls/export/book and you shall get a file download dialog:
+This section shows how to export the data in your models as an excel file. After
+you have completed the previous section, you can visit
+http://localhost:8000/polls/export/book and you shall get a file download dialog:
 
 .. image:: download-dialog.png
 
@@ -192,48 +181,53 @@ Please save and open it. You shall see these data in your window:
 .. image:: question-sheet.png
 .. image:: choice-sheet.png
 
-Now let's examine the code behind this in `polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L48>`_::
+Now let's examine the code behind this in
+`polls/views.py <https://github.com/pyexcel/django-excel/blob/master/polls/views.py#L48>`_:
 
-    def export_data(request, atype):
-        if atype == "sheet":
-            return excel.make_response_from_a_table(Question, 'xls', file_name="sheet")
-        elif atype == "book":
-            return excel.make_response_from_tables([Question, Choice], 'xls', file_name="book")
-        
-:meth:`~django_excel.make_response_from_tables` does all what is needed: read out the data, convert them into xls and give it the browser. And what you need to do is to give a list of models to be exported and a file type. As you have noticed, you can visit http://localhost:8000/polls/export/sheet and will get **Question** exported as a single sheet file.
+.. literalinclude:: ../../polls/views.py
+   :lines: 49-56
+
+
+:meth:`~django_excel.make_response_from_tables` does all what is needed: read out
+the data, convert them into xls and give it the browser. And what you need to do
+is to give a list of models to be exported and a file type. As you have noticed,
+you can visit http://localhost:8000/polls/export/sheet and will get **Question**
+exported as a single sheet file.
 
 
 How to import one sheet instead of multi-sheet book
-*****************************************************
+********************************************************************************
 
-Previous example shows how to import a multi-sheet book. However, what exactly is needed to import only one sheet instead? Before you proceed, please empty question and choice data using django admin.
+Previous example shows how to import a multi-sheet book. However, what exactly is
+needed to import only one sheet instead? Before you proceed, please empty question
+and choice data using django admin.
 
-Let's visit this url first http://localhost:8000/polls/imports_sheet/, where you see a similar file upload form. This time please choose `sample-sheet.xls <https://github.com/pyexcel/django-excel/blob/master/sample-sheet.xls>`_ instead. Then look at django admin and see if the question data have been imported or not.
+Let's visit this url first http://localhost:8000/polls/imports_sheet/, where you
+see a similar file upload form. This time please choose
+`sample-sheet.xls <https://github.com/pyexcel/django-excel/blob/master/sample-sheet.xls>`_
+instead. Then look at django admin and see if the question data have been
+imported or not.
 
-Now let's look at the code::
+Now let's look at the code:
 
-    def import_sheet(request):
-        if request.method == "POST":
-            form = UploadFileForm(request.POST,
-                                  request.FILES)
-            if form.is_valid():
-                request.FILES['file'].save_to_database(
-                    name_columns_by_row=2,
-                    model=Question,
-                    mapdict=['question_text', 'pub_date', 'slug'])
-                return HttpResponse("OK")
-            else:
-                return HttpResponseBadRequest()
-        else:
-           ...
+.. literalinclude:: ../../polls/views.py
+   :lines: 104-116
 
-Becuase it is a single sheet, the function to call is  :meth:`~django_excel.ExcelMixin.save_to_database` where you specify a model and its mapping dictionary.
+Because it is a single sheet, the function to call is
+:meth:`~django_excel.ExcelMixin.save_to_database` where you specify a model and
+its mapping dictionary.
 
-Have you noticed the extra parameter 'name_columns_by_row'? Why is this needed? Well, normally you *will not need* that if you have column names in the first row. In this example, the column names appears in the second row. Please open `sample-sheet.xls <https://github.com/pyexcel/django-excel/blob/master/sample-sheet.xls>`_ and have a look. The straight answer is because the column names in the data appears in the 2nd row of the data matrix.
+Have you noticed the extra parameter 'name_columns_by_row'? Why is this needed?
+Well, normally you *will not need* that if you have column names in the first row.
+In this example, the column names appears in the second row. Please open
+`sample-sheet.xls <https://github.com/pyexcel/django-excel/blob/master/sample-sheet.xls>`_
+and have a look. The straight answer is because the column names in the data
+appears in the 2nd row of the data matrix.
 
 .. note::
 
-   If you have imported earlier excel sheet "sample-data.xls", you will get the following warning in your console output::
+   If you have imported earlier excel sheet "sample-data.xls", you will get the
+   following warning in your console output::
 
        Warning: Bulk insertion got below exception. Trying to do it one by one slowly.
        column slug is not unique <- reason
@@ -245,31 +239,37 @@ Have you noticed the extra parameter 'name_columns_by_row'? Why is this needed? 
        What is your favourite IDE?
 
 
-   This is because question data have been imported before. Django is raising IntegrityError. For more details please read `this part of code in pyexcel-io <https://github.com/pyexcel/pyexcel-io/blob/master/pyexcel_io/djangobook.py#L98>`_, and `django-excel issue 2 <https://github.com/pyexcel/django-excel/issues/2>`_
+   This is because question data have been imported before. Django is raising
+   IntegrityError. For more details please read
+   `this part of code in pyexcel-io <https://github.com/pyexcel/pyexcel-io/blob/master/pyexcel_io/djangobook.py#L98>`_,
+   and `django-excel issue 2 <https://github.com/pyexcel/django-excel/issues/2>`_
 
-   In order to remove those warnings, what you can do is to empty all data using django admin and redo this single sheet import again.
+   In order to remove those warnings, what you can do is to empty all data using
+   django admin and redo this single sheet import again.
 
 
 What to do if import data overlaps existing data in the database
-******************************************************************
+********************************************************************************
 
-With new version pyexcel-io v0.1.0, you could provide the row initialization function that returns None in order to skip a row in your import data. Inside the initialization function, you could also do database update. As long as it returns None, django-excel will try to do bulk create the import data.
+With new version pyexcel-io v0.1.0, you could provide the row initialization
+function that returns None in order to skip a row in your import data. Inside
+the initialization function, you could also do database update. As long as it
+returns None, django-excel will try to do bulk create the import data.
 
 
 Handle custom data export
 +++++++++++++++++++++++++++++++
 
-It is also quite common to download a portion of the data in a database table, for example the result of a search query. With version 0.0.2, you can pass on a query sets to to :meth:`~django_excel.make_response_from_query_sets` and generate an excel sheet from it::
+It is also quite common to download a portion of the data in a database table,
+for example the result of a search query. With version 0.0.2, you can pass on a
+query sets to to :meth:`~django_excel.make_response_from_query_sets` and generate
+an excel sheet from it:
 
-    def export_data(request, atype):
-	    ...
-        elif atype == "custom":
-            question = Question.objects.get(slug='ide')
-            query_sets = Choice.objects.filter(question=question)
-            column_names = ['choice_text', 'id', 'votes']
-            return excel.make_response_from_query_sets(query_sets, column_names, 'xls', file_name="custom")
+.. literalinclude:: ../../polls/views.py
+   :lines: 49, 56-65
 
-You can visit http://localhost:8000/polls/export/custom and will get the query set exported as a single sheet file as:
+You can visit http://localhost:8000/polls/export/custom and will get the query
+set exported as a single sheet file as:
 
 .. image:: custom-export.png
 
@@ -285,7 +285,7 @@ a list of lists             :meth:`~django_excel.ExcelMixin.get_array`          
 dict of a list of lists     :meth:`~django_excel.ExcelMixin.get_book_dict`           :meth:`~django_excel.make_response_from_book_dict`
 :class:`pyexcel.Sheet`      :meth:`~django_excel.ExcelMixin.get_sheet`               :meth:`~django_excel.make_response`
 :class:`pyexcel.Book`       :meth:`~django_excel.ExcelMixin.get_book`                :meth:`~django_excel.make_response`
-database table              :meth:`~django_excel.ExcelMixin.save_to_database`        :meth:`~django_excel.make_response_from_a_table` 
+database table              :meth:`~django_excel.ExcelMixin.save_to_database`        :meth:`~django_excel.make_response_from_a_table`
 a list of database tables   :meth:`~django_excel.ExcelMixin.save_book_to_database`   :meth:`~django_excel.make_response_from_tables`
 a database query sets                                                                :meth:`~django_excel.make_response_from_query_sets`
 =========================== ======================================================== ===================================================
@@ -357,7 +357,7 @@ Response methods
 
    :param pyexcel_instance: :class:`pyexcel.Sheet` or :class:`pyexcel.Book`
    :param file_type: one of the following strings:
-                     
+
                      * 'csv'
                      * 'tsv'
                      * 'csvz'
@@ -366,28 +366,28 @@ Response methods
                      * 'xlsx'
                      * 'xlsm'
                      * 'ods'
-                       
+
    :param status: unless a different status is to be returned.
-         
+
 .. method:: make_response_from_array(array, file_type, status=200)
 
    :param array: a list of lists
    :param file_type: same as :meth:`~django_excel.make_response`
    :param status: same as :meth:`~django_excel.make_response`
-         
+
 .. method:: make_response_from_dict(dict, file_type, status=200)
 
-   :param dict: a dictinary of lists
+   :param dict: a dictionary of lists
    :param file_type: same as :meth:`~django_excel.make_response`
    :param status: same as :meth:`~django_excel.make_response`
-         
+
 .. method:: make_response_from_records(records, file_type, status=200)
 
    :param records: a list of dictionaries
    :param file_type: same as :meth:`~django_excel.make_response`
    :param status: same as :meth:`~django_excel.make_response`
-         
-             
+
+
 .. method:: make_response_from_book_dict(book_dict, file_type, status=200)
 
    :param book_dict: a dictionary of two dimensional arrays
@@ -396,7 +396,7 @@ Response methods
 
 .. method:: make_response_from_a_table(model, file_type status=200)
    Produce a single sheet Excel book of *file_type*
-	  
+
    :param model: a Django model
    :param file_type: same as :meth:`~django_excel.make_response`
    :param status: same as :meth:`~django_excel.make_response`
@@ -415,7 +415,7 @@ Response methods
    Produce a multiple sheet Excel book of *file_type*. It becomes the same
    as :meth:`~django_excel.make_response_from_a_table` if you pass *tables*
    with an array that has a single table
-	  
+
    :param models: a list of Django models
    :param file_type: same as :meth:`~django_excel.make_response`
    :param status: same as :meth:`~django_excel.make_response`
@@ -428,4 +428,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-

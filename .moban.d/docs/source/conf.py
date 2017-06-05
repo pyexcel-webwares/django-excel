@@ -1,5 +1,10 @@
 {% extends 'docs/source/conf.py.jj2' %}
 
+{%block SPHINX_EXTENSIONS%}
+    'sphinxcontrib.spelling'
+{%endblock%}
+
+
 {%block custom_doc_theme%}
 import os  # noqa
 import sys  # noqa

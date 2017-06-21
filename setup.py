@@ -11,7 +11,7 @@ PY26 = PY2 and sys.version_info[1] < 7
 NAME = 'django-excel'
 AUTHOR = 'C.W.'
 VERSION = '0.0.6'
-EMAIL = 'wangc_2011 (at) hotmail.com'
+EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
     'A django middleware that provides one application programming interfac' +

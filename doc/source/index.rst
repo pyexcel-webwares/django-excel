@@ -74,7 +74,7 @@ The highlighted features are:
                             mediawiki, html,                        3.5, pypy, pypy3
                             latex, grid, pipe,
                             orgtbl, plain simple
-   `pyexcel-handsontable`_  handsontable in html    `handsontable`_ same as above [#f3]_
+   `pyexcel-handsontable`_  handsontable in html    `handsontable`_ same as above
    `pyexcel-pygal`_         svg chart               `pygal`_        same as above [#f3]_
    ======================== ======================= =============== ==================
 

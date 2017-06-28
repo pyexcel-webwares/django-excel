@@ -9,6 +9,8 @@ import pyexcel as pe
 import pyexcel.ext.xls  # noqa
 import pyexcel.ext.xlsx  # noqa
 import pyexcel.ext.ods3  # noqa
+from django_excel._compact import urllib_quote
+
 PY2 = sys.version_info[0] == 2
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
@@ -68,9 +70,12 @@ class ExcelResponseTestCase(TestCase):
             print(file_type)
             response = self.client.get(
                 "/polls/download_attachment/"+file_type+"/"+test_file_name)
+            url_encoded_file_name = urllib_quote(test_file_name)
             assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
             assert response['Content-Disposition'] == (
-                "attachment; filename=%s.%s" % (test_file_name, file_type))
+                "attachment; filename=%s.%s;filename*=utf-8''%s.%s"
+                % (url_encoded_file_name, file_type,
+                   url_encoded_file_name, file_type))
             sheet = pe.get_sheet(file_type=file_type,
                                  file_content=response.content)
             sheet.format(int)

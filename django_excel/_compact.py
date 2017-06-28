@@ -1,6 +1,15 @@
 import pkg_resources
 from distutils.version import LooseVersion
 
+try:
+    # if in py2
+    from urllib import quote as urllib_quote
+    PY2_VERSION = True
+except ImportError:
+    # else (aka in py3)
+    from urllib.parse import quote as urllib_quote # flake8: noqa
+    PY2_VERSION = False
+
 
 django_version = pkg_resources.get_distribution('django').version
 

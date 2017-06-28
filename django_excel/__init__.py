@@ -15,7 +15,7 @@ from django.core.files.uploadedfile import (
 from django.http import HttpResponse
 import pyexcel as pe
 import pyexcel_webio as webio
-from ._compact import DJANGO_ONE_SIX
+from ._compact import DJANGO_ONE_SIX, PY2_VERSION, urllib_quote
 
 
 class ExcelMixin(webio.ExcelInput):
@@ -124,8 +124,13 @@ def _make_response(content, content_type, status, file_name=None):
     """
     response = HttpResponse(content, content_type=content_type, status=status)
     if file_name:
+        if PY2_VERSION and isinstance(file_name, unicode):
+            file_name = file_name.encode('utf-8')
+        url_encoded_file_name = urllib_quote(file_name)
         response["Content-Disposition"] = (
-            "attachment; filename=%s" % (file_name))
+            "attachment; filename=%s;filename*=utf-8''%s"
+            % (url_encoded_file_name, url_encoded_file_name)
+        )
     return response
 
 

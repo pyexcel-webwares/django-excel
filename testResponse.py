@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import sys
 import json
@@ -64,13 +66,24 @@ class ExcelResponseTestCase(TestCase):
             array = sheet.to_array()
             assert array == self.data
 
-    def test_download_attachment(self):
+    def test_download_attachment_with_ascii_name(self):
         test_file_name = "test"
+        self._download_and_verify_file_name(test_file_name)
+
+    def test_download_attachment_with_unicode_name(self):
+        test_file_name = u'中文文件名'
+        self._download_and_verify_file_name(test_file_name.encode('utf-8'))
+
+    def test_download_attachment_with_unicode_name_as_string(self):
+        test_file_name = '中文文件名'
+        self._download_and_verify_file_name(test_file_name)
+
+    def _download_and_verify_file_name(self, file_name):
         for file_type in FILE_TYPE_MIME_TABLE.keys():
             print(file_type)
+            url_encoded_file_name = urllib_quote(file_name)
             response = self.client.get(
-                "/polls/download_attachment/"+file_type+"/"+test_file_name)
-            url_encoded_file_name = urllib_quote(test_file_name)
+                "/polls/download_attachment/"+file_type+"/"+file_name)
             assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
             assert response['Content-Disposition'] == (
                 "attachment; filename=%s.%s;filename*=utf-8''%s.%s"

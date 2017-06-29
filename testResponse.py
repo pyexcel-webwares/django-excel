@@ -57,7 +57,6 @@ class ExcelResponseTestCase(TestCase):
 
     def test_download(self):
         for file_type in FILE_TYPE_MIME_TABLE.keys():
-            print(file_type)
             response = self.client.get("/polls/download/"+file_type)
             assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
             sheet = pe.get_sheet(file_type=file_type,
@@ -80,10 +79,10 @@ class ExcelResponseTestCase(TestCase):
 
     def _download_and_verify_file_name(self, file_name):
         for file_type in FILE_TYPE_MIME_TABLE.keys():
-            print(file_type)
             url_encoded_file_name = urllib_quote(file_name)
             response = self.client.get(
-                "/polls/download_attachment/"+file_type+"/"+file_name)
+                ("/polls/download_attachment/%s/%s" % (
+                    file_type, url_encoded_file_name)))
             assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
             assert response['Content-Disposition'] == (
                 "attachment; filename=%s.%s;filename*=utf-8''%s.%s"

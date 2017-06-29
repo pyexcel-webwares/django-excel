@@ -34,6 +34,16 @@ matrix:
       env: DJANGO_VERSION=1.7.11
     - python: 3.5
       env: DJANGO_VERSION=1.8.18
+    - python: 3.6
+      env: DJANGO_VERSION=1.6.11
+    - python: 3.6
+      env: DJANGO_VERSION=1.9.13
+    - python: 3.6
+      env: DJANGO_VERSION=1.10.7
+    - python: 3.6
+      env: DJANGO_VERSION=1.7.11
+    - python: 3.6
+      env: DJANGO_VERSION=1.8.18
 {%endblock%}
 
 {%block custom_python_versions%}
@@ -43,6 +53,7 @@ python:
   - 3.3
   - 3.4
   - 3.5
+  - 3.6
 {%endblock%}
 
 {% block custom_install %}  - pip install Django==$DJANGO_VERSION

@@ -5,9 +5,10 @@ notifications:
 env:
   - DJANGO_VERSION=1.6.11
   - DJANGO_VERSION=1.7.11
-  - DJANGO_VERSION=1.8.14
-  - DJANGO_VERSION=1.9.9
-  - DJANGO_VERSION=1.10
+  - DJANGO_VERSION=1.8.18
+  - DJANGO_VERSION=1.9.13
+  - DJANGO_VERSION=1.10.7
+  - DJANGO_VERSION=1.11.2
 python:
   - 2.6
   - 2.7
@@ -19,23 +20,25 @@ matrix:
     - python: 2.6
       env: DJANGO_VERSION=1.7.11
     - python: 2.6
-      env: DJANGO_VERSION=1.8.14
+      env: DJANGO_VERSION=1.8.18
     - python: 2.6
-      env: DJANGO_VERSION=1.9.9
+      env: DJANGO_VERSION=1.9.13
     - python: 2.6
-      env: DJANGO_VERSION=1.10
+      env: DJANGO_VERSION=1.10.7
+    - python: 2.6
+      env: DJANGO_VERSION=1.11.2
     - python: 3.4
       env: DJANGO_VERSION=1.6.11
     - python: 3.5
       env: DJANGO_VERSION=1.6.11
     - python: 3.3
-      env: DJANGO_VERSION=1.9.9
+      env: DJANGO_VERSION=1.9.13
     - python: 3.3
-      env: DJANGO_VERSION=1.10
+      env: DJANGO_VERSION=1.10.7
     - python: 3.5
       env: DJANGO_VERSION=1.7.11
     - python: 3.5
-      env: DJANGO_VERSION=1.8.14
+      env: DJANGO_VERSION=1.8.18
 before_install:
   - cd $HOME
   - "if [[ $TRAVIS_PYTHON_VERSION == 'pypy' ]]; then deactivate && wget https://bitbucket.org/squeaky/portable-pypy/downloads/pypy-5.7.1-linux_x86_64-portable.tar.bz2 -O - | tar -jxf - && echo 'Setting up aliases...' && ln -s pypy-5.7.1-linux_x86_64-portable pypy2-latest && export PATH=$HOME/pypy2-latest/bin/:$PATH && virtualenv --no-site-packages --python ~/pypy2-latest/bin/pypy pypy2-env && echo 'Creating custom env...' && source pypy2-env/bin/activate && python -V; fi"

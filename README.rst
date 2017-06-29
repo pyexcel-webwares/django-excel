@@ -136,13 +136,16 @@ and export from SQL databases, information analysis and persistence. It uses
 Tested Django Versions
 ========================
 
-.. image:: https://img.shields.io/badge/django-1.10-green.svg
+.. image:: https://img.shields.io/badge/django-1.11.2-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
-.. image:: https://img.shields.io/badge/django-1.9.9-green.svg
+.. image:: https://img.shields.io/badge/django-1.10.7-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
-.. image:: https://img.shields.io/badge/django-1.8.14-green.svg
+.. image:: https://img.shields.io/badge/django-1.9.13-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.8.18-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
 .. image:: https://img.shields.io/badge/django-1.7.11-green.svg

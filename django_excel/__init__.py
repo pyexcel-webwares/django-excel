@@ -25,6 +25,7 @@ class ExcelMixin(webio.ExcelInput):
     def get_params(self, **keywords):
         extension = self.name.split(".")[-1]
         keywords['file_type'] = extension
+        self.file.seek(0)
         content = self.file.read()
         if content:
             keywords['file_content'] = content

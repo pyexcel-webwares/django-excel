@@ -303,7 +303,7 @@ and upload. And you get the following excel-alike table in response to confirm a
 .. note ::
 
    pyexcel-handsontable along with pyexcel v0.5.0 brings excel-alie table rendering feature.
-   Let me explain how this view is done at the end of the tutorial.
+   Let me explain how this view is done a few paragraphs later.
 
 Then visit the admin page http://localhost:8000/admin/polls/question,
 you shall see questions have been populated:
@@ -372,6 +372,32 @@ the data, convert them into xls and give it the browser. And what you need to do
 is to give a list of models to be exported and a file type. As you have noticed,
 you can visit http://localhost:8000/polls/export/sheet and will get **Question**
 exported as a single sheet file.
+
+
+Render an excel-alike html in a browser
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In the tutorial, you have seen the rendering of the excel-alike table. First of
+all, the credits goes to `handsontable developers <https://handsontable.com/>`_.
+`pyexcel-handsontable` as renderer plugin to pyexcel v0.5.0 bring it to
+pyexcel developers.
+
+Here is how it is done. Simply put in 'handsontable.html' instead of 'xls' as
+file type.
+
+.. literalinclude:: ../../polls/views.py
+   :lines: 153-155
+
+It is understood that you will want to embed it into your django templates.
+Here are the sample embedding code:
+
+.. literalinclude:: ../../polls/views.py
+   :lines: 158-189
+
+Those views can be accessed as http://localhost:8000/polls/embedded_handson_view/
+and http://localhost:8000/polls/embedded_handson_view_single/.
+
+.. image:: handsontable-embedded.png
 
 
 How to import one sheet instead of multi-sheet book
@@ -452,30 +478,6 @@ set exported as a single sheet file as:
 
 .. image:: custom-export.png
 
-Render an excel-alike html in a browser
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-In the tutorial, you have seen the rendering of the excel-alike table. First of
-all, the credits goes to `handsontable developers <https://handsontable.com/>`_.
-`pyexcel-handsontable` as renderer plugin to pyexcel v0.5.0 bring it to
-pyexcel developers.
-
-Here is how it is done. Simply put in 'handsontable.html' instead of 'xls' as
-file type.
-
-.. literalinclude:: ../../polls/views.py
-   :lines: 153-155
-
-It is understood that you will want to embed it into your django templates.
-Here are the sample embedding code:
-
-.. literalinclude:: ../../polls/views.py
-   :lines: 158-189
-
-Those views can be accessed as http://localhost:8000/polls/embedded_handson_view/
-and http://localhost:8000/polls/embedded_handson_view_single/.
-
-.. image:: handsontable-embedded.png
 
 .. _data-types-and-its-conversion-funcs:
 

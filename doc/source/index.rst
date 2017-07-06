@@ -476,7 +476,7 @@ Render an excel-alike html in a browser
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 In the tutorial, you have seen the rendering of the excel-alike table. First of
-all, the credits goes to `handsontable developers<https://handsontable.com/>`_.
+all, the credits goes to `handsontable developers <https://handsontable.com/>`_.
 `pyexcel-handsontable` as renderer plugin to pyexcel v0.5.0 bring it to
 pyexcel developers.
 
@@ -495,6 +495,7 @@ Here are the sample embedding code:
 Those views can be accessed as http://localhost:8000/polls/embedded_handson_view/
 and http://localhost:8000/polls/embedded_handson_view_single/.
 
+.. image:: handsonable-embedded.png
 
 .. _data-types-and-its-conversion-funcs:
 

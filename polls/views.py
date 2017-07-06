@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseBadRequest, HttpResponse
 from _compact import JsonResponse
 from django import forms
@@ -86,7 +86,7 @@ def import_data(request):
                     ['question_text', 'pub_date', 'slug'],
                     ['question', 'choice_text', 'votes']]
             )
-            return HttpResponse("OK", status=200)
+            return redirect('handson_view')
         else:
             return HttpResponseBadRequest()
     else:
@@ -148,3 +148,42 @@ def parse(request, data_struct_type):
             return HttpResponseBadRequest()
     else:
         return HttpResponseBadRequest()
+
+
+def handson_table(request):
+    return excel.make_response_from_tables(
+        [Question, Choice], 'handsontable.html')
+
+
+def embed_handson_table(request):
+    """
+    Renders two table in a handsontable
+    """
+    content = excel.pe.save_book_as(
+        models=[Question, Choice],
+        dest_file_type='handsontable.html',
+        dest_embed=True)
+    content.seek(0)
+    return render(
+        request,
+        'custom-handson-table.html',
+        {
+            'handsontable_content': content.read()
+        })
+
+
+def embed_handson_table_from_a_single_table(request):
+    """
+    Renders one table in a handsontable
+    """
+    content = excel.pe.save_as(
+        model=Question,
+        dest_file_type='handsontable.html',
+        dest_embed=True)
+    content.seek(0)
+    return render(
+        request,
+        'custom-handson-table.html',
+        {
+            'handsontable_content': content.read()
+        })

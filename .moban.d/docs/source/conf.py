@@ -1,7 +1,8 @@
 {% extends 'docs/source/conf.py.jj2' %}
 
 {%block SPHINX_EXTENSIONS%}
-    'sphinxcontrib.spelling'
+    'sphinxcontrib.spelling',
+    'sphinxcontrib.excel'
 {%endblock%}
 
 

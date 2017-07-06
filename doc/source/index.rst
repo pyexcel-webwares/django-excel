@@ -277,28 +277,7 @@ This example shows how to import uploaded excel file into django models. We are
 going to import
 `sample-data.xls <https://github.com/pyexcel/django-excel/blob/master/sample-data.xls>`_
 
-.. table:: Sheet 1 of sample-data.xls
-
-    ============================================ ============ =================
-    Question Text                                Publish Date Unique Identifier
-    ============================================ ============ =================
-    What is your favourite programming language? 28/01/15     language
-    What is your favourite IDE?                  29/01/15     ide
-    ============================================ ============ =================
-
-.. table:: Sheet 2 of sample-data.xls
-
-    ==========  ==============  ======
-    Question    Choice          Votes
-    ==========  ==============  ======
-    language    Java            0
-    language    C++             0
-    language    C               0
-    ide         Eclipse         0
-    ide         Visual Studio   0
-    ide         PyCharm         0
-    ide         IntelliJ        0
-    ==========  ==============  ======
+.. pyexcel-table:: ../../sample-data.xls
 
 into the following data models:
 

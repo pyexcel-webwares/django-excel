@@ -1,2 +1,4 @@
 sphinxcontrib-spelling
+sphinxcontrib-excel
+
 

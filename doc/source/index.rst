@@ -516,6 +516,8 @@ dict of a list of lists     :meth:`~django_excel.ExcelMixin.get_book_dict`      
 database table              :meth:`~django_excel.ExcelMixin.save_to_database`        :meth:`~django_excel.make_response_from_a_table`
 a list of database tables   :meth:`~django_excel.ExcelMixin.save_book_to_database`   :meth:`~django_excel.make_response_from_tables`
 a database query sets                                                                :meth:`~django_excel.make_response_from_query_sets`
+a generator for records     :meth:`~django_excel.ExcelMixin.iget_records`
+a generator of lists        :meth:`~django_excel.ExcelMixin.iget_array`
 =========================== ======================================================== ===================================================
 
 See more examples of the data structures in :ref:`pyexcel documentation<pyexcel:a-list-of-data-structures>`
@@ -541,6 +543,12 @@ API Reference
    :param keywords: additional keywords to pyexcel library
    :returns: a two dimensional array, a list of lists
 
+.. method:: iget_array(sheet_name=None, **keywords)
+
+   :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
+   :param keywords: additional keywords to pyexcel library
+   :returns: a generator for a two dimensional array, a list of lists
+
 .. method:: get_dict(sheet_name=None, name_columns_by_row=0, **keywords)
 
    :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
@@ -554,6 +562,13 @@ API Reference
    :param name_columns_by_row: uses the first row of the sheet to be record field names by default.
    :param keywords: additional keywords to pyexcel library
    :returns: a list of dictionary of the file content
+
+.. method:: iget_records(sheet_name=None, name_columns_by_row=0, **keywords)
+
+   :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
+   :param name_columns_by_row: uses the first row of the sheet to be record field names by default.
+   :param keywords: additional keywords to pyexcel library
+   :returns: a generator for a list of dictionary of the file content
 
 .. method:: get_book(**keywords)
 
@@ -578,6 +593,11 @@ API Reference
    :param initializers: a list of model initialization functions.
    :param mapdicts: a list of explicit table column names if your excel data sheets do not have the exact column names
    :param keywords: additional keywords to :meth:`pyexcel.Book.save_to_django_models`
+
+.. method:: free_resources()
+
+   It should be called after iget_array and iget_records were used
+
 
 Response methods
 -----------------

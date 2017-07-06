@@ -24,11 +24,11 @@ you should check out the code from
     git clone https://github.com/pyexcel/django-excel.git
 
 The test application is written according
-to `Part 1 <https://docs.djangoproject.com/en/1.7/intro/tutorial01/>`_,
-`Part 2 <https://docs.djangoproject.com/en/1.7/intro/tutorial02/>`_ and
-`Part 3 <https://docs.djangoproject.com/en/1.7/intro/tutorial03/>`_ of django
-tutorial version 1.7.1. If you should wonder how the test application was
-written, please visit django documentation and come back.
+to `Part 1 <https://docs.djangoproject.com/en/1.11/intro/tutorial01/>`_,
+`Part 2 <https://docs.djangoproject.com/en/1.11/intro/tutorial02/>`_ and
+`Part 3 <https://docs.djangoproject.com/en/1.11/intro/tutorial03/>`_ of django
+tutorial. If you should wonder how the test application was written, please
+visit django documentation and come back.
 
 Once you have the code, please change to django-excel directory and then
 install all dependencies::
@@ -43,11 +43,20 @@ Then run the test application::
     Performing system checks...
 
     System check identified no issues (0 silenced).
-    January 29, 2015 - 18:11:06
-    Django version 1.7.1, using settings 'mysite.settings'
-    Starting development server at http://127.0.0.1:8000/
-    Quit the server with CTRL-BREAK.
 
+    You have 9 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes.
+    Run 'python manage.py migrate' to apply them.
+
+    July 06, 2017 - 08:29:10
+    Django version 1.11.3, using settings 'mysite.settings'
+    Starting development server at http://127.0.0.1:8000/
+    Quit the server with CONTROL-C.
+
+
+.. note::
+
+   The 9 unapplied migration(s) were ignored because migrations are out of scope in this
+   tutorial.
 
 Handle excel file upload and download
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

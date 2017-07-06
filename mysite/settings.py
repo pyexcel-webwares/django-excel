@@ -23,13 +23,8 @@ SECRET_KEY = '&kzg)(b_xt1*nyp-s97ibt01b7p+67#&-brmb_nqj&dn_%q6tc'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
-
 ALLOWED_HOSTS = []
 
-TEMPLATE_DIRS = [(
-    BASE_DIR + '/templates/'
-)]
 # Application definition
 
 FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
@@ -82,7 +77,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
-        },
+        }
     },
 ]
 

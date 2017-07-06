@@ -12,6 +12,7 @@ import pyexcel.ext.xls  # noqa
 import pyexcel.ext.xlsx  # noqa
 import pyexcel.ext.ods3  # noqa
 from django_excel._compact import urllib_quote
+from nose.tools import eq_
 
 PY2 = sys.version_info[0] == 2
 if sys.version_info[0] == 2 and sys.version_info[1] < 7:
@@ -178,7 +179,7 @@ class DatabaseOperationsTestCase(TestCase):
     def testBook(self):
         fp = open(self.testfile, "rb")
         response = self.client.post('/polls/import/', data={"file": fp})
-        assert response.status_code == 200
+        eq_(response.status_code, 302)
         response2 = self.client.get('/polls/export/book')
         assert response2.status_code == 200
         book = pe.get_book(file_type='xls', file_content=response2.content)
@@ -214,7 +215,7 @@ class DatabaseOperationsTestCase(TestCase):
     def testSheet(self):
         fp = open(self.testfile, "rb")
         response = self.client.post('/polls/import/', data={"file": fp})
-        assert response.status_code == 200
+        eq_(response.status_code, 302)
         response2 = self.client.get('/polls/export/sheet')
         assert response2.status_code == 200
         sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
@@ -232,9 +233,9 @@ class DatabaseOperationsTestCase(TestCase):
     def testImportSheet(self):
         fp = open("sample-sheet.xls", "rb")
         response = self.client.post('/polls/import_sheet/', data={"file": fp})
-        assert response.status_code == 200
+        eq_(response.status_code, 200)
         response2 = self.client.get('/polls/export/sheet')
-        assert response2.status_code == 200
+        eq_(response2.status_code, 200)
         sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
         content = dedent("""
         question:
@@ -250,9 +251,9 @@ class DatabaseOperationsTestCase(TestCase):
     def testCustomExport(self):
         fp = open(self.testfile, "rb")
         response = self.client.post('/polls/import/', data={"file": fp})
-        assert response.status_code == 200
+        eq_(response.status_code, 302)
         response2 = self.client.get('/polls/export/custom')
-        assert response2.status_code == 200
+        eq_(response2.status_code, 200)
         sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
         content = dedent("""
         pyexcel_sheet1:

@@ -495,7 +495,7 @@ Here are the sample embedding code:
 Those views can be accessed as http://localhost:8000/polls/embedded_handson_view/
 and http://localhost:8000/polls/embedded_handson_view_single/.
 
-.. image:: handsonable-embedded.png
+.. image:: handsontable-embedded.png
 
 .. _data-types-and-its-conversion-funcs:
 

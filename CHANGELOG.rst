@@ -7,8 +7,8 @@ Change log
 Added
 ********************************************************************************
 
-#. `issue 38 <https://github.com/pyexcel/django-excel/issues/38>`_, Support
-   unicode code as download file name
+#. `issue 39 <https://github.com/pyexcel/django-excel/issues/39>`_, explicitly
+   seeking at 0
 
 0.0.7 - 29.06.2017
 --------------------------------------------------------------------------------

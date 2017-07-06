@@ -12,6 +12,7 @@ import pyexcel.ext.xls  # noqa
 import pyexcel.ext.xlsx  # noqa
 import pyexcel.ext.ods3  # noqa
 from django_excel._compact import urllib_quote
+from django_excel import ExcelInMemoryUploadedFile
 from nose.tools import eq_
 
 PY2 = sys.version_info[0] == 2
@@ -19,6 +20,12 @@ if sys.version_info[0] == 2 and sys.version_info[1] < 7:
     from ordereddict import OrderedDict
 else:
     from collections import OrderedDict
+
+if PY2:
+    from StringIO import StringIO
+else:
+    from io import StringIO
+
 
 _XLSX_MIME = (
     "application/" +
@@ -279,3 +286,20 @@ class ExcelResponseUsingFileTestCase(ExcelResponseTestCase):
 @override_settings(FILE_UPLOAD_MAX_MEMORY_SIZE=1)
 class DatabaseOperationsUsingFileTestCase(DatabaseOperationsTestCase):
     pass
+
+
+class TestUploadedFile(TestCase):
+    def test_in_memory_file(self):
+        test_content = 'a,b,c'
+        strio = StringIO(test_content)
+        strio.read()
+        in_memory_file = ExcelInMemoryUploadedFile(
+            file=strio,
+            field_name='test',
+            name='test_file',
+            content_type='text',
+            size=3,
+            charset=None
+        )
+        params = in_memory_file.get_params()
+        eq_(params['file_content'], test_content)

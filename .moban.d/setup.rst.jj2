@@ -1,0 +1,7 @@
+You will need to update your *settings.py*:
+
+.. code-block:: python
+
+    FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
+                            "django_excel.TemporaryExcelFileUploadHandler")
+

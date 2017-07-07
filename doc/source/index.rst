@@ -154,11 +154,38 @@ Django developer is left with the choice to install and load the excel file form
 
 Setup
 ------------------------
-You will need to update your *settings.py*::
+
+You will need to update your *settings.py*:
+
+.. code-block:: python
 
     FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
                             "django_excel.TemporaryExcelFileUploadHandler")
 
+
+
+
+
+Tested Django Versions
+========================
+
+.. image:: https://img.shields.io/badge/django-1.11.2-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.10.7-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.9.13-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.8.18-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.7.11-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
+.. image:: https://img.shields.io/badge/django-1.6.11-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
 
 
 Support the project

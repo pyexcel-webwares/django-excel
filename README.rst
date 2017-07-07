@@ -157,7 +157,6 @@ Tested Django Versions
 .. image:: https://img.shields.io/badge/django-1.6.11-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
-
 Installation
 ================================================================================
 You can install it via pip:
@@ -184,6 +183,7 @@ You will need to update your *settings.py*:
 
     FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
                             "django_excel.TemporaryExcelFileUploadHandler")
+
 
 
 Usage

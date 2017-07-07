@@ -5,11 +5,14 @@ come with all batteries due to the size of the dependency(xlwt, openpyxl, odfpy)
 Django developer is left with the choice to install and load the excel file formats.
 {%endblock%}
 
-{%block setup %}
-You will need to update your *settings.py*::
+{%block verified_frameworks%}
+{%include 'verified_frameworks.rst.jj2'%}
+{%endblock%}
 
-    FILE_UPLOAD_HANDLERS = ("django_excel.ExcelMemoryFileUploadHandler",
-                            "django_excel.TemporaryExcelFileUploadHandler")
+{%block setup %}
+
+{%include "setup.rst.jj2"%}
+
 {%endblock%}
 
 {%block tutorial%}

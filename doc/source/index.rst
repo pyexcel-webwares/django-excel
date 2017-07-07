@@ -10,7 +10,6 @@
 :Source code: http://github.com/pyexcel/django-excel.git
 :Issues: http://github.com/pyexcel/django-excel/issues
 :License: New BSD License
-:Development: |release|
 :Released: |version|
 :Generated: |today|
 
@@ -71,11 +70,12 @@ The highlighted features are:
    `pyexcel-ods`_           ods                     `odfpy`_        same as above
    `pyexcel-odsr`_          ods(read only)          lxml            same as above
    `pyexcel-text`_          (write only)json, rst,  `tabulate`_     2.6, 2.7, 3.3, 3.4
-                            mediawiki, html,                        3.5, pypy, pypy3
+                            mediawiki, html,                        3.5, 3.6, pypy
                             latex, grid, pipe,
                             orgtbl, plain simple
    `pyexcel-handsontable`_  handsontable in html    `handsontable`_ same as above
-   `pyexcel-pygal`_         svg chart               `pygal`_        same as above [#f3]_
+   `pyexcel-pygal`_         svg chart               `pygal`_        2.7, 3.3, 3.4, 3.5
+                                                                    3.6, pypy
    ======================== ======================= =============== ==================
 
 .. _pyexcel-io: https://github.com/pyexcel/pyexcel-io
@@ -102,7 +102,6 @@ The highlighted features are:
 .. _pyexcel-matplotlib: https://github.com/pyexcel/pyexcel-matplotlib
 .. _matplotlib: https://matplotlib.org
 
-.. [#f3] coming soon
 
 In order to manage the list of plugins installed, you need to use pip to add or remove
 a plugin. When you use virtualenv, you can have different plugins per virtual
@@ -482,12 +481,16 @@ set exported as a single sheet file as:
 Visualize your data
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Let's go to the admin page and update some votes for the choices. In my case,
-I have got something like this:
+Let's go to the admin page and update some votes for the choices.
+
+.. image:: admin-vote.png
+
+In my case, I have updated all of them and have gotten something like this:
 
 .. image:: votes-handson-table.png
 
-Now, let's look at the survey result for "What's your favorite IDE?":
+Now, let's look at the survey result(http://localhost:8000/polls/survey_result/)
+for "What's your favorite IDE?":
 
 .. image:: survey-result.png
 
@@ -495,7 +498,7 @@ Now, let's look at the survey result for "What's your favorite IDE?":
 your data intuitively. Here is the code to achieve that:
 
 .. literalinclude:: ../../polls/views.py
-   :lines: 192-212
+   :lines: 192-217
 
 
 .. _data-types-and-its-conversion-funcs:

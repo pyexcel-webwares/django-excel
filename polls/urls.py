@@ -19,5 +19,8 @@ urlpatterns = [
         views.embed_handson_table, name="embed_handson_view"),
     url(r'^embedded_handson_view_single/',
         views.embed_handson_table_from_a_single_table,
-        name="embed_handson_view")
+        name="embed_handson_view"),
+    # survey_result
+    url('^survey_result/',
+        views.survey_result, name='survey_result'),
 ]

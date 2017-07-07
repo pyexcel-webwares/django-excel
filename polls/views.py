@@ -187,3 +187,31 @@ def embed_handson_table_from_a_single_table(request):
         {
             'handsontable_content': content.read()
         })
+
+
+def survey_result(request):
+    question = Question.objects.get(slug='ide')
+    query_sets = Choice.objects.filter(question=question)
+    column_names = ['choice_text', 'votes']
+
+    # Obtain a pyexcel sheet from the query sets
+    sheet = excel.pe.get_sheet(query_sets=query_sets,
+                               column_names=column_names)
+    sheet.name_columns_by_row(0)
+    sheet.column.format('votes', int)
+
+    # Transform the sheet into an svg chart
+    svg = excel.pe.save_as(
+        array=[sheet.column['choice_text'], sheet.column['votes']],
+        dest_file_type='svg',
+        dest_chart_type='pie',
+        dest_title=question.question_text,
+        dest_width=600,
+        dest_height=400
+    )
+
+    return render(
+        request,
+        'survey_result.html',
+        dict(svg=svg.read())
+    )

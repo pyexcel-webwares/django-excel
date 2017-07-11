@@ -10,7 +10,7 @@ PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'django-excel'
 AUTHOR = 'C.W.'
-VERSION = '0.0.8'
+VERSION = '0.0.9'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
@@ -55,7 +55,7 @@ CLASSIFIERS = [
 ]
 
 INSTALL_REQUIRES = [
-    'pyexcel-webio>=0.1.0',
+    'pyexcel-webio>=0.1.2',
     'Django>=1.6.1',
 ]
 

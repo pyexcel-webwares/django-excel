@@ -1,7 +1,2 @@
-https://github.com/chfw/lml/archive/master.zip
-https://github.com/pyexcel/pyexcel/archive/master.zip
-https://github.com/pyexcel/pyexcel-io/archive/v0.4.x.zip
-https://github.com/pyexcel/pyexcel-xls/archive/v0.4.x.zip
-https://github.com/pyexcel/pyexcel-xlsx/archive/v0.4.x.zip
-https://github.com/pyexcel/pyexcel-ods3/archive/v0.4.x.zip
+https://github.com/pyexcel/pyexcel/archive/0.6.0.zip
 https://github.com/pyexcel/pyexcel-webio/archive/master.zip

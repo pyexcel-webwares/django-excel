@@ -1,2 +1,2 @@
-pyexcel-webio>=0.1.0
+pyexcel-webio>=0.1.2
 Django>=1.6.1

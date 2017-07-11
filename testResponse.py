@@ -162,7 +162,6 @@ class ExcelResponseTestCase(TestCase):
             tmp_filename = "test.%s" % in_file_type
             sheet.save_as(tmp_filename)
             for file_type in FILE_TYPE_MIME_TABLE.keys():
-                print("Post %s -> Respond %s" % (in_file_type, file_type))
                 with open(tmp_filename, "rb") as fp:
                     response = self.client.post(
                         '/polls/exchange/'+file_type,
@@ -219,6 +218,43 @@ class DatabaseOperationsTestCase(TestCase):
         +---------------+----+-------------+-------+""").strip('\n')  # noqa
         self.assertEqual(str(book), content)
 
+    def testBookUsingIsave(self):
+        fp = open(self.testfile, "rb")
+        response = self.client.post('/polls/import_using_isave/',
+                                    data={"file": fp})
+        eq_(response.status_code, 302)
+        response2 = self.client.get('/polls/export/book')
+        assert response2.status_code == 200
+        book = pe.get_book(file_type='xls', file_content=response2.content)
+        content = dedent("""
+        question:
+        +----+---------------------------+----------------------------------------------+----------+
+        | id | pub_date                  | question_text                                | slug     |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 1  | 2015-01-28T00:00:00+00:00 | What is your favourite programming language? | language |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
+        +----+---------------------------+----------------------------------------------+----------+
+        choice:
+        +---------------+----+-------------+-------+
+        | choice_text   | id | question_id | votes |
+        +---------------+----+-------------+-------+
+        | Java          | 1  | 1           | 0     |
+        +---------------+----+-------------+-------+
+        | C++           | 2  | 1           | 0     |
+        +---------------+----+-------------+-------+
+        | C             | 3  | 1           | 0     |
+        +---------------+----+-------------+-------+
+        | Eclipse       | 4  | 2           | 0     |
+        +---------------+----+-------------+-------+
+        | Visual Studio | 5  | 2           | 0     |
+        +---------------+----+-------------+-------+
+        | PyCharm       | 6  | 2           | 0     |
+        +---------------+----+-------------+-------+
+        | IntelliJ      | 7  | 2           | 0     |
+        +---------------+----+-------------+-------+""").strip('\n')  # noqa
+        self.assertEqual(str(book), content)
+
     def testSheet(self):
         fp = open(self.testfile, "rb")
         response = self.client.post('/polls/import/', data={"file": fp})
@@ -240,6 +276,25 @@ class DatabaseOperationsTestCase(TestCase):
     def testImportSheet(self):
         fp = open("sample-sheet.xls", "rb")
         response = self.client.post('/polls/import_sheet/', data={"file": fp})
+        eq_(response.status_code, 200)
+        response2 = self.client.get('/polls/export/sheet')
+        eq_(response2.status_code, 200)
+        sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
+        content = dedent("""
+        question:
+        +----+---------------------------+----------------------------------------------+----------+
+        | id | pub_date                  | question_text                                | slug     |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 1  | 2015-01-28T00:00:00+00:00 | What is your favourite programming language? | language |
+        +----+---------------------------+----------------------------------------------+----------+
+        | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
+        +----+---------------------------+----------------------------------------------+----------+""").strip('\n')  # noqa
+        self.assertEqual(str(sheet), content)
+
+    def testImportSheetUsingISave(self):
+        fp = open("sample-sheet-for-isave.xls", "rb")
+        response = self.client.post('/polls/import_sheet_using_isave/',
+                                    data={"file": fp})
         eq_(response.status_code, 200)
         response2 = self.client.get('/polls/export/sheet')
         eq_(response2.status_code, 200)

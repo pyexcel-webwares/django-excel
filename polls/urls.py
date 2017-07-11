@@ -23,4 +23,10 @@ urlpatterns = [
     # survey_result
     url('^survey_result/',
         views.survey_result, name='survey_result'),
+
+    # testing purpose
+    url(r'^import_using_isave/',
+        views.import_data_using_isave_book_as),
+    url(r'^import_sheet_using_isave/',
+        views.import_sheet_using_isave_to_database)
 ]

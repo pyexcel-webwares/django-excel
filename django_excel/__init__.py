@@ -61,6 +61,31 @@ class ExcelMixin(webio.ExcelInput):
         params['dest_batch_size'] = batch_size
         pe.save_book_as(**params)
 
+    def isave_to_database(self, model=None, initializer=None, mapdict=None,
+                          **keywords):
+        """
+        Save data from a sheet to a nominated django model
+        """
+        params = self.get_params(**keywords)
+        params['dest_model'] = model
+        params['dest_initializer'] = initializer
+        params['dest_mapdict'] = mapdict
+        pe.isave_as(**params)
+        self.free_resources()
+
+    def isave_book_to_database(self, models=None, initializers=None,
+                               mapdicts=None, batch_size=None,
+                               **keywords):
+        """
+        Save data from a book to a nominated django models
+        """
+        params = self.get_params(**keywords)
+        params['dest_models'] = models
+        params['dest_initializers'] = initializers
+        params['dest_mapdicts'] = mapdicts
+        params['dest_batch_size'] = batch_size
+        pe.isave_book_as(**params)
+
 
 class ExcelInMemoryUploadedFile(ExcelMixin, InMemoryUploadedFile):
     """
@@ -135,7 +160,7 @@ def _make_response(content, content_type, status, file_name=None):
     return response
 
 
-webio.ExcelResponse = _make_response
+webio.init_webio(_make_response)
 
 
 from pyexcel_webio import (  # noqa

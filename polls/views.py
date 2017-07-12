@@ -111,7 +111,7 @@ def import_data_using_isave_book_as(request):
             row[0] = q
             return row
         if form.is_valid():
-            request.FILES['file'].save_book_to_database(
+            request.FILES['file'].isave_book_to_database(
                 models=[Question, Choice],
                 initializers=[None, choice_func],
                 mapdicts=[

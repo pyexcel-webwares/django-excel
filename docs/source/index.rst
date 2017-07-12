@@ -10,7 +10,6 @@
 :Source code: http://github.com/pyexcel/django-excel.git
 :Issues: http://github.com/pyexcel/django-excel/issues
 :License: New BSD License
-:Development: |release|
 :Released: |version|
 :Generated: |today|
 

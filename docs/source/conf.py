@@ -23,7 +23,7 @@ master_doc = 'index'
 
 project = u'django-excel'
 copyright = u'2015-2017 Onni Software Ltd.'
-version = '0.0.8'
+version = '0.0.9'
 release = '0.0.9'
 exclude_patterns = []
 pygments_style = 'sphinx'

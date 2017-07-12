@@ -10,7 +10,6 @@
 :Source code: http://github.com/pyexcel/django-excel.git
 :Issues: http://github.com/pyexcel/django-excel/issues
 :License: New BSD License
-:Development: |release|
 :Released: |version|
 :Generated: |today|
 
@@ -531,7 +530,9 @@ dict of a list of lists     :meth:`~django_excel.ExcelMixin.get_book_dict`      
 :class:`pyexcel.Sheet`      :meth:`~django_excel.ExcelMixin.get_sheet`               :meth:`~django_excel.make_response`
 :class:`pyexcel.Book`       :meth:`~django_excel.ExcelMixin.get_book`                :meth:`~django_excel.make_response`
 database table              :meth:`~django_excel.ExcelMixin.save_to_database`        :meth:`~django_excel.make_response_from_a_table`
+                            :meth:`~django_excel.ExcelMixin.isave_to_database`
 a list of database tables   :meth:`~django_excel.ExcelMixin.save_book_to_database`   :meth:`~django_excel.make_response_from_tables`
+                            :meth:`~django_excel.ExcelMixin.isave_book_to_database`
 a database query sets                                                                :meth:`~django_excel.make_response_from_query_sets`
 a generator for records     :meth:`~django_excel.ExcelMixin.iget_records`
 a generator of lists        :meth:`~django_excel.ExcelMixin.iget_array`
@@ -604,12 +605,26 @@ API Reference
    :param mapdict: the explicit table column names if your excel data do not have the exact column names
    :param keywords: additional keywords to :meth:`pyexcel.Sheet.save_to_django_model`
 
+.. method:: isave_to_database(model=None, initializer=None, mapdict=None, **keywords)
+
+   similar to :meth:`~django_excel.ExcelMixin.save_to_database`. But it requires
+   less memory.
+
+   This requires column names must be at the first row.
+
 .. method:: save_book_to_database(models=None, initializers=None, mapdicts=None, **keywords)
 
    :param models: a list of django models
    :param initializers: a list of model initialization functions.
    :param mapdicts: a list of explicit table column names if your excel data sheets do not have the exact column names
    :param keywords: additional keywords to :meth:`pyexcel.Book.save_to_django_models`
+
+.. method:: isave_book_to_database(models=None, initializers=None, mapdicts=None, **keywords)
+
+   similar to :meth:`~django_excel.ExcelMixin.save_book_to_database`. But it requires
+   less memory.
+
+   This requires column names must be at the first row in each sheets.
 
 .. method:: free_resources()
 

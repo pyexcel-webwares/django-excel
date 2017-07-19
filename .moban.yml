@@ -2,6 +2,7 @@ configuration:
   configuration_dir: "commons/config"
   template_dir:
     - "commons/templates"
+    - "setupmobans/templates"
     - ".moban.d"
   configuration: django_excel.yml
 targets:
@@ -10,7 +11,6 @@ targets:
   - "docs/source/conf.py": "docs/source/conf.py"
   - .travis.yml: travis.yml
   - requirements.txt: requirements.txt
-  - LICENSE: LICENSE.jj2
   - MANIFEST.in: MANIFEST.in
   - "docs/source/index.rst": "docs/source/index.rst.jj2"
   - "tests/requirements.txt": "tests/requirements.txt"

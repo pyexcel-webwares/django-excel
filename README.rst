@@ -8,8 +8,8 @@ django-excel - Let you focus on data, instead of file formats
 .. image:: https://api.travis-ci.org/pyexcel/django-excel.svg?branch=master
    :target: http://travis-ci.org/pyexcel/django-excel
 
-.. image:: https://codecov.io/github/pyexcel/django-excel/coverage.png
-   :target: https://codecov.io/github/pyexcel/django-excel
+.. image:: https://codecov.io/gh/pyexcel/django-excel/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/pyexcel/django-excel
 
 .. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :target: https://gitter.im/pyexcel/Lobby
@@ -17,11 +17,28 @@ django-excel - Let you focus on data, instead of file formats
 .. image:: https://readthedocs.org/projects/django-excel/badge/?version=latest
    :target: http://django-excel.readthedocs.org/en/latest/
 
+Support the project
+================================================================================
+
+If your company has embedded pyexcel and its components into a revenue generating
+product, please `support me on patreon <https://www.patreon.com/bePatron?u=5537627>`_ to
+maintain the project and develop it further.
+
+If you are an individual, you are welcome to support me too on patreon and for however long
+you feel like to. As a patreon, you will receive
+`early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
+
+With your financial support, I will be able to invest
+a little bit more time in coding, documentation and writing interesting posts.
+
+
 Known constraints
 ==================
 
 Fonts, colors and charts are not supported.
 
+Introduction
+================================================================================
 Here is a typical conversation between the developer and the user::
 
  User: "I have uploaded an excel file"
@@ -86,6 +103,8 @@ The highlighted features are:
    `pyexcel-pygal`_         svg chart               `pygal`_        2.7, 3.3, 3.4, 3.5
                                                                     3.6, pypy
    `pyexcel-sortable`_      sortable table in html  `csvtotable`_   same as above
+   `pyexcel-gantt`_         gantt chart in html     `frappe-gantt`_ except pypy, same
+                                                                    as above
    ======================== ======================= =============== ==================
 
 .. _pyexcel-io: https://github.com/pyexcel/pyexcel-io
@@ -113,7 +132,8 @@ The highlighted features are:
 .. _matplotlib: https://matplotlib.org
 .. _pyexcel-sortable: https://github.com/pyexcel/pyexcel-sortable
 .. _csvtotable: https://github.com/vividvilla/csvtotable
-
+.. _pyexcel-gantt: https://github.com/pyexcel/pyexcel-gantt
+.. _frappe-gantt: https://github.com/frappe/gantt
 
 In order to manage the list of plugins installed, you need to use pip to add or remove
 a plugin. When you use virtualenv, you can have different plugins per virtual
@@ -222,21 +242,6 @@ Here is the example viewing function codes:
         sheet = excel.pe.Sheet([[1, 2],[3, 4]])
         return excel.make_response(sheet, "csv")
 
-Support the project
-================================================================================
-
-If your company has embedded pyexcel and its components into a revenue generating
-product, please `support me on patreon <https://www.patreon.com/bePatron?u=5537627>`_ to
-maintain the project and develop it further.
-
-If you are an individual, you are welcome to support me too on patreon and for however long
-you feel like to. As a patreon, you will receive
-`early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
-
-With your financial support, I will be able to invest
-a little bit more time in coding, documentation and writing interesting posts.
-
-
 Development guide
 ================================================================================
 
@@ -306,6 +311,7 @@ Acceptance criteria
 #. Passes all Travis CI builds
 #. Has fair amount of documentation if your change is complex
 #. Agree on NEW BSD License for your contribution
+
 
 
 

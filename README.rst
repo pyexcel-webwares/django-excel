@@ -94,7 +94,7 @@ The highlighted features are:
    `pyexcel-ods3`_          ods                     `ezodf`_,       2.6, 2.7, 3.3, 3.4
                                                     lxml            3.5, 3.6
    `pyexcel-ods`_           ods                     `odfpy`_        same as above
-   `pyexcel-odsr`_          ods(read only)          lxml            same as above
+   `pyexcel-odsr`_          read only for ods, fods lxml            same as above
    `pyexcel-htmlr`_         html(read only)         lxml,html5lib   same as above
    `pyexcel-text`_          (write only)json, rst,  `tabulate`_     2.6, 2.7, 3.3, 3.4
                             mediawiki, html,                        3.5, 3.6, pypy
@@ -268,9 +268,9 @@ and update CHANGELOG.rst.
 .. note::
 
     As to rnd_requirements.txt, usually, it is created when a dependent
-	library is not released. Once the dependecy is installed
-	(will be released), the future
-	version of the dependency in the requirements.txt will be valid.
+    library is not released. Once the dependecy is installed
+    (will be released), the future
+    version of the dependency in the requirements.txt will be valid.
 
 
 How to test your contribution
@@ -292,6 +292,7 @@ How to update test environment and update documentation
 Additional steps are required:
 
 #. pip install moban
+#. git clone https://github.com/pyexcel/setupmobans.git # generic setup
 #. git clone https://github.com/pyexcel/pyexcel-commons.git commons
 #. make your changes in `.moban.d` directory, then issue command `moban`
 
@@ -312,8 +313,9 @@ Acceptance criteria
 #. Has all code lines tested
 #. Passes all Travis CI builds
 #. Has fair amount of documentation if your change is complex
+#. Please update CHANGELOG.rst
+#. Please add yourself to CONTRIBUTORS.rst
 #. Agree on NEW BSD License for your contribution
-
 
 
 

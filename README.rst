@@ -219,10 +219,9 @@ Here is the example viewing function codes:
 
 .. code-block:: python
 
-    from django.shortcuts import render_to_response
+    from django.shortcuts import render
     from django.http import HttpResponseBadRequest
     from django import forms
-    from django.template import RequestContext
     import django_excel as excel
     
     class UploadFileForm(forms.Form):
@@ -238,13 +237,19 @@ Here is the example viewing function codes:
                 return HttpResponseBadRequest()
         else:
             form = UploadFileForm()
-        return render_to_response('upload_form.html',
-                                  {'form': form},
-                                  context_instance=RequestContext(request))
+        return render(request, 'upload_form.html', {'form': form})
     
     def download(request):
         sheet = excel.pe.Sheet([[1, 2],[3, 4]])
         return excel.make_response(sheet, "csv")
+
+.. code-block:: html
+
+    <form action="/upload-file/" enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Submit" />
+    </form>
 
 Development guide
 ================================================================================

@@ -25,7 +25,7 @@ product, please `support me on patreon <https://www.patreon.com/bePatron?u=55376
 maintain the project and develop it further.
 
 If you are an individual, you are welcome to support me too on patreon and for however long
-you feel like to. As a patreon, you will receive
+you feel like. As a patreon, you will receive
 `early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
 
 With your financial support, I will be able to invest
@@ -56,15 +56,16 @@ well as on file system. This library can turn the excel data into a list of list
 a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it
 lets you focus on data in Django based web development, instead of file formats.
 
-The idea originated from the common usability problem when developing an excel file
-driven web applications for non-technical office workers: such as office assistant,
-human resource administrator. The fact is that not all people know the
-difference among various excel formats: csv, xls, xlsx. Instead of training those people
+The idea originated from the common usability problem: when an excel file
+driven web application is delivered for non-developer users (ie: team assistant,
+human resource administrator etc). The fact is that not everyone knows (or cares) about the
+differences between various excel formats: csv, xls, xlsx are all the same to them. Instead of training those users
 about file formats, this library helps web developers to handle most of the excel file
-formats by providing a common programming interface. To add a specific excel file format
-to you application, all you need is to install an extra pyexcel plugin. No code change
-to your application. Looking at the community, this library and its associated ones try
-to become a small and easy to install alternative to Pandas.
+formats by providing a common programming interface. To add a specific excel file format type
+to you application, all you need is to install an extra pyexcel plugin. Hence no code changes
+to your application and no issues with excel file formats any more. Looking at the
+community, this library and its associated ones try to become a small and easy to
+install alternative to Pandas.
 
 
 The highlighted features are:
@@ -90,25 +91,21 @@ The highlighted features are:
    `pyexcel-xls`_           xls, xlsx(read only),   `xlrd`_,          same as above
                             xlsm(read only)         `xlwt`_
    `pyexcel-xlsx`_          xlsx                    `openpyxl`_       same as above
-   `pyexcel-xlsxw`_         xlsx(write only)        `XlsxWriter`_     same as above
    `pyexcel-ods3`_          ods                     `pyexcel-ezodf`_, 2.6, 2.7, 3.3, 3.4
                                                     lxml              3.5, 3.6
    `pyexcel-ods`_           ods                     `odfpy`_          same as above
+   ======================== ======================= ================= ==================
+
+.. table:: Dedicated file reader and writers
+
+   ======================== ======================= ================= ==================
+   Package name              Supported file formats  Dependencies     Python versions
+   ======================== ======================= ================= ==================
+   `pyexcel-xlsxw`_         xlsx(write only)        `XlsxWriter`_     Python 2 and 3
    `pyexcel-odsr`_          read only for ods, fods lxml              same as above
    `pyexcel-htmlr`_         html(read only)         lxml,html5lib     same as above
-   `pyexcel-text`_          write only:rst,         `tabulate`_     2.6, 2.7, 3.3, 3.4
-                            mediawiki, html,                        3.5, 3.6, pypy
-                            latex, grid, pipe,
-                            orgtbl, plain simple
-                            read only: ndjson
-                            r/w: json
-   `pyexcel-handsontable`_  handsontable in html    `handsontable`_ same as above
-   `pyexcel-pygal`_         svg chart               `pygal`_        2.7, 3.3, 3.4, 3.5
-                                                                    3.6, pypy
-   `pyexcel-sortable`_      sortable table in html  `csvtotable`_   same as above
-   `pyexcel-gantt`_         gantt chart in html     `frappe-gantt`_ except pypy, same
-                                                                    as above
    ======================== ======================= ================= ==================
+
 
 .. _pyexcel-io: https://github.com/pyexcel/pyexcel-io
 .. _pyexcel-xls: https://github.com/pyexcel/pyexcel-xls
@@ -125,6 +122,25 @@ The highlighted features are:
 .. _XlsxWriter: https://github.com/jmcnamara/XlsxWriter
 .. _pyexcel-ezodf: https://github.com/pyexcel/pyexcel-ezodf
 .. _odfpy: https://github.com/eea/odfpy
+
+.. table:: Other data renderers
+
+   ======================== ======================= ================= ==================
+   Package name              Supported file formats  Dependencies     Python versions
+   ======================== ======================= ================= ==================
+   `pyexcel-text`_          write only:rst,         `tabulate`_       2.6, 2.7, 3.3, 3.4
+                            mediawiki, html,                          3.5, 3.6, pypy
+                            latex, grid, pipe,
+                            orgtbl, plain simple
+                            read only: ndjson
+                            r/w: json
+   `pyexcel-handsontable`_  handsontable in html    `handsontable`_   same as above
+   `pyexcel-pygal`_         svg chart               `pygal`_          2.7, 3.3, 3.4, 3.5
+                                                                      3.6, pypy
+   `pyexcel-sortable`_      sortable table in html  `csvtotable`_     same as above
+   `pyexcel-gantt`_         gantt chart in html     `frappe-gantt`_   except pypy, same
+                                                                      as above
+   ======================== ======================= ================= ==================
 
 .. _pyexcel-text: https://github.com/pyexcel/pyexcel-text
 .. _tabulate: https://bitbucket.org/astanin/python-tabulate
@@ -186,7 +202,8 @@ Tested Django Versions
 
 Installation
 ================================================================================
-You can install it via pip:
+
+You can install django-excel via pip:
 
 .. code-block:: bash
 
@@ -219,9 +236,10 @@ Here is the example viewing function codes:
 
 .. code-block:: python
 
-    from django.shortcuts import render
+    from django.shortcuts import render_to_response
     from django.http import HttpResponseBadRequest
     from django import forms
+    from django.template import RequestContext
     import django_excel as excel
     
     class UploadFileForm(forms.Form):
@@ -237,19 +255,13 @@ Here is the example viewing function codes:
                 return HttpResponseBadRequest()
         else:
             form = UploadFileForm()
-        return render(request, 'upload_form.html', {'form': form})
+        return render_to_response('upload_form.html',
+                                  {'form': form},
+                                  context_instance=RequestContext(request))
     
     def download(request):
         sheet = excel.pe.Sheet([[1, 2],[3, 4]])
         return excel.make_response(sheet, "csv")
-
-.. code-block:: html
-
-    <form action="/upload-file/" enctype="multipart/form-data" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Submit" />
-    </form>
 
 Development guide
 ================================================================================

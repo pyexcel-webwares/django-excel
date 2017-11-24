@@ -73,7 +73,8 @@ GS_COMMAND = ('gs django-excel v0.0.9 ' +
               "Find 0.0.9 in changelog for more details")
 NO_GS_MESSAGE = ('Automatic github release is disabled. ' +
                  'Please install gease to enable it.')
-UPLOAD_FAILED_MSG = ('Upload failed. please run "%s" yourself.')
+UPLOAD_FAILED_MSG = (
+    'Upload failed. please run "%s" yourself.' % PUBLISH_COMMAND)
 HERE = os.path.abspath(os.path.dirname(__file__))
 
 

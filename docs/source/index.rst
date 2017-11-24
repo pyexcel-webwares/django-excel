@@ -7,8 +7,8 @@
 ================================================================================
 
 :Author: C.W.
-:Source code: http://github.com/pyexcel/django-excel.git
-:Issues: http://github.com/pyexcel/django-excel/issues
+:Source code: http://github.com/pyexcel-webwares/django-excel.git
+:Issues: http://github.com/pyexcel-webwares/django-excel/issues
 :License: New BSD License
 :Released: |version|
 :Generated: |today|
@@ -169,7 +169,7 @@ or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone https://github.com/pyexcel/django-excel.git
+    $ git clone https://github.com/pyexcel-webwares/django-excel.git
     $ cd django-excel
     $ python setup.py install
 

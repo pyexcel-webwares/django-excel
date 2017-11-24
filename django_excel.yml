@@ -1,5 +1,6 @@
 overrides: "pyexcel.yaml"
 name: "django-excel"
+organisation: pyexcel-webwares
 version: 0.0.9
 current_version: 0.0.9
 release: 0.0.9

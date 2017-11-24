@@ -17,7 +17,7 @@ DESCRIPTION = (
     'e to read and write data in different excel file formats' +
     ''
 )
-URL = 'https://github.com/pyexcel/django-excel'
+URL = 'https://github.com/pyexcel-webwares/django-excel'
 DOWNLOAD_URL = '%s/archive/0.0.9.tar.gz' % URL
 FILES = ['README.rst',  'CHANGELOG.rst']
 KEYWORDS = [

@@ -5,11 +5,11 @@ django-excel - Let you focus on data, instead of file formats
 .. image:: https://raw.githubusercontent.com/pyexcel/pyexcel.github.io/master/images/patreon.png
    :target: https://www.patreon.com/pyexcel
 
-.. image:: https://api.travis-ci.org/pyexcel/django-excel.svg?branch=master
-   :target: http://travis-ci.org/pyexcel/django-excel
+.. image:: https://api.travis-ci.org/pyexcel-webwares/django-excel.svg?branch=master
+   :target: http://travis-ci.org/pyexcel-webwares/django-excel
 
-.. image:: https://codecov.io/gh/pyexcel/django-excel/branch/master/graph/badge.svg
-   :target: https://codecov.io/gh/pyexcel/django-excel
+.. image:: https://codecov.io/gh/pyexcel-webwares/django-excel/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/pyexcel-webwares/django-excel
 
 .. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :target: https://gitter.im/pyexcel/Lobby
@@ -216,7 +216,7 @@ or clone it and install it:
 
 .. code-block:: bash
 
-    $ git clone https://github.com/pyexcel/django-excel.git
+    $ git clone https://github.com/pyexcel-webwares/django-excel.git
     $ cd django-excel
     $ python setup.py install
 

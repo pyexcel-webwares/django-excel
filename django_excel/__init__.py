@@ -49,7 +49,7 @@ class ExcelMixin(webio.ExcelInput):
         pe.save_as(**params)
 
     def save_book_to_database(self, models=None, initializers=None,
-                              mapdicts=None, batch_size=None,
+                              mapdicts=None, batch_size=None, bulk_save=None,
                               **keywords):
         """
         Save data from a book to a nominated django models
@@ -59,6 +59,7 @@ class ExcelMixin(webio.ExcelInput):
         params['dest_initializers'] = initializers
         params['dest_mapdicts'] = mapdicts
         params['dest_batch_size'] = batch_size
+        params['dest_bulk_save'] = bulk_save
         pe.save_book_as(**params)
 
     def isave_to_database(self, model=None, initializer=None, mapdict=None,
@@ -74,7 +75,7 @@ class ExcelMixin(webio.ExcelInput):
         self.free_resources()
 
     def isave_book_to_database(self, models=None, initializers=None,
-                               mapdicts=None, batch_size=None,
+                               mapdicts=None, batch_size=None, bulk_save=None,
                                **keywords):
         """
         Save data from a book to a nominated django models
@@ -84,6 +85,7 @@ class ExcelMixin(webio.ExcelInput):
         params['dest_initializers'] = initializers
         params['dest_mapdicts'] = mapdicts
         params['dest_batch_size'] = batch_size
+        params['dest_bulk_save'] = bulk_save
         pe.isave_book_as(**params)
 
 

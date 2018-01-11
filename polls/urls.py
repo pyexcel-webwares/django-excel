@@ -28,5 +28,7 @@ urlpatterns = [
     url(r'^import_using_isave/',
         views.import_data_using_isave_book_as),
     url(r'^import_sheet_using_isave/',
-        views.import_sheet_using_isave_to_database)
+        views.import_sheet_using_isave_to_database),
+    url(r'^import_without_bulk_save/',
+        views.import_without_bulk_save, name="import_no_bulk_save")
 ]

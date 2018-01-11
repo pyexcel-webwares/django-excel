@@ -1,0 +1,41 @@
+name: django-excel
+organisation: webwares
+releases:
+- changes:
+  - action: Added
+    details:
+    - '`pyexcel-io#46`, expose `bulk_save` to django developers'
+  date: 11.01.2018
+  version: 0.0.10
+- changes:
+  - action: Added
+    details:
+    - bring isave_to_database and isave_book_to_database
+  date: 12.07.2017
+  version: 0.0.9
+- changes:
+  - action: Added
+    details:
+    - '`pyexcel#39`, explicitly  seeking at 0'
+  date: 07.07.2017
+  version: 0.0.8
+- changes:
+  - action: Added
+    details:
+    - '`pyexcel#38`, Support  unicode code as download file name'
+  date: 29.06.2017
+  version: 0.0.7
+- changes:
+  - action: Updated
+    details:
+    - '`pyexcel#26`, raise  ioerror if content is empty.'
+    - Use pyexcel-webio v0.0.9 so as to push out new version of pyexcel and its  plugins.
+  date: 12.22.2016
+  version: 0.0.6
+- changes:
+  - action: 'Added:'
+    details:
+    - Support for django 1.6.x
+    - Tested against django 1.10
+  date: 26.08.2016
+  version: 0.0.5

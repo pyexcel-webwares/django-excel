@@ -6,7 +6,7 @@
 `django-excel` - Let you focus on data, instead of file formats
 ================================================================================
 
-:Author: C.W.
+:Author: C. Wang
 :Source code: http://github.com/pyexcel-webwares/django-excel.git
 :Issues: http://github.com/pyexcel-webwares/django-excel/issues
 :License: New BSD License
@@ -212,6 +212,8 @@ maintain the project and develop it further.
 If you are an individual, you are welcome to support me too on patreon and for however long
 you feel like. As a patreon, you will receive
 `early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
+
+And your issues will get prioritized if you would like to become my patreon as `pyexcel pro user`.
 
 With your financial support, I will be able to invest
 a little bit more time in coding, documentation and writing interesting posts.
@@ -731,5 +733,3 @@ Response methods
    :param models: a list of Django models
    :param file_type: same as :meth:`~django_excel.make_response`
    :param status: same as :meth:`~django_excel.make_response`
-
-

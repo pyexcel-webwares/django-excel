@@ -14,3 +14,6 @@ targets:
   - MANIFEST.in: MANIFEST.in
   - "docs/source/index.rst": "docs/source/index.rst.jj2"
   - "tests/requirements.txt": "tests/requirements.txt"
+  - output: CHANGELOG.rst
+    configuration: changelog.yml
+    template: CHANGELOG.rst.jj2

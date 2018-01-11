@@ -12,19 +12,17 @@ extensions = [
     'sphinxcontrib.spelling',
     'sphinxcontrib.excel'
 ]
-
 intersphinx_mapping = {
     'pyexcel': ('http://pyexcel.readthedocs.io/en/latest/', None),
 }
-spelling_word_list_filename = 'spelling_wordlist.txt'
 templates_path = ['_templates']
 source_suffix = '.rst'
 master_doc = 'index'
 
 project = u'django-excel'
-copyright = u'2015-2017 Onni Software Ltd.'
-version = '0.0.9'
-release = '0.0.9'
+copyright = u'2015-2018 Onni Software Ltd.'
+version = '0.0.10'
+release = '0.0.10'
 exclude_patterns = []
 pygments_style = 'sphinx'
 import os  # noqa

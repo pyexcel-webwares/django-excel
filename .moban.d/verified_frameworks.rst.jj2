@@ -18,3 +18,5 @@ Tested Django Versions
 
 .. image:: https://img.shields.io/badge/django-1.6.11-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
+
+Test on django 2.0.1 fails.

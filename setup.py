@@ -8,17 +8,16 @@ PY2 = sys.version_info[0] == 2
 PY26 = PY2 and sys.version_info[1] < 7
 
 NAME = 'django-excel'
-AUTHOR = 'C.W.'
-VERSION = '0.0.9'
+AUTHOR = 'C. Wang'
+VERSION = '0.0.10'
 EMAIL = 'wangc_2011@hotmail.com'
 LICENSE = 'New BSD'
 DESCRIPTION = (
-    'A django middleware that provides one application programming interfac' +
-    'e to read and write data in different excel file formats' +
-    ''
+    'A django middleware that provides one application programming' +
+    'interface to read and write data in different excel file formats'
 )
 URL = 'https://github.com/pyexcel-webwares/django-excel'
-DOWNLOAD_URL = '%s/archive/0.0.9.tar.gz' % URL
+DOWNLOAD_URL = '%s/archive/0.0.10.tar.gz' % URL
 FILES = ['README.rst',  'CHANGELOG.rst']
 KEYWORDS = [
     'API',
@@ -55,6 +54,7 @@ CLASSIFIERS = [
 ]
 
 INSTALL_REQUIRES = [
+    'pyexcel>=0.5.7',
     'pyexcel-webio>=0.1.2',
     'Django>=1.6.1',
 ]
@@ -69,8 +69,8 @@ EXTRAS_REQUIRE = {
 # You do not need to read beyond this line
 PUBLISH_COMMAND = '{0} setup.py sdist bdist_wheel upload -r pypi'.format(
     sys.executable)
-GS_COMMAND = ('gs django-excel v0.0.9 ' +
-              "Find 0.0.9 in changelog for more details")
+GS_COMMAND = ('gs django-excel v0.0.10 ' +
+              "Find 0.0.10 in changelog for more details")
 NO_GS_MESSAGE = ('Automatic github release is disabled. ' +
                  'Please install gease to enable it.')
 UPLOAD_FAILED_MSG = (

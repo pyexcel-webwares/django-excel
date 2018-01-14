@@ -9,7 +9,9 @@ Django developer is left with the choice to install and load the excel file form
 Tested Django Versions
 --------------------------------------------------------------------------------
 
-2.0.1, 1.11.10, 1.10.8, 1.9.13, 1.8.18, 1.7.11, 1.6.11
+1.11.9, 1.10.8, 1.9.13, 1.8.18, 1.7.11, 1.6.11
+
+test on django 2.0.1 fails
 
 {%endblock%}
 

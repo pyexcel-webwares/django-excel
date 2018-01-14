@@ -6,9 +6,8 @@ env:
   - DJANGO_VERSION=1.8.18
   - DJANGO_VERSION=1.9.13
   - DJANGO_VERSION=1.10.8
-  - DJANGO_VERSION=1.11.10
-  - DJANGO_VERSION=2.0.1
-{%endblock%}
+  - DJANGO_VERSION=1.11.9
+{%endblock%}1
 
 {%block exclusion_matrix%}
 matrix:
@@ -20,15 +19,15 @@ matrix:
     - python: 2.6
       env: DJANGO_VERSION=1.9.13
     - python: 2.6
-      env: DJANGO_VERSION=1.10.7
+      env: DJANGO_VERSION=1.10.8
     - python: 2.6
-      env: DJANGO_VERSION=1.11.2
+      env: DJANGO_VERSION=1.11.9
     - python: 2.6
       env: DJANGO_VERSION=2.0.1
     - python: 2.7
       env: DJANGO_VERSION=2.0.1
     - python: 3.3
-      env: DJANGO_VERSION=1.11.2
+      env: DJANGO_VERSION=1.11.9
     - python: 3.4
       env: DJANGO_VERSION=1.6.11
     - python: 3.5
@@ -36,7 +35,7 @@ matrix:
     - python: 3.3
       env: DJANGO_VERSION=1.9.13
     - python: 3.3
-      env: DJANGO_VERSION=1.10.7
+      env: DJANGO_VERSION=1.10.8
     - python: 3.5
       env: DJANGO_VERSION=1.7.11
     - python: 3.5
@@ -46,7 +45,7 @@ matrix:
     - python: 3.6
       env: DJANGO_VERSION=1.9.13
     - python: 3.6
-      env: DJANGO_VERSION=1.10.7
+      env: DJANGO_VERSION=1.10.8
     - python: 3.6
       env: DJANGO_VERSION=1.7.11
     - python: 3.6

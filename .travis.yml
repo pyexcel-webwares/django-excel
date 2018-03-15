@@ -10,7 +10,6 @@ env:
   - DJANGO_VERSION=1.10.8
   - DJANGO_VERSION=1.11.9
 python:
-  - 2.6
   - 2.7
   - 3.3
   - 3.4
@@ -18,17 +17,6 @@ python:
   - 3.6
 matrix:
   exclude:
-    - python: 2.6
-      env: DJANGO_VERSION=1.7.11
-    - python: 2.6
-      env: DJANGO_VERSION=1.8.18
-    - python: 2.6
-      env: DJANGO_VERSION=1.9.13
-    - python: 2.6
-      env: DJANGO_VERSION=1.10.8
-    - python: 2.6
-      env: DJANGO_VERSION=1.11.9
-    - python: 2.6
       env: DJANGO_VERSION=2.0.1
     - python: 2.7
       env: DJANGO_VERSION=2.0.1
@@ -58,7 +46,6 @@ matrix:
       env: DJANGO_VERSION=1.8.18
 before_install:
   - pip install Django==$DJANGO_VERSION
-  - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install flake8==2.6.2; fi
   - if [[ -f min_requirements.txt && "$MINREQ" -eq 1 ]]; then
       mv min_requirements.txt requirements.txt ;
     fi

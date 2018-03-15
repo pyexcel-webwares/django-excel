@@ -22,6 +22,8 @@ Tested Django Versions
 
 test on django 2.0.1 fails
 
+Since 15 March 2015, python 2.6 are no longer tested via travis-ci.
+
 {%endblock%}
 
 

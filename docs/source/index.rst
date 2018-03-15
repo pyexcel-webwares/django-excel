@@ -6,7 +6,7 @@
 `django-excel` - Let you focus on data, instead of file formats
 ================================================================================
 
-:Author: C. Wang
+:Author: C.W.
 :Source code: http://github.com/pyexcel-webwares/django-excel.git
 :Issues: http://github.com/pyexcel-webwares/django-excel/issues
 :License: New BSD License
@@ -40,6 +40,7 @@ to you application, all you need is to install an extra pyexcel plugin. Hence no
 to your application and no issues with excel file formats any more. Looking at the
 community, this library and its associated ones try to become a small and easy to
 install alternative to Pandas.
+
 
 
 The highlighted features are:

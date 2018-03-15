@@ -1,4 +1,13 @@
 {% extends 'docs/source/WEB-index.rst.jj2' %}
+
+{% block further_dissertation %}
+Given the existence of pyexcel, what is the reason for django-excel?
+1. **Speedy file uploads**.  **django-excel** help you access the uploaded excel file directly using ExcelMemoryFileUploadHandler and TemporaryExcelFileUploadHandler. In particular, MemoryFileUploadHandler would hold the uploaded file in memory and django-excel could read the excel data from this memory buffer without caching it onto file system.
+2. **Import excel data into database**. **django-excel** uses bulk_insert to import your excel
+data into your django Model, which is very efficient.
+{% endblock %}
+
+
 {%block installation_note%}
 Contrary to Django's philosophy of 'battery included', django-excel does not
 come with all batteries due to the size of the dependency(xlwt, openpyxl, odfpy). Hence,

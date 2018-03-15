@@ -9,7 +9,6 @@ extensions = [
     'sphinx.ext.doctest',
     'sphinx.ext.intersphinx',
     'sphinx.ext.viewcode',
-    'sphinxcontrib.spelling',
     'sphinxcontrib.excel'
 ]
 intersphinx_mapping = {

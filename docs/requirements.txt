@@ -1,4 +1,3 @@
-sphinxcontrib-spelling==4.0.1
 sphinxcontrib-excel
 
 

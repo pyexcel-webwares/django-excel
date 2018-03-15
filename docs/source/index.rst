@@ -42,7 +42,6 @@ community, this library and its associated ones try to become a small and easy t
 install alternative to Pandas.
 
 
-
 The highlighted features are:
 
 #. excel data import into and export from databases
@@ -155,6 +154,11 @@ and export from SQL databases, information analysis and persistence. It uses
 #. to provide the same interface for information persistence at server side: saving a uploaded excel file to and loading a saved excel file from file system.
 
 
+Given the existence of pyexcel, what is the reason for django-excel?
+1. **Speedy file uploads**.  **django-excel** help you access the uploaded excel file directly using ExcelMemoryFileUploadHandler and TemporaryExcelFileUploadHandler. In particular, MemoryFileUploadHandler would hold the uploaded file in memory and django-excel could read the excel data from this memory buffer without caching it onto file system.
+2. **Import excel data into database**. **django-excel** uses bulk_insert to import your excel
+data into your django Model, which is very efficient.
+
 Installation
 -------------------
 
@@ -202,6 +206,8 @@ Tested Django Versions
 1.11.9, 1.10.8, 1.9.13, 1.8.18, 1.7.11, 1.6.11
 
 test on django 2.0.1 fails
+
+Since 15 March 2015, python 2.6 are no longer tested via travis-ci.
 
 
 

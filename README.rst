@@ -70,7 +70,6 @@ community, this library and its associated ones try to become a small and easy t
 install alternative to Pandas.
 
 
-
 The highlighted features are:
 
 #. excel data import into and export from databases

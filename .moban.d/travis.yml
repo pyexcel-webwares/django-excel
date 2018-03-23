@@ -12,18 +12,6 @@ env:
 {%block exclusion_matrix%}
 matrix:
   exclude:
-    - python: 2.6
-      env: DJANGO_VERSION=1.7.11
-    - python: 2.6
-      env: DJANGO_VERSION=1.8.18
-    - python: 2.6
-      env: DJANGO_VERSION=1.9.13
-    - python: 2.6
-      env: DJANGO_VERSION=1.10.8
-    - python: 2.6
-      env: DJANGO_VERSION=1.11.9
-    - python: 2.6
-      env: DJANGO_VERSION=2.0.1
     - python: 2.7
       env: DJANGO_VERSION=2.0.1
     - python: 3.3
@@ -54,7 +42,6 @@ matrix:
 
 {%block custom_python_versions%}
 python:
-  - 2.6
   - 2.7
   - 3.3
   - 3.4

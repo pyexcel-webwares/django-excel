@@ -155,7 +155,7 @@ and export from SQL databases, information analysis and persistence. It uses
 
 
 Given the existence of pyexcel, what is the reason for django-excel?
-1. **Speedy file uploads**.  **django-excel** help you access the uploaded excel file directly using ExcelMemoryFileUploadHandler and TemporaryExcelFileUploadHandler. In particular, MemoryFileUploadHandler would hold the uploaded file in memory and django-excel could read the excel data from this memory buffer without caching it onto file system.
+1. **Speedy file uploads**.  **django-excel** help you access the uploaded excel file directly using ExcelMemoryFileUploadHandler and TemporaryExcelFileUploadHandler. MemoryFileUploadHandler holds the uploaded file in memory and django-excel reads the excel data from this memory buffer without caching it onto file system. Meanwhile, TemporaryExcelFileUploadHandler holds the uploaded file in file system and django-excel reads directly from this stream-to-file without extra function calls.
 2. **Import excel data into database**. **django-excel** uses bulk_insert to import your excel
 data into your django Model, which is very efficient.
 
@@ -215,11 +215,12 @@ Support the project
 -----------------------
 
 If your company has embedded pyexcel and its components into a revenue generating
-product, please `support me on patreon <https://www.patreon.com/bePatron?u=5537627>`_ to
-maintain the project and develop it further.
+product, please support me on `patreon <https://www.patreon.com/bePatron?u=5537627>`_
+or `bounty source <https://salt.bountysource.com/teams/chfw-pyexcel>`_ to maintain
+the project and develop it further.
 
-If you are an individual, you are welcome to support me too on patreon and for however long
-you feel like. As a patreon, you will receive
+If you are an individual, you are welcome to support me too and for however long
+you feel like. As my backer, you will receive
 `early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
 
 And your issues will get prioritized if you would like to become my patreon as `pyexcel pro user`.

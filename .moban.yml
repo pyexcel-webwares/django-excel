@@ -8,7 +8,6 @@ configuration:
 targets:
   - README.rst: README.rst
   - setup.py: setup.py
-  - "docs/source/conf.py": "docs/source/conf.py"
   - .travis.yml: travis.yml
   - requirements.txt: requirements.txt
   - MANIFEST.in: MANIFEST.in

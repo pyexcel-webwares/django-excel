@@ -203,9 +203,7 @@ You will need to update your *settings.py*:
 Tested Django Versions
 --------------------------------------------------------------------------------
 
-1.11.9, 1.10.8, 1.9.13, 1.8.18, 1.7.11, 1.6.11
-
-test on django 2.0.1 fails
+2.1, 2.08, 1.11.15, 1.10.8, 1.9.13, 1.8.18, 1.7.11, 1.6.11
 
 Since 15 March 2015, python 2.6 are no longer tested via travis-ci.
 

@@ -7,7 +7,7 @@ try:
     PY2_VERSION = True
 except ImportError:
     # else (aka in py3)
-    from urllib.parse import quote as urllib_quote # flake8: noqa
+    from urllib.parse import quote as urllib_quote  # noqa: F401
     PY2_VERSION = False
 
 

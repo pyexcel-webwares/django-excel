@@ -1,1 +1,2 @@
-coverage run --source='django_excel' manage.py test && flake8 . --exclude=.moban.d --builtins=unicode
+pip freeze
+nosetests --with-coverage --cover-package django_excel --cover-package tests tests --with-doctest --doctest-extension=.rst README.rst docs/source django_excel

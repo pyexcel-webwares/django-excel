@@ -3,16 +3,21 @@ django-excel - Let you focus on data, instead of file formats
 ================================================================================
 
 .. image:: https://raw.githubusercontent.com/pyexcel/pyexcel.github.io/master/images/patreon.png
-   :target: https://www.patreon.com/pyexcel
-
-.. image:: https://api.bountysource.com/badge/team?team_id=288537
-   :target: https://salt.bountysource.com/teams/chfw-pyexcel
+   :target: https://www.patreon.com/chfw
 
 .. image:: https://travis-ci.org/pyexcel-webwares/django-excel.svg?branch=master
    :target: http://travis-ci.org/pyexcel-webwares/django-excel
 
 .. image:: https://codecov.io/gh/pyexcel-webwares/django-excel/branch/master/graph/badge.svg
    :target: https://codecov.io/gh/pyexcel-webwares/django-excel
+
+.. image:: https://badge.fury.io/py/django-excel.svg
+   :target: https://pypi.org/project/django-excel
+
+
+.. image:: https://pepy.tech/badge/django-excel/month
+   :target: https://pepy.tech/project/django-excel/month
+
 
 .. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg
    :target: https://gitter.im/pyexcel/Lobby
@@ -24,7 +29,7 @@ Support the project
 ================================================================================
 
 If your company has embedded pyexcel and its components into a revenue generating
-product, please support me on `patreon <https://www.patreon.com/bePatron?u=5537627>`_
+product, please support me on `github <https://github.com/sponsors/chfw>`_, `patreon <https://www.patreon.com/bePatron?u=5537627>`_
 or `bounty source <https://salt.bountysource.com/teams/chfw-pyexcel>`_ to maintain
 the project and develop it further.
 
@@ -332,8 +337,6 @@ How to update test environment and update documentation
 Additional steps are required:
 
 #. pip install moban
-#. git clone https://github.com/moremoban/setupmobans.git # generic setup
-#. git clone https://github.com/pyexcel/pyexcel-commons.git commons
 #. make your changes in `.moban.d` directory, then issue command `moban`
 
 What is pyexcel-commons
@@ -345,18 +348,6 @@ What is .moban.d
 ---------------------------------
 
 `.moban.d` stores the specific meta data for the library.
-
-Acceptance criteria
--------------------
-
-#. Has Test cases written
-#. Has all code lines tested
-#. Passes all Travis CI builds
-#. Has fair amount of documentation if your change is complex
-#. run 'make format' so as to confirm the pyexcel organisation's coding style
-#. Please update CHANGELOG.rst
-#. Please add yourself to CONTRIBUTORS.rst
-#. Agree on NEW BSD License for your contribution
 
 
 

@@ -1,24 +1,10 @@
-requires:
-  - type: git
-    url: https://github.com/moremoban/pypi-mobans
-    submodule: true
-  - https://github.com/pyexcel/pyexcel-mobans
+overrides: "git://github.com/pyexcel/pyexcel-mobans!/mobanfile.yaml"
 configuration:
-  configuration_dir: "pyexcel-mobans:config"
-  template_dir:
-    - "pyexcel-mobans:templates"
-    - "pypi-mobans:templates"
-    - ".moban.d"
   configuration: django_excel.yml
 targets:
-  - README.rst: README.rst
-  - setup.py: setup.py
-  - .travis.yml: travis.yml
-  - requirements.txt: requirements.txt
+  - README.rst: custom_README.rst.jj2
+  - setup.py: custom_setup.py.jj2
+  - .travis.yml: custom_travis.yml.jj2
   - MANIFEST.in: MANIFEST.in
   - "docs/source/index.rst": "docs/source/django-index.rst.jj2"
-  - "tests/requirements.txt": "tests/requirements.txt"
-  - output: CHANGELOG.rst
-    configuration: changelog.yml
-    template: CHANGELOG.rst.jj2
-  - lint.sh: lint.script.jj2
+  - "tests/requirements.txt": "tests/custom_requirements.txt.jj2"

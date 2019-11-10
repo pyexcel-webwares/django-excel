@@ -55,25 +55,55 @@ matrix:
       env: DJANGO_VERSION=1.11.15
 
 stages:
-  - test
   - lint
+  - moban
+  - test
+
+.disable_global: &disable_global
+  addons: false
+  cache: false
+  env: {}
+  python: false
+  before_install: false
+  install: false
+  before_script: false
+  script: false
+  after_success: false
+  after_failure: false
+  before_deploy: false
+  deploy: false
+
+.lint: &lint
+  <<: *disable_global
+  git:
+    submodules: false
+  python: 3.6
+  stage: lint
+  script: make lint
+
+.moban: &moban
+  <<: *disable_global
+  python: 3.6
+  stage: moban
+  install: pip install moban>=0.0.4
+  script:
+    - moban
+    - git diff --exit-code
+
 jobs:
   include:
-    - stage: lint
-      python: 3.6
-      script: make lint
+    - *moban
+    - *lint
 
 stage: test
 
-script: make test
-
 before_install:
   - pip install Django==$DJANGO_VERSION
-  - if [[ $TRAVIS_PYTHON_VERSION == "2.6" ]]; then pip install flake8==2.6.2; fi
   - if [[ -f min_requirements.txt && "$MINREQ" -eq 1 ]]; then
       mv min_requirements.txt requirements.txt ;
     fi
-  - test ! -f rnd_requirements.txt || pip install --no-deps -r rnd_requirements.txt
+  - test ! -f rnd_requirements.txt ||
+    pip install --no-deps -r rnd_requirements.txt
   - test ! -f rnd_requirements.txt || pip install -r rnd_requirements.txt ;
   - pip install -r tests/requirements.txt
 script:

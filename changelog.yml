@@ -1,5 +1,5 @@
 name: django-excel
-organisation: webwares
+organisation: pyexcel-webwares
 releases:
 - changes:
   - action: Added

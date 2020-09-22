@@ -59,33 +59,22 @@ stages:
   - moban
   - test
 
-.disable_global: &disable_global
-  addons: false
-  cache: false
-  env: {}
-  python: false
-  before_install: false
-  install: false
-  before_script: false
-  script: false
-  after_success: false
-  after_failure: false
-  before_deploy: false
-  deploy: false
 
 .lint: &lint
-  <<: *disable_global
   git:
     submodules: false
   python: 3.6
+  env:
+    - MINREQ=0
   stage: lint
   script: make lint
 
 .moban: &moban
-  <<: *disable_global
   python: 3.6
+  env:
+    - MINREQ=0
   stage: moban
-  install: pip install moban>=0.0.4
+  install: pip install moban gitfs2 pypifs moban-jinja2-github moban-ansible
   script:
     - moban
     - git diff --exit-code

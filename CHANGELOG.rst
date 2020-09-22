@@ -6,8 +6,8 @@ Change log
 
 **Added**
 
-#. `pyexcel-io#46 <https://github.com/webwares/pyexcel-io/issues/46>`_, expose
-   `bulk_save` to django developers
+#. `pyexcel-io#46 <https://github.com/pyexcel-webwares/pyexcel-io/issues/46>`_,
+   expose `bulk_save` to django developers
 
 0.0.9 - 12.07.2017
 --------------------------------------------------------------------------------
@@ -21,24 +21,24 @@ Change log
 
 **Added**
 
-#. `pyexcel#39 <https://github.com/webwares/pyexcel/issues/39>`_, explicitly
-   seeking at 0
+#. `pyexcel#39 <https://github.com/pyexcel-webwares/pyexcel/issues/39>`_,
+   explicitly seeking at 0
 
 0.0.7 - 29.06.2017
 --------------------------------------------------------------------------------
 
 **Added**
 
-#. `pyexcel#38 <https://github.com/webwares/pyexcel/issues/38>`_, Support
-   unicode code as download file name
+#. `pyexcel#38 <https://github.com/pyexcel-webwares/pyexcel/issues/38>`_,
+   Support unicode code as download file name
 
 0.0.6 - 12.22.2016
 --------------------------------------------------------------------------------
 
 **Updated**
 
-#. `pyexcel#26 <https://github.com/webwares/pyexcel/issues/26>`_, raise ioerror
-   if content is empty.
+#. `pyexcel#26 <https://github.com/pyexcel-webwares/pyexcel/issues/26>`_, raise
+   ioerror if content is empty.
 #. Use pyexcel-webio v0.0.9 so as to push out new version of pyexcel and its
    plugins.
 

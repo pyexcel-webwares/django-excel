@@ -8,3 +8,4 @@ targets:
   - MANIFEST.in: MANIFEST.in
   - "docs/source/index.rst": "docs/source/django-index.rst.jj2"
   - "tests/requirements.txt": "tests/custom_requirements.txt.jj2"
+  - .gitignore: gitignore.jj2

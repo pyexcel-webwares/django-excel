@@ -16,6 +16,13 @@ extra_dependencies:
     - pyexcel-xlsx>=0.4.0
   - ods:
     - pyexcel-ods3>=0.4.0
+test_dependencies:
+  - lxml
+  - pyexcel-ods3>=0.1.0
+  - pyexcel-xls>=0.1.0
+  - pyexcel-xlsx>=0.1.0
+  - pyexcel-handsontable
+  - pyexcel-pygal
 keywords:
   - API
   - Django

@@ -1,7 +1,6 @@
 {% extends "travis.yml.jj2" %}
 {%block test_other_environments%}
 env:
-  - DJANGO_VERSION=1.6.11
   - DJANGO_VERSION=1.8.18
   - DJANGO_VERSION=1.9.13
   - DJANGO_VERSION=1.10.8
@@ -14,15 +13,11 @@ env:
 {%block exclusion_matrix%}
 matrix:
     - python: 3.6
-      env: DJANGO_VERSION=1.6.11
-    - python: 3.6
       env: DJANGO_VERSION=1.9.13
     - python: 3.6
       env: DJANGO_VERSION=1.10.8
     - python: 3.7
       env: DJANGO_VERSION=1.8.18
-    - python: 3.7
-      env: DJANGO_VERSION=1.6.11
     - python: 3.7
       env: DJANGO_VERSION=1.9.13
     - python: 3.7

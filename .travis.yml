@@ -63,7 +63,7 @@ jobs:
 stage: test
 
 before_install:
-  - if [ -n $DJANGO_VERSION ]; then
+  - if [ -n "$DJANGO_VERSION" ]; then
       pip install Django==$DJANGO_VERSION
     fi
   - if [[ -f min_requirements.txt && "$MINREQ" -eq 1 ]]; then

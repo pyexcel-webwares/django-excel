@@ -34,7 +34,7 @@ python:
   - 3.7
 {%endblock%}
 
-{% block custom_install %}  - if [ -n $DJANGO_VERSION ]; then
+{% block custom_install %}  - if [ -n "$DJANGO_VERSION" ]; then
       pip install Django==$DJANGO_VERSION
     fi
 {% endblock%}

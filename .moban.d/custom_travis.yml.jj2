@@ -10,8 +10,8 @@ env:
   - DJANGO_VERSION=3.1.1
 {%endblock%}1
 
-{%block exclusion_matrix%}
-matrix:
+{%block extra_jobs%}
+  exclude:
     - python: 3.6
       env: DJANGO_VERSION=1.9.13
     - python: 3.6

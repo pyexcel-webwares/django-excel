@@ -10,7 +10,6 @@ env:
   - DJANGO_VERSION=1.11.15
   - DJANGO_VERSION=2.0.8
   - DJANGO_VERSION=2.1
-  - DJANGO_VERSION=3.1.1
 python:
   - 3.6
   - 3.7
@@ -64,7 +63,7 @@ stage: test
 
 before_install:
   - if [ -n "$DJANGO_VERSION" ]; then
-      pip install Django==$DJANGO_VERSION
+      pip install Django==$DJANGO_VERSION;
     fi
   - if [[ -f min_requirements.txt && "$MINREQ" -eq 1 ]]; then
       mv min_requirements.txt requirements.txt ;

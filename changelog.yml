@@ -4,6 +4,11 @@ releases:
 - changes:
   - action: Added
     details:
+    - 'Support for django 3.x.x'
+    - 'Tested against django 3.x.x'
+- changes:
+  - action: Added
+    details:
     - '`pyexcel-io#46`, expose `bulk_save` to django developers'
   date: 11.01.2018
   version: 0.0.10

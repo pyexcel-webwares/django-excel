@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import django
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -40,7 +41,7 @@ INSTALLED_APPS = (
     'polls'
 )
 
-MIDDLEWARE_CLASSES = (
+COMMON_MIDDLEWARE = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -48,6 +49,15 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware'
 )
+
+if django.VERSION[0] > 1:
+    MIDDLEWARE = (
+        'django.middleware.security.SecurityMiddleware',
+        *COMMON_MIDDLEWARE
+    )
+
+else:
+    MIDDLEWARE_CLASSES = COMMON_MIDDLEWARE
 
 
 ROOT_URLCONF = 'mysite.urls'

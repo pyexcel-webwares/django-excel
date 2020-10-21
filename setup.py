@@ -31,7 +31,7 @@ except (ValueError, UnicodeError, locale.Error):
     locale.setlocale(locale.LC_ALL, "en_US.UTF-8")
 
 NAME = "django-excel"
-AUTHOR = "chfw"
+AUTHOR = "C.W."
 VERSION = "0.0.10"
 EMAIL = "info@pyexcel.org"
 LICENSE = "New BSD"
@@ -95,7 +95,7 @@ EXTRAS_REQUIRE = {
 PUBLISH_COMMAND = "{0} setup.py sdist bdist_wheel upload -r pypi".format(sys.executable)
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-GS_COMMAND = ("gs django-excel v0.0.10 " +
+GS_COMMAND = ("gease django-excel v0.0.10 " +
               "Find 0.0.10 in changelog for more details")
 NO_GS_MESSAGE = ("Automatic github release is disabled. " +
                  "Please install gease to enable it.")

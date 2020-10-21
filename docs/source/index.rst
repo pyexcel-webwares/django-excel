@@ -6,7 +6,7 @@
 `django-excel` - Let you focus on data, instead of file formats
 ================================================================================
 
-:Author: chfw
+:Author: C.W.
 :Source code: http://github.com/pyexcel-webwares/django-excel.git
 :Issues: http://github.com/pyexcel-webwares/django-excel/issues
 :License: New BSD License

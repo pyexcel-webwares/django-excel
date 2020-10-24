@@ -10,14 +10,12 @@ env:
   - DJANGO_VERSION=1.11.15
   - DJANGO_VERSION=2.0.8
   - DJANGO_VERSION=2.1
-  - DJANGO_VERSION=3.1.2
 python:
   - 3.6
   - 3.7
 
 stages:
   - lint
-  - moban
   - test
 
 
@@ -29,16 +27,6 @@ stages:
     - MINREQ=0
   stage: lint
   script: make lint
-
-.moban: &moban
-  python: 3.6
-  env:
-    - MINREQ=0
-  stage: moban
-  install: pip install moban gitfs2 pypifs moban-jinja2-github moban-ansible
-  script:
-    - moban
-    - git diff --exit-code
 
 jobs:
   include:

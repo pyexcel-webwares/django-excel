@@ -231,6 +231,9 @@ and export from SQL databases, information analysis and persistence. It uses
 Tested Django Versions
 ========================
 
+.. image:: https://img.shields.io/badge/django-3.1.2-green.svg
+    :target: http://travis-ci.org/pyexcel/django-excel
+
 .. image:: https://img.shields.io/badge/django-2.1-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
@@ -247,12 +250,6 @@ Tested Django Versions
     :target: http://travis-ci.org/pyexcel/django-excel
 
 .. image:: https://img.shields.io/badge/django-1.8.18-green.svg
-    :target: http://travis-ci.org/pyexcel/django-excel
-
-.. image:: https://img.shields.io/badge/django-1.7.11-green.svg
-    :target: http://travis-ci.org/pyexcel/django-excel
-
-.. image:: https://img.shields.io/badge/django-1.6.11-green.svg
     :target: http://travis-ci.org/pyexcel/django-excel
 
 Installation

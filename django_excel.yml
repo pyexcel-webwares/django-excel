@@ -28,5 +28,5 @@ keywords:
   - Django
 description: 
   A django middleware that provides one application programming interface to read and write data in different excel file formats
-flake8_options: --ignore=F401,E402
+flake8_options: --ignore=F401,E402,E501,W503
 moban_command: false

@@ -27,9 +27,7 @@ else:
     from io import StringIO
 
 
-_XLSX_MIME = (
-    "application/" +
-    "vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+_XLSX_MIME = "application/" + "vnd.openxmlformats-officedocument.spreadsheetml.sheet"
 
 FILE_TYPE_MIME_TABLE = {
     "csv": "text/csv",
@@ -39,36 +37,27 @@ FILE_TYPE_MIME_TABLE = {
     "ods": "application/vnd.oasis.opendocument.spreadsheet",
     "xls": "application/vnd.ms-excel",
     "xlsx": _XLSX_MIME,
-    "xlsm": "application/vnd.ms-excel.sheet.macroenabled.12"
+    "xlsm": "application/vnd.ms-excel.sheet.macroenabled.12",
 }
 
 
 class ExcelResponseTestCase(TestCase):
     def setUp(self):
         self.client = Client()
-        self.data = [
-            [1, 2, 3],
-            [4, 5, 6]
-        ]
-        self.single_sheet = [
-            ['X', 'Y', 'Z'],
-            [1, 2, 3],
-            [4, 5, 6]
-        ]
+        self.data = [[1, 2, 3], [4, 5, 6]]
+        self.single_sheet = [["X", "Y", "Z"], [1, 2, 3], [4, 5, 6]]
         self.book_content = OrderedDict()
-        self.book_content.update({
-            "Sheet1": [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]]})
-        self.book_content.update({
-            "Sheet2": [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]]})
-        self.book_content.update({
-            "Sheet3": [[u'X', u'Y', u'Z'], [1, 4, 7], [2, 5, 8], [3, 6, 9]]})
+        self.book_content.update({"Sheet1": [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]]})
+        self.book_content.update({"Sheet2": [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]]})
+        self.book_content.update(
+            {"Sheet3": [[u"X", u"Y", u"Z"], [1, 4, 7], [2, 5, 8], [3, 6, 9]]}
+        )
 
     def test_download(self):
         for file_type in FILE_TYPE_MIME_TABLE.keys():
-            response = self.client.get("/polls/download/"+file_type)
-            assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
-            sheet = pe.get_sheet(file_type=file_type,
-                                 file_content=response.content)
+            response = self.client.get("/polls/download/" + file_type)
+            assert response["Content-Type"] == FILE_TYPE_MIME_TABLE[file_type]
+            sheet = pe.get_sheet(file_type=file_type, file_content=response.content)
             sheet.format(int)
             array = sheet.to_array()
             assert array == self.data
@@ -78,26 +67,28 @@ class ExcelResponseTestCase(TestCase):
         self._download_and_verify_file_name(test_file_name)
 
     def test_download_attachment_with_unicode_name(self):
-        test_file_name = u'中文文件名'
-        self._download_and_verify_file_name(test_file_name.encode('utf-8'))
+        test_file_name = u"中文文件名"
+        self._download_and_verify_file_name(test_file_name.encode("utf-8"))
 
     def test_download_attachment_with_unicode_name_as_string(self):
-        test_file_name = '中文文件名'
+        test_file_name = "中文文件名"
         self._download_and_verify_file_name(test_file_name)
 
     def _download_and_verify_file_name(self, file_name):
         for file_type in FILE_TYPE_MIME_TABLE.keys():
             url_encoded_file_name = urllib_quote(file_name)
             response = self.client.get(
-                ("/polls/download_attachment/%s/%s" % (
-                    file_type, url_encoded_file_name)))
-            assert response['Content-Type'] == FILE_TYPE_MIME_TABLE[file_type]
-            assert response['Content-Disposition'] == (
+                (
+                    "/polls/download_attachment/%s/%s"
+                    % (file_type, url_encoded_file_name)
+                )
+            )
+            assert response["Content-Type"] == FILE_TYPE_MIME_TABLE[file_type]
+            assert response["Content-Disposition"] == (
                 "attachment; filename=%s.%s;filename*=utf-8''%s.%s"
-                % (url_encoded_file_name, file_type,
-                   url_encoded_file_name, file_type))
-            sheet = pe.get_sheet(file_type=file_type,
-                                 file_content=response.content)
+                % (url_encoded_file_name, file_type, url_encoded_file_name, file_type)
+            )
+            sheet = pe.get_sheet(file_type=file_type, file_content=response.content)
             sheet.format(int)
             array = sheet.to_array()
             assert array == self.data
@@ -105,16 +96,15 @@ class ExcelResponseTestCase(TestCase):
     def test_parse_single_sheet(self):
         test_sample = {
             "array": {
-                u'result': [[u'X', u'Y', u'Z'],
-                            [1.0, 2.0, 3.0],
-                            [4.0, 5.0, 6.0]]},
-            "dict": {
-                u'Y': [2.0, 5.0],
-                u'X': [1.0, 4.0],
-                u'Z': [3.0, 6.0]},
+                u"result": [[u"X", u"Y", u"Z"], [1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
+            },
+            "dict": {u"Y": [2.0, 5.0], u"X": [1.0, 4.0], u"Z": [3.0, 6.0]},
             "records": {
-                u'result': [{u'Y': 2.0, u'X': 1.0, u'Z': 3.0},
-                            {u'Y': 5.0, u'X': 4.0, u'Z': 6.0}]}
+                u"result": [
+                    {u"Y": 2.0, u"X": 1.0, u"Z": 3.0},
+                    {u"Y": 5.0, u"X": 4.0, u"Z": 6.0},
+                ]
+            },
         }
         for data_struct_type in test_sample.keys():
             sheet = pe.Sheet(self.single_sheet)
@@ -122,38 +112,45 @@ class ExcelResponseTestCase(TestCase):
             sheet.save_as(tmp_filename)
             with open(tmp_filename, "rb") as fp:
                 response = self.client.post(
-                    '/polls/parse/'+data_struct_type,
-                    data={"file": fp})
-                self.assertEqual(json.loads(response.content.decode('utf-8')),
-                                 test_sample[data_struct_type])
+                    "/polls/parse/" + data_struct_type, data={"file": fp}
+                )
+                self.assertEqual(
+                    json.loads(response.content.decode("utf-8")),
+                    test_sample[data_struct_type],
+                )
             os.unlink(tmp_filename)
 
     def test_parse_book(self):
-        test_sample = [
-            "book",
-            "book_dict"
-        ]
+        test_sample = ["book", "book_dict"]
         expected_dict = {
-            u'Sheet1': [[1.0, 1.0, 1.0, 1.0],
-                        [2.0, 2.0, 2.0, 2.0],
-                        [3.0, 3.0, 3.0, 3.0]],
-            u'Sheet3': [[u'X', u'Y', u'Z'],
-                        [1.0, 4.0, 7.0],
-                        [2.0, 5.0, 8.0],
-                        [3.0, 6.0, 9.0]],
-            u'Sheet2': [[4.0, 4.0, 4.0, 4.0],
-                        [5.0, 5.0, 5.0, 5.0],
-                        [6.0, 6.0, 6.0, 6.0]]}
+            u"Sheet1": [
+                [1.0, 1.0, 1.0, 1.0],
+                [2.0, 2.0, 2.0, 2.0],
+                [3.0, 3.0, 3.0, 3.0],
+            ],
+            u"Sheet3": [
+                [u"X", u"Y", u"Z"],
+                [1.0, 4.0, 7.0],
+                [2.0, 5.0, 8.0],
+                [3.0, 6.0, 9.0],
+            ],
+            u"Sheet2": [
+                [4.0, 4.0, 4.0, 4.0],
+                [5.0, 5.0, 5.0, 5.0],
+                [6.0, 6.0, 6.0, 6.0],
+            ],
+        }
         for data_struct_type in test_sample:
             sheet = pe.Book(self.book_content)
             tmp_filename = "test.xls"
             sheet.save_as(tmp_filename)
             with open(tmp_filename, "rb") as fp:
                 response = self.client.post(
-                    '/polls/parse/'+data_struct_type,
-                    data={"file": fp})
-                self.assertEqual(json.loads(response.content.decode('utf-8')),
-                                 expected_dict)
+                    "/polls/parse/" + data_struct_type, data={"file": fp}
+                )
+                self.assertEqual(
+                    json.loads(response.content.decode("utf-8")), expected_dict
+                )
             os.unlink(tmp_filename)
 
     def test_exchange(self):
@@ -164,12 +161,14 @@ class ExcelResponseTestCase(TestCase):
             for file_type in FILE_TYPE_MIME_TABLE.keys():
                 with open(tmp_filename, "rb") as fp:
                     response = self.client.post(
-                        '/polls/exchange/'+file_type,
-                        data={"file": fp})
-                    self.assertEqual(response['Content-Type'],
-                                     FILE_TYPE_MIME_TABLE[file_type])
-                    sheet = pe.get_sheet(file_type=file_type,
-                                         file_content=response.content)
+                        "/polls/exchange/" + file_type, data={"file": fp}
+                    )
+                    self.assertEqual(
+                        response["Content-Type"], FILE_TYPE_MIME_TABLE[file_type]
+                    )
+                    sheet = pe.get_sheet(
+                        file_type=file_type, file_content=response.content
+                    )
                     sheet.format(int)
                     array = sheet.to_array()
                     assert array == self.data
@@ -184,12 +183,13 @@ class DatabaseOperationsTestCase(TestCase):
 
     def testBook(self):
         fp = open(self.testfile, "rb")
-        response = self.client.post('/polls/import/', data={"file": fp})
+        response = self.client.post("/polls/import/", data={"file": fp})
         eq_(response.status_code, 302)
-        response2 = self.client.get('/polls/export/book')
+        response2 = self.client.get("/polls/export/book")
         assert response2.status_code == 200
-        book = pe.get_book(file_type='xls', file_content=response2.content)
-        content = dedent("""
+        book = pe.get_book(file_type="xls", file_content=response2.content)
+        content = dedent(
+            """
         question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
@@ -215,17 +215,21 @@ class DatabaseOperationsTestCase(TestCase):
         | PyCharm       | 6  | 2           | 0     |
         +---------------+----+-------------+-------+
         | IntelliJ      | 7  | 2           | 0     |
-        +---------------+----+-------------+-------+""").strip('\n')  # noqa
+        +---------------+----+-------------+-------+"""
+        ).strip(
+            "\n"
+        )  # noqa
         self.assertEqual(str(book), content)
 
     def testBookWithoutBulkSave(self):
         fp = open(self.testfile, "rb")
-        response = self.client.post('/polls/import/', data={"file": fp})
+        response = self.client.post("/polls/import/", data={"file": fp})
         eq_(response.status_code, 302)
-        response2 = self.client.get('/polls/export/book')
+        response2 = self.client.get("/polls/export/book")
         assert response2.status_code == 200
-        book = pe.get_book(file_type='xls', file_content=response2.content)
-        content = dedent("""
+        book = pe.get_book(file_type="xls", file_content=response2.content)
+        content = dedent(
+            """
         question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
@@ -251,18 +255,21 @@ class DatabaseOperationsTestCase(TestCase):
         | PyCharm       | 6  | 2           | 0     |
         +---------------+----+-------------+-------+
         | IntelliJ      | 7  | 2           | 0     |
-        +---------------+----+-------------+-------+""").strip('\n')  # noqa
+        +---------------+----+-------------+-------+"""
+        ).strip(
+            "\n"
+        )  # noqa
         self.assertEqual(str(book), content)
 
     def testBookUsingIsave(self):
         fp = open(self.testfile, "rb")
-        response = self.client.post('/polls/import_using_isave/',
-                                    data={"file": fp})
+        response = self.client.post("/polls/import_using_isave/", data={"file": fp})
         eq_(response.status_code, 302)
-        response2 = self.client.get('/polls/export/book')
+        response2 = self.client.get("/polls/export/book")
         assert response2.status_code == 200
-        book = pe.get_book(file_type='xls', file_content=response2.content)
-        content = dedent("""
+        book = pe.get_book(file_type="xls", file_content=response2.content)
+        content = dedent(
+            """
         question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
@@ -288,17 +295,21 @@ class DatabaseOperationsTestCase(TestCase):
         | PyCharm       | 6  | 2           | 0     |
         +---------------+----+-------------+-------+
         | IntelliJ      | 7  | 2           | 0     |
-        +---------------+----+-------------+-------+""").strip('\n')  # noqa
+        +---------------+----+-------------+-------+"""
+        ).strip(
+            "\n"
+        )  # noqa
         self.assertEqual(str(book), content)
 
     def testSheet(self):
         fp = open(self.testfile, "rb")
-        response = self.client.post('/polls/import/', data={"file": fp})
+        response = self.client.post("/polls/import/", data={"file": fp})
         eq_(response.status_code, 302)
-        response2 = self.client.get('/polls/export/sheet')
+        response2 = self.client.get("/polls/export/sheet")
         assert response2.status_code == 200
-        sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
-        content = dedent("""
+        sheet = pe.get_sheet(file_type="xls", file_content=response2.content)
+        content = dedent(
+            """
         question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
@@ -306,17 +317,21 @@ class DatabaseOperationsTestCase(TestCase):
         | 1  | 2015-01-28T00:00:00+00:00 | What is your favourite programming language? | language |
         +----+---------------------------+----------------------------------------------+----------+
         | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
-        +----+---------------------------+----------------------------------------------+----------+""").strip('\n')  # noqa
+        +----+---------------------------+----------------------------------------------+----------+"""
+        ).strip(
+            "\n"
+        )  # noqa
         assert str(sheet) == content
 
     def testImportSheet(self):
         fp = open("sample-sheet.xls", "rb")
-        response = self.client.post('/polls/import_sheet/', data={"file": fp})
+        response = self.client.post("/polls/import_sheet/", data={"file": fp})
         eq_(response.status_code, 200)
-        response2 = self.client.get('/polls/export/sheet')
+        response2 = self.client.get("/polls/export/sheet")
         eq_(response2.status_code, 200)
-        sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
-        content = dedent("""
+        sheet = pe.get_sheet(file_type="xls", file_content=response2.content)
+        content = dedent(
+            """
         question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
@@ -324,18 +339,23 @@ class DatabaseOperationsTestCase(TestCase):
         | 1  | 2015-01-28T00:00:00+00:00 | What is your favourite programming language? | language |
         +----+---------------------------+----------------------------------------------+----------+
         | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
-        +----+---------------------------+----------------------------------------------+----------+""").strip('\n')  # noqa
+        +----+---------------------------+----------------------------------------------+----------+"""
+        ).strip(
+            "\n"
+        )  # noqa
         self.assertEqual(str(sheet), content)
 
     def testImportSheetUsingISave(self):
         fp = open("sample-sheet-for-isave.xls", "rb")
-        response = self.client.post('/polls/import_sheet_using_isave/',
-                                    data={"file": fp})
+        response = self.client.post(
+            "/polls/import_sheet_using_isave/", data={"file": fp}
+        )
         eq_(response.status_code, 200)
-        response2 = self.client.get('/polls/export/sheet')
+        response2 = self.client.get("/polls/export/sheet")
         eq_(response2.status_code, 200)
-        sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
-        content = dedent("""
+        sheet = pe.get_sheet(file_type="xls", file_content=response2.content)
+        content = dedent(
+            """
         question:
         +----+---------------------------+----------------------------------------------+----------+
         | id | pub_date                  | question_text                                | slug     |
@@ -343,17 +363,21 @@ class DatabaseOperationsTestCase(TestCase):
         | 1  | 2015-01-28T00:00:00+00:00 | What is your favourite programming language? | language |
         +----+---------------------------+----------------------------------------------+----------+
         | 2  | 2015-01-29T00:00:00+00:00 | What is your favourite IDE?                  | ide      |
-        +----+---------------------------+----------------------------------------------+----------+""").strip('\n')  # noqa
+        +----+---------------------------+----------------------------------------------+----------+"""
+        ).strip(
+            "\n"
+        )  # noqa
         self.assertEqual(str(sheet), content)
 
     def testCustomExport(self):
         fp = open(self.testfile, "rb")
-        response = self.client.post('/polls/import/', data={"file": fp})
+        response = self.client.post("/polls/import/", data={"file": fp})
         eq_(response.status_code, 302)
-        response2 = self.client.get('/polls/export/custom')
+        response2 = self.client.get("/polls/export/custom")
         eq_(response2.status_code, 200)
-        sheet = pe.get_sheet(file_type='xls', file_content=response2.content)
-        content = dedent("""
+        sheet = pe.get_sheet(file_type="xls", file_content=response2.content)
+        content = dedent(
+            """
         pyexcel_sheet1:
         +---------------+----+-------+
         | choice_text   | id | votes |
@@ -365,7 +389,8 @@ class DatabaseOperationsTestCase(TestCase):
         | PyCharm       | 6  | 0     |
         +---------------+----+-------+
         | IntelliJ      | 7  | 0     |
-        +---------------+----+-------+""").strip('\n')
+        +---------------+----+-------+"""
+        ).strip("\n")
         self.assertEqual(str(sheet), content)
 
 
@@ -381,16 +406,16 @@ class DatabaseOperationsUsingFileTestCase(DatabaseOperationsTestCase):
 
 class TestUploadedFile(TestCase):
     def test_in_memory_file(self):
-        test_content = 'a,b,c'
+        test_content = "a,b,c"
         strio = StringIO(test_content)
         strio.read()
         in_memory_file = ExcelInMemoryUploadedFile(
             file=strio,
-            field_name='test',
-            name='test_file',
-            content_type='text',
+            field_name="test",
+            name="test_file",
+            content_type="text",
             size=3,
-            charset=None
+            charset=None,
         )
         params = in_memory_file.get_params()
-        eq_(params['file_content'], test_content)
+        eq_(params["file_content"], test_content)

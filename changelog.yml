@@ -2,10 +2,12 @@ name: django-excel
 organisation: pyexcel-webwares
 releases:
 - changes:
-  - action: Added
+  - action: Updated
     details:
-    - 'Support for django 3.x.x'
+    - 'Test Support for django 3.x.x'
     - 'Tested against django 3.x.x'
+  date: tbd
+  version: 0.0.11
 - changes:
   - action: Added
     details:

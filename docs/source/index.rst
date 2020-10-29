@@ -364,6 +364,10 @@ into the following data models:
 .. note::
    Except the added "slug" field, **Question** and **Choice** are copied from Django tutorial part 1.
 
+.. note::
+   Please also pay attention to 'choice' sheet. There exists an arbitrary column: "Noise", which
+   exists to show case skipping column feature using mapdicts later.
+
 Please visit this link http://localhost:8000/polls/import/, you shall see this upload form:
 
 .. image:: import-page.png
@@ -405,14 +409,16 @@ The star is :meth:`~django_excel.save_book_to_database`. The parameter **models*
 should be a list of django models. **initializers** is a list of initialization
 functions for each model. In the example, we do not have init function for Question
 so 'None' is given and `choice_func` is given to Choice. **mapdicts** is a list of
-column names for each model. The member of the **mapdicts** can be a dictionary
-as well::
+column names for each model and the member of the **mapdicts** can be a dictionary::
 
     {
       "Question Text": "question_text",
       "Publish Date": "pub_date",
       "Unique Identifier": "slug"
     }
+
+As a dictionary, it can be used to skip columns in the incoming sheets. For example,
+'Noise' column is skipped because it was not mentioned in the mapdict.
 
 The custom initialization function is needed when the data from the excel sheet
 needs translation before data import. For example, **Choice** has a foreign

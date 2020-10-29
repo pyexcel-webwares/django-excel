@@ -19,7 +19,7 @@ django-excel - Let you focus on data, instead of file formats
 
 
 .. image:: https://pepy.tech/badge/django-excel/month
-   :target: https://pepy.tech/project/django-excel/month
+   :target: https://pepy.tech/project/django-excel
 
 
 .. image:: https://img.shields.io/gitter/room/gitterHQ/gitter.svg

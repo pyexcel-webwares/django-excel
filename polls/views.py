@@ -242,7 +242,7 @@ def import_data_using_isave_book_as(request):
                 initializers=[None, choice_func],
                 mapdicts=[
                     ["question_text", "pub_date", "slug"],
-                    ["question", "choice_text", "votes"],
+                    {"Question": "question", "Choice": "choice_text", "Votes": "votes"},
                 ],
             )
             return redirect("handson_view")

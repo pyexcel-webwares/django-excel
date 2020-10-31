@@ -178,6 +178,7 @@ class ExcelResponseTestCase(TestCase):
 class DatabaseOperationsTestCase(TestCase):
     def setUp(self):
         self.testfile = "sample-data.xls"
+        self.maxDiff = None
         Question.objects.all().delete()
         Choice.objects.all().delete()
 

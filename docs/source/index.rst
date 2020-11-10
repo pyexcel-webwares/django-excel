@@ -204,9 +204,9 @@ or clone it and install it:
     $ cd django-excel
     $ python setup.py install
 
-Installation of individual plugins , please refer to individual plugin page. For example, if you need xls file support, please install pyexcel-xls::
+Installation of individual plugins , please refer to individual plugin page. For example, if you need xlsx file support, please install pyexcel-xlsx::
 
-        $ pip install pyexcel-xls
+        $ pip install pyexcel-xlsx
 
 Contrary to Django's philosophy of 'battery included', django-excel does not
 come with all batteries due to the size of the dependency(xlwt, openpyxl, odfpy). Hence,
@@ -623,50 +623,50 @@ API Reference
    :param sheet_name: For an excel book, there could be multiple sheets. If it is left
                       unspecified, the sheet at index 0 is loaded. For 'csv', 'tsv' file,
                       *sheet_name* should be None anyway.
-   :param keywords: additional keywords to :meth:`pyexcel.get_sheet`
+   :param keywords: additional keywords to :func:`pyexcel.get_sheet`
    :returns: A sheet object
 
 .. method:: get_array(sheet_name=None, **keywords)
 
    :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
-   :param keywords: additional keywords to pyexcel library
+   :param keywords: additional keywords to :func:`pyexcel.get_array`
    :returns: a two dimensional array, a list of lists
 
 .. method:: iget_array(sheet_name=None, **keywords)
 
    :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
-   :param keywords: additional keywords to pyexcel library
+   :param keywords: additional keywords to :func:`pyexcel.iget_array`
    :returns: a generator for a two dimensional array, a list of lists
 
 .. method:: get_dict(sheet_name=None, name_columns_by_row=0, **keywords)
 
    :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
    :param name_columns_by_row: uses the first row of the sheet to be column headers by default.
-   :param keywords: additional keywords to pyexcel library
+   :param keywords: additional keywords to :func:`pyexcel.get_dict`
    :returns: a dictionary of the file content
 
 .. method:: get_records(sheet_name=None, name_columns_by_row=0, **keywords)
 
    :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
    :param name_columns_by_row: uses the first row of the sheet to be record field names by default.
-   :param keywords: additional keywords to pyexcel library
+   :param keywords: additional keywords to :func:`pyexcel.get_records`
    :returns: a list of dictionary of the file content
 
 .. method:: iget_records(sheet_name=None, name_columns_by_row=0, **keywords)
 
    :param sheet_name: same as :meth:`~django_excel.ExcelMixin.get_sheet`
    :param name_columns_by_row: uses the first row of the sheet to be record field names by default.
-   :param keywords: additional keywords to pyexcel library
+   :param keywords: additional keywords to :func:`pyexcel.iget_records`
    :returns: a generator for a list of dictionary of the file content
 
 .. method:: get_book(**keywords)
 
-   :param keywords: additional keywords to pyexcel library
+   :param keywords: additional keywords to :func:`pyexcel.get_book`
    :returns: a two dimensional array, a list of lists
 
 .. method:: get_book_dict(**keywords)
 
-   :param keywords: additional keywords to pyexcel library
+   :param keywords: additional keywords to :func:`pyexcel.get_book_dict`
    :returns: a two dimensional array, a list of lists
 
 .. method:: save_to_database(model=None, initializer=None, mapdict=None, **keywords)

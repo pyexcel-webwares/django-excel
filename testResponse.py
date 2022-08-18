@@ -8,9 +8,6 @@ from polls.models import Question, Choice
 from django.test import Client, TestCase
 from django.test.utils import override_settings
 import pyexcel as pe
-import pyexcel.ext.xls  # noqa
-import pyexcel.ext.xlsx  # noqa
-import pyexcel.ext.ods3  # noqa
 from django_excel._compact import urllib_quote
 from django_excel import ExcelInMemoryUploadedFile
 from nose.tools import eq_

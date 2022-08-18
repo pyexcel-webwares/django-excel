@@ -1,3 +1,4 @@
+xlrd<=1.2.0
 nose
 mock;python_version<"3"
 codecov

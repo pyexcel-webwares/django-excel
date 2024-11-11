@@ -2,6 +2,14 @@ name: django-excel
 organisation: pyexcel-webwares
 releases:
 - changes:
+    - action: 'Change:'
+      details:
+        - Support for django 2.0.x
+        - Tested against django 4.1
+        - Change xlrd version <=1.2.0
+  date: 18.08.2022
+  version: 0.0.12
+- changes:
   - action: Updated
     details:
     - 'Test Support for django 3.x.x'

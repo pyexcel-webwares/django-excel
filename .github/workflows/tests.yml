@@ -1,0 +1,35 @@
+name: Run unit tests on Windows, Ubuntu and Mac
+
+on: [push, pull_request]
+
+jobs:
+
+  test:
+    name:  ${{ matrix.os }} / ${{ matrix.python_version }}
+    runs-on: ${{ matrix.os }}-latest 
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [Ubuntu]
+        python_version: ["3.9.16"]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+            python-version:  ${{ matrix.python_version }}
+            architecture: x64
+
+      - name: install
+        run: |
+          pip --use-deprecated=legacy-resolver install -r requirements.txt
+          pip --use-deprecated=legacy-resolver install -r tests/requirements.txt
+      - name: test
+        run: |
+          pip freeze
+          nosetests --verbosity=3 --with-coverage --cover-package django_excel --cover-package tests tests --with-doctest --doctest-extension=.rst README.rst docs/source django_excel
+      - name: Upload coverage
+        uses: codecov/codecov-action@v1
+        with:
+          name:  ${{ matrix.os }} Python ${{ matrix.python-version }}

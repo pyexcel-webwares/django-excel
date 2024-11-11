@@ -41,7 +41,7 @@ DESCRIPTION = (
 )
 URL = "https://github.com/pyexcel-webwares/django-excel"
 DOWNLOAD_URL = "%s/archive/0.0.10.tar.gz" % URL
-FILES = ["README.rst", "CHANGELOG.rst"]
+FILES = ["README.rst", "CONTRIBUTORS.rst", "CHANGELOG.rst"]
 KEYWORDS = [
     "python",
     "API",
@@ -75,6 +75,7 @@ CLASSIFIERS = [
     'Programming Language :: Python :: 3.3',
     'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5'
+
 ]
 
 

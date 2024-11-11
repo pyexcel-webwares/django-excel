@@ -8,22 +8,22 @@ jobs:
       - uses: actions/checkout@v2
         with:
           ref: ${{ github.head_ref }}
+          token: ${{ secrets.PAT }}
       - name: Set up Python
         uses: actions/setup-python@v1
         with:
           python-version: '3.7'
       - name: check changes
         run: |
+          pip install markupsafe==2.0.1
           pip install moban gitfs2 pypifs moban-jinja2-github moban-ansible
           moban
           git status
           git diff --exit-code
       - name: Auto-commit
         if: failure()
-        uses: docker://cdssnc/auto-commit-github-action
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          args: >-
+          commit_message: >-
             This is an auto-commit, updating project meta data,
             such as changelog.rst, contributors.rst

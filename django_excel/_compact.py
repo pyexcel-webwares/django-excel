@@ -1,6 +1,6 @@
 from distutils.version import LooseVersion
 
-import pkg_resources
+from django import get_version
 
 try:
     # if in py2
@@ -14,7 +14,7 @@ except ImportError:
     PY2_VERSION = False
 
 
-django_version = pkg_resources.get_distribution("django").version
+django_version = get_version()
 
 
 DJANGO_ONE_SIX = LooseVersion(django_version) < LooseVersion(

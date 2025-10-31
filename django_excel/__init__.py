@@ -1,13 +1,14 @@
 """
-    django_excel
-    ~~~~~~~~~~~~~~~~~~~
+django_excel
+~~~~~~~~~~~~~~~~~~~
 
-    A django middleware that provides one application programming interface
-    to read and write data in different excel file formats
+A django middleware that provides one application programming interface
+to read and write data in different excel file formats
 
-    :copyright: (c) 2015 by Onni Software Ltd.
-    :license: New BSD License
+:copyright: (c) 2015 by Onni Software Ltd.
+:license: New BSD License
 """
+
 import pyexcel as pe
 import pyexcel_webio as webio
 from django.core.files.uploadedfile import (
@@ -174,11 +175,12 @@ def _make_response(content, content_type, status, file_name=None):
         if PY2_VERSION and isinstance(file_name, unicode):
             file_name = file_name.encode("utf-8")
         url_encoded_file_name = urllib_quote(file_name)
-        response[
-            "Content-Disposition"
-        ] = "attachment; filename=%s;filename*=utf-8''%s" % (
-            url_encoded_file_name,
-            url_encoded_file_name,
+        response["Content-Disposition"] = (
+            "attachment; filename=%s;filename*=utf-8''%s"
+            % (
+                url_encoded_file_name,
+                url_encoded_file_name,
+            )
         )
     return response
 
@@ -186,9 +188,9 @@ def _make_response(content, content_type, status, file_name=None):
 webio.init_webio(_make_response)
 
 
+from pyexcel_webio import make_response_from_array  # noqa
 from pyexcel_webio import (
     make_response,
-    make_response_from_array,  # noqa
     make_response_from_book_dict,
     make_response_from_dict,
     make_response_from_query_sets,

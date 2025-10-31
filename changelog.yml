@@ -4,6 +4,13 @@ releases:
 - changes:
     - action: 'Change:'
       details:
+        - Replace pkg_resources-based Django version check with django.get_version()
+        - Exclude .venv from flake8 check to simplify development
+  date: 31.10.2025
+  version: 0.0.13
+- changes:
+    - action: 'Change:'
+      details:
         - Support for django 2.0.x
         - Tested against django 4.1
         - Change xlrd version <=1.2.0

@@ -17,6 +17,6 @@ except ImportError:
 django_version = get_version()
 
 
-DJANGO_ONE_SIX = LooseVersion(django_version) < LooseVersion("1.7.0") and LooseVersion(
-    django_version
-) > LooseVersion("1.5.12")
+DJANGO_ONE_SIX = LooseVersion(django_version) < LooseVersion(
+    "1.7.0"
+) and LooseVersion(django_version) > LooseVersion("1.5.12")

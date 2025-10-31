@@ -24,7 +24,9 @@ else:
     from io import StringIO
 
 
-_XLSX_MIME = "application/" + "vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+_XLSX_MIME = (
+    "application/" + "vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+)
 
 FILE_TYPE_MIME_TABLE = {
     "csv": "text/csv",
@@ -44,17 +46,23 @@ class ExcelResponseTestCase(TestCase):
         self.data = [[1, 2, 3], [4, 5, 6]]
         self.single_sheet = [["X", "Y", "Z"], [1, 2, 3], [4, 5, 6]]
         self.book_content = OrderedDict()
-        self.book_content.update({"Sheet1": [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]]})
-        self.book_content.update({"Sheet2": [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]]})
         self.book_content.update(
-            {"Sheet3": [[u"X", u"Y", u"Z"], [1, 4, 7], [2, 5, 8], [3, 6, 9]]}
+            {"Sheet1": [[1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3]]}
+        )
+        self.book_content.update(
+            {"Sheet2": [[4, 4, 4, 4], [5, 5, 5, 5], [6, 6, 6, 6]]}
+        )
+        self.book_content.update(
+            {"Sheet3": [["X", "Y", "Z"], [1, 4, 7], [2, 5, 8], [3, 6, 9]]}
         )
 
     def test_download(self):
         for file_type in FILE_TYPE_MIME_TABLE.keys():
             response = self.client.get("/polls/download/" + file_type)
             assert response["Content-Type"] == FILE_TYPE_MIME_TABLE[file_type]
-            sheet = pe.get_sheet(file_type=file_type, file_content=response.content)
+            sheet = pe.get_sheet(
+                file_type=file_type, file_content=response.content
+            )
             sheet.format(int)
             array = sheet.to_array()
             assert array == self.data
@@ -64,7 +72,7 @@ class ExcelResponseTestCase(TestCase):
         self._download_and_verify_file_name(test_file_name)
 
     def test_download_attachment_with_unicode_name(self):
-        test_file_name = u"中文文件名"
+        test_file_name = "中文文件名"
         self._download_and_verify_file_name(test_file_name.encode("utf-8"))
 
     def test_download_attachment_with_unicode_name_as_string(self):
@@ -83,9 +91,16 @@ class ExcelResponseTestCase(TestCase):
             assert response["Content-Type"] == FILE_TYPE_MIME_TABLE[file_type]
             assert response["Content-Disposition"] == (
                 "attachment; filename=%s.%s;filename*=utf-8''%s.%s"
-                % (url_encoded_file_name, file_type, url_encoded_file_name, file_type)
+                % (
+                    url_encoded_file_name,
+                    file_type,
+                    url_encoded_file_name,
+                    file_type,
+                )
             )
-            sheet = pe.get_sheet(file_type=file_type, file_content=response.content)
+            sheet = pe.get_sheet(
+                file_type=file_type, file_content=response.content
+            )
             sheet.format(int)
             array = sheet.to_array()
             assert array == self.data
@@ -93,13 +108,13 @@ class ExcelResponseTestCase(TestCase):
     def test_parse_single_sheet(self):
         test_sample = {
             "array": {
-                u"result": [[u"X", u"Y", u"Z"], [1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
+                "result": [["X", "Y", "Z"], [1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
             },
-            "dict": {u"Y": [2.0, 5.0], u"X": [1.0, 4.0], u"Z": [3.0, 6.0]},
+            "dict": {"Y": [2.0, 5.0], "X": [1.0, 4.0], "Z": [3.0, 6.0]},
             "records": {
-                u"result": [
-                    {u"Y": 2.0, u"X": 1.0, u"Z": 3.0},
-                    {u"Y": 5.0, u"X": 4.0, u"Z": 6.0},
+                "result": [
+                    {"Y": 2.0, "X": 1.0, "Z": 3.0},
+                    {"Y": 5.0, "X": 4.0, "Z": 6.0},
                 ]
             },
         }
@@ -120,18 +135,18 @@ class ExcelResponseTestCase(TestCase):
     def test_parse_book(self):
         test_sample = ["book", "book_dict"]
         expected_dict = {
-            u"Sheet1": [
+            "Sheet1": [
                 [1.0, 1.0, 1.0, 1.0],
                 [2.0, 2.0, 2.0, 2.0],
                 [3.0, 3.0, 3.0, 3.0],
             ],
-            u"Sheet3": [
-                [u"X", u"Y", u"Z"],
+            "Sheet3": [
+                ["X", "Y", "Z"],
                 [1.0, 4.0, 7.0],
                 [2.0, 5.0, 8.0],
                 [3.0, 6.0, 9.0],
             ],
-            u"Sheet2": [
+            "Sheet2": [
                 [4.0, 4.0, 4.0, 4.0],
                 [5.0, 5.0, 5.0, 5.0],
                 [6.0, 6.0, 6.0, 6.0],
@@ -161,7 +176,8 @@ class ExcelResponseTestCase(TestCase):
                         "/polls/exchange/" + file_type, data={"file": fp}
                     )
                     self.assertEqual(
-                        response["Content-Type"], FILE_TYPE_MIME_TABLE[file_type]
+                        response["Content-Type"],
+                        FILE_TYPE_MIME_TABLE[file_type],
                     )
                     sheet = pe.get_sheet(
                         file_type=file_type, file_content=response.content
@@ -261,7 +277,9 @@ class DatabaseOperationsTestCase(TestCase):
 
     def testBookUsingIsave(self):
         fp = open(self.testfile, "rb")
-        response = self.client.post("/polls/import_using_isave/", data={"file": fp})
+        response = self.client.post(
+            "/polls/import_using_isave/", data={"file": fp}
+        )
         eq_(response.status_code, 302)
         response2 = self.client.get("/polls/export/book")
         assert response2.status_code == 200

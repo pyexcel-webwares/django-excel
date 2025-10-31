@@ -9,7 +9,7 @@ to read and write data in different excel file formats
 :license: New BSD License
 """
 
-import pyexcel as pe
+import pyexcel as p
 import pyexcel_webio as webio
 from django.core.files.uploadedfile import (
     InMemoryUploadedFile,
@@ -20,6 +20,14 @@ from django.core.files.uploadhandler import (
     TemporaryFileUploadHandler,
 )
 from django.http import HttpResponse
+from pyexcel_webio import make_response_from_array  # noqa
+from pyexcel_webio import (
+    make_response,
+    make_response_from_book_dict,
+    make_response_from_dict,
+    make_response_from_query_sets,
+    make_response_from_records,
+)
 
 from ._compact import DJANGO_ONE_SIX, PY2_VERSION, urllib_quote
 
@@ -54,7 +62,7 @@ class ExcelMixin(webio.ExcelInput):
         params["dest_model"] = model
         params["dest_initializer"] = initializer
         params["dest_mapdict"] = mapdict
-        pe.save_as(**params)
+        p.save_as(**params)
 
     def save_book_to_database(
         self,
@@ -74,7 +82,7 @@ class ExcelMixin(webio.ExcelInput):
         params["dest_mapdicts"] = mapdicts
         params["dest_batch_size"] = batch_size
         params["dest_bulk_save"] = bulk_save
-        pe.save_book_as(**params)
+        p.save_book_as(**params)
 
     def isave_to_database(
         self, model=None, initializer=None, mapdict=None, **keywords
@@ -86,7 +94,7 @@ class ExcelMixin(webio.ExcelInput):
         params["dest_model"] = model
         params["dest_initializer"] = initializer
         params["dest_mapdict"] = mapdict
-        pe.isave_as(**params)
+        p.isave_as(**params)
         self.free_resources()
 
     def isave_book_to_database(
@@ -107,7 +115,7 @@ class ExcelMixin(webio.ExcelInput):
         params["dest_mapdicts"] = mapdicts
         params["dest_batch_size"] = batch_size
         params["dest_bulk_save"] = bulk_save
-        pe.isave_book_as(**params)
+        p.isave_book_as(**params)
 
 
 class ExcelInMemoryUploadedFile(ExcelMixin, InMemoryUploadedFile):
@@ -188,16 +196,6 @@ def _make_response(content, content_type, status, file_name=None):
 webio.init_webio(_make_response)
 
 
-from pyexcel_webio import make_response_from_array  # noqa
-from pyexcel_webio import (
-    make_response,
-    make_response_from_book_dict,
-    make_response_from_dict,
-    make_response_from_query_sets,
-    make_response_from_records,
-)
-
-
 def make_response_from_a_table(
     model, file_type, status=200, file_name=None, **keywords
 ):
@@ -208,7 +206,7 @@ def make_response_from_a_table(
     :param file_type: same as :meth:`~django_excel.make_response`
     :param status: same as :meth:`~django_excel.make_response`
     """
-    sheet = pe.get_sheet(model=model, **keywords)
+    sheet = p.get_sheet(model=model, **keywords)
     return make_response(
         sheet, file_type, status, file_name=file_name, **keywords
     )
@@ -226,7 +224,7 @@ def make_response_from_tables(
     :param file_type: same as :meth:`~django_excel.make_response`
     :param status: same as :meth:`~django_excel.make_response`
     """
-    book = pe.get_book(models=models, **keywords)
+    book = p.get_book(models=models, **keywords)
     return make_response(
         book, file_type, status, file_name=file_name, **keywords
     )

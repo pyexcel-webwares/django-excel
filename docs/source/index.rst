@@ -15,11 +15,11 @@
 
 Here is a typical conversation between the developer and the user::
 
- User: "I have uploaded an excel file"
-       "but your application says un-supported file format"
+      User: "I have uploaded an excel file"
+            "but your application says un-supported file format"
  Developer: "Did you upload an xlsx file or a csv file?"
- User: "Well, I am not sure. I saved the data using "
-       "Microsoft Excel. Surely, it must be in an excel format."
+      User: "Well, I am not sure. I saved the data using "
+            "Microsoft Excel. Surely, it must be in an excel format."
  Developer: "OK. Here is the thing. I were not told to support"
             "all available excel formats in day 1. Live with it"
             "or delay the project x number of days."
@@ -30,18 +30,19 @@ well as on file system. This library can turn the excel data into a list of list
 a list of records(dictionaries), dictionaries of lists. And vice versa. Hence it
 lets you focus on data in Django based web development, instead of file formats.
 
-The idea originated from the common usability problem: when an excel file
-driven web application is delivered for non-developer users (ie: team assistant,
-human resource administrator etc). The fact is that not everyone knows (or cares)
-about the differences between various excel formats: csv, xls, xlsx are all
-the same to them. Instead of training those users about file formats, this
-library helps web developers to handle most of the excel file
-formats by providing a common programming interface. To add a specific excel
-file format type to you application, all you need is to install an extra pyexcel
-plugin. Hence no code changes to your application and no issues with excel file
-formats any more. Looking at the community, this library and its associated ones
-try to become a small and easy to install alternative to Pandas.
+The idea behind pyexcel originated from a common usability problem: when Excel-driven
+web applications are delivered to non-developer users (e.g., project assistants, human
+resources administrators), they often are not aware of the differences
+between file formats such as CSV, XLS, and XLSX. Rather than training users on these
+formats, pyexcel provides web developers with a unified interface to handle most
+Excel file types.
 
+
+To add support for a specific Excel format in your application, simply install an
+additional pyexcel plugin—no code changes required. This eliminates issues with
+different file formats. In the broader community, pyexcel and its associated
+libraries aim to be a simple, easy-to-install alternative to Pandas, where minimal
+data manipulation is needed.
 
 The highlighted features are:
 
@@ -238,19 +239,11 @@ Since 15 March 2015, python 2.6 are no longer tested via travis-ci.
 Support the project
 -----------------------
 
-If your company has embedded pyexcel and its components into a revenue generating
-product, please support me on github, `patreon <https://www.patreon.com/bePatron?u=5537627>`_
-or `bounty source <https://salt.bountysource.com/teams/chfw-pyexcel>`_ to maintain
-the project and develop it further.
-
-If you are an individual, you are welcome to support me too and for however long
-you feel like. As my backer, you will receive
-`early access to pyexcel related contents <https://www.patreon.com/pyexcel/posts>`_.
-
-And your issues will get prioritized if you would like to become my patreon as `pyexcel pro user`.
-
-With your financial support, I will be able to invest
-a little bit more time in coding, documentation and writing interesting posts.
+If your company uses pyexcel and its components in a revenue-generating product,
+please consider supporting the project on GitHub or
+`Patreon <https://www.patreon.com/bePatron?u=5537627>`_. Your financial
+support will enable me to dedicate more time to coding, improving documentation,
+and creating engaging content.
 
 
 

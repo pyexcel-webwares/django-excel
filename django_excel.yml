@@ -1,9 +1,9 @@
 overrides: "pyexcel.yaml"
 name: "django-excel"
 organisation: pyexcel-webwares
-version: 0.0.10
-current_version: 0.0.10
-release: 0.0.10
+version: 0.0.13
+current_version: 0.0.13
+release: 0.0.13
 webframework: Django
 dependencies:
   - pyexcel>=0.5.7

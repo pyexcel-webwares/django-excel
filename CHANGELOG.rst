@@ -9,7 +9,7 @@ Change log
 #. Replace pkg_resources-based Django version check with django.get_version()
 #. Exclude .venv from flake8 check to simplify development
 
-0.0.12 - 18.08.2022
+0.0.12 - not released
 --------------------------------------------------------------------------------
 
 **Change:**
@@ -18,7 +18,7 @@ Change log
 #. Tested against django 4.1
 #. Change xlrd version <=1.2.0
 
-0.0.11 - tbd
+0.0.11 - not released
 --------------------------------------------------------------------------------
 
 **Updated**

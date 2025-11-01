@@ -32,7 +32,7 @@ except (ValueError, UnicodeError, locale.Error):
 
 NAME = "django-excel"
 AUTHOR = "C.W."
-VERSION = "0.0.10"
+VERSION = "0.0.13"
 EMAIL = "info@pyexcel.org"
 LICENSE = "New BSD"
 DESCRIPTION = (
@@ -40,7 +40,7 @@ DESCRIPTION = (
     "interface to read and write data in different excel file formats"
 )
 URL = "https://github.com/pyexcel-webwares/django-excel"
-DOWNLOAD_URL = "%s/archive/0.0.10.tar.gz" % URL
+DOWNLOAD_URL = "%s/archive/0.0.13.tar.gz" % URL
 FILES = ["README.rst", "CONTRIBUTORS.rst", "CHANGELOG.rst"]
 KEYWORDS = [
     "python",
@@ -96,8 +96,8 @@ EXTRAS_REQUIRE = {
 PUBLISH_COMMAND = "{0} setup.py sdist bdist_wheel upload -r pypi".format(sys.executable)
 HERE = os.path.abspath(os.path.dirname(__file__))
 
-GS_COMMAND = ("gease django-excel v0.0.10 " +
-              "Find 0.0.10 in changelog for more details")
+GS_COMMAND = ("gease django-excel v0.0.13 " +
+              "Find 0.0.13 in changelog for more details")
 NO_GS_MESSAGE = ("Automatic github release is disabled. " +
                  "Please install gease to enable it.")
 UPLOAD_FAILED_MSG = (
